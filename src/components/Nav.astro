@@ -1,0 +1,207 @@
+---
+---
+
+<header class="nav" id="nav" data-od-id="nav">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Novus home">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="currentColor" fill-opacity="0.08"/>
+        <text x="6" y="23" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#36F4A4">N</text>
+      </svg>
+      <span>Novus</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a
+      href="https://apps.shopify.com/"
+      class="btn btn-primary btn-sm nav-cta"
+      id="nav-cta"
+    >
+      Install Free on Shopify
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7" class="line-top" />
+        <line x1="4" y1="12" x2="20" y2="12" class="line-mid" />
+        <line x1="4" y1="17" x2="20" y2="17" class="line-bot" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="nav-mobile">
+    <nav class="nav-mobile-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="https://apps.shopify.com/" class="btn btn-primary" style="margin-top: 16px;">
+        Install Free on Shopify
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  // Scroll: add .scrolled for bg change
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Mobile toggle
+  const toggle = document.getElementById("nav-toggle");
+  const mobile = document.getElementById("nav-mobile");
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    mobile.classList.toggle("open", !expanded);
+    document.body.style.overflow = !expanded ? "hidden" : "";
+  });
+
+  // Close mobile on link click
+  mobile.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle.setAttribute("aria-expanded", "false");
+      mobile.classList.remove("open");
+      document.body.style.overflow = "";
+    });
+  });
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background var(--duration-normal) var(--ease-out),
+      border-color var(--duration-normal) var(--ease-out);
+  }
+
+  .nav.scrolled {
+    background: rgba(6, 26, 28, 0.85);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-height);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--duration-fast);
+    letter-spacing: 0.01em;
+    padding: 4px 2px;
+    border-radius: 3px;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-links a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    color: var(--text-primary);
+  }
+
+  .nav-cta {
+    font-size: 14px;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-mobile {
+      display: block;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-normal) var(--ease-out);
+    }
+
+    .nav-mobile.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav-mobile-links {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-7) var(--space-5);
+      gap: var(--space-5);
+    }
+
+    .nav-mobile-links a {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+  }
+</style>

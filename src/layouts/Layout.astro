@@ -1,0 +1,123 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Novus — AI SEO & AEO Audit for Shopify",
+  description = "Audit your Shopify store for ChatGPT, Perplexity, Google AI, and Bing Copilot. Fix what's broken with one-click AI. Schema blocks, llms.txt, and more.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og-image.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Novus" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts: Inter + JetBrains Mono from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JSON-LD: SoftwareApplication -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Novus: AI SEO & AEO Audit",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": description,
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "name": "Free"
+        },
+        {
+          "@type": "Offer",
+          "price": "23",
+          "priceCurrency": "USD",
+          "name": "Pro",
+          "billingPeriod": "P1M"
+        },
+        {
+          "@type": "Offer",
+          "price": "47",
+          "priceCurrency": "USD",
+          "name": "Growth",
+          "billingPeriod": "P1M"
+        },
+        {
+          "@type": "Offer",
+          "price": "119",
+          "priceCurrency": "USD",
+          "name": "Agency",
+          "billingPeriod": "P1M"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "12"
+      }
+    })} />
+
+    <!-- Styles -->
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Scroll-triggered animations -->
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+        );
+        document.querySelectorAll(".animate-on-scroll").forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>

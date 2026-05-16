@@ -1,0 +1,290 @@
+---
+---
+
+<section class="hero" id="hero">
+  <!-- Ambient glow -->
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="container hero-content">
+    <div class="hero-badge animate-on-scroll">
+      <span class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        Shopify App
+      </span>
+    </div>
+
+    <h1 class="display-xl text-balance animate-on-scroll">
+      Your store is invisible<br />to AI search engines.
+    </h1>
+
+    <p class="body-lg hero-sub animate-on-scroll">
+      Novus audits your Shopify store for ChatGPT, Perplexity, Google AI,
+      and Bing Copilot — then fixes what's broken with one-click AI.
+    </p>
+
+    <div class="hero-cta animate-on-scroll">
+      <a href="https://apps.shopify.com/" class="btn btn-primary" id="hero-cta-primary">
+        Start Free Audit
+      </a>
+      <a href="#how-it-works" class="btn btn-ghost" id="hero-cta-secondary">
+        See How It Works
+      </a>
+    </div>
+
+    <!-- Score preview card -->
+    <div class="hero-card animate-on-scroll">
+      <div class="hero-card-header">
+        <div class="hero-card-dot" style="background: #ef4444;" aria-hidden="true"></div>
+        <div class="hero-card-dot" style="background: #f59e0b;" aria-hidden="true"></div>
+        <div class="hero-card-dot" style="background: var(--accent);" aria-hidden="true"></div>
+        <span class="hero-card-title">AEO Score — your-store.myshopify.com</span>
+      </div>
+      <div class="hero-scores">
+        <div class="hero-score-item">
+          <div class="hero-score-label">Catalog Quality</div>
+          <div class="hero-score-row">
+            <span class="hero-score-num mono" data-target="74">0</span>
+            <div class="score-bar"><div class="score-bar-fill good" style="width: 0%;" data-width="74%"></div></div>
+          </div>
+        </div>
+        <div class="hero-score-item">
+          <div class="hero-score-label">Structured Data</div>
+          <div class="hero-score-row">
+            <span class="hero-score-num mono" data-target="62">0</span>
+            <div class="score-bar"><div class="score-bar-fill warning" style="width: 0%;" data-width="62%"></div></div>
+          </div>
+        </div>
+        <div class="hero-score-item">
+          <div class="hero-score-label">Content Clarity</div>
+          <div class="hero-score-row">
+            <span class="hero-score-num mono" data-target="100">0</span>
+            <div class="score-bar"><div class="score-bar-fill good" style="width: 0%;" data-width="100%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card-footer">
+        <span class="hero-issues">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          8 issues found — 1 critical
+        </span>
+        <span class="hero-fix-btn">AI Quick Fix →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Animate score counters on scroll into view
+  const heroCard = document.querySelector(".hero-card");
+  let animated = false;
+
+  const animateScores = () => {
+    if (animated) return;
+    animated = true;
+
+    // Animate numbers
+    document.querySelectorAll(".hero-score-num").forEach((el) => {
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1400;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+
+    // Animate bars
+    document.querySelectorAll(".score-bar-fill").forEach((el) => {
+      setTimeout(() => {
+        el.style.width = el.dataset.width;
+      }, 200);
+    });
+  };
+
+  const obs = new IntersectionObserver(
+    (entries) => { if (entries[0].isIntersecting) animateScores(); },
+    { threshold: 0.3 }
+  );
+  if (heroCard) obs.observe(heroCard);
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: calc(var(--nav-height) + 80px) 0 100px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(54, 244, 164, 0.06) 0%,
+      rgba(15, 38, 32, 0.03) 50%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-badge {
+    margin-bottom: var(--space-5);
+  }
+
+  .hero h1 {
+    max-width: 16ch;
+    margin-bottom: var(--space-5);
+  }
+
+  .hero-sub {
+    max-width: 52ch;
+    margin-bottom: var(--space-7);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: var(--space-8);
+  }
+
+  /* Score card */
+  .hero-card {
+    width: 100%;
+    max-width: 560px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .hero-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-section);
+  }
+
+  .hero-card-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .hero-card-title {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: 8px;
+    font-family: var(--font-mono);
+  }
+
+  .hero-scores {
+    padding: 24px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero-score-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hero-score-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+  }
+
+  .hero-score-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-score-num {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text-primary);
+    min-width: 42px;
+    text-align: right;
+  }
+
+  .hero-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-section);
+  }
+
+  .hero-issues {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .hero-fix-btn {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding-top: calc(var(--nav-height) + 48px);
+      min-height: auto;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+    }
+
+    .hero-card {
+      max-width: 100%;
+    }
+
+    .hero-score-num {
+      font-size: 22px;
+    }
+  }
+</style>

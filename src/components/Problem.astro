@@ -1,0 +1,233 @@
+---
+---
+
+<section class="problem section" id="how-it-works">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-text">
+        <span class="overline animate-on-scroll">The Problem</span>
+        <h2 class="display animate-on-scroll text-balance">
+          AI engines now drive product discovery. Can they find you?
+        </h2>
+        <p class="body-lg animate-on-scroll">
+          ChatGPT, Perplexity, and Google AI Overview are changing how shoppers discover products.
+          If your store lacks structured data, clear content, and an AI context file,
+          these engines can't cite, recommend, or even see you.
+        </p>
+        <p class="body animate-on-scroll">
+          Traditional SEO tools don't check for AI readiness.
+          Novus was built specifically for this — auditing the signals that AI search engines
+          actually use to decide which stores to surface.
+        </p>
+      </div>
+
+      <div class="problem-visual animate-on-scroll">
+        <div class="platform-stack stagger">
+          <div class="platform-item animate-on-scroll">
+            <div class="platform-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 12h8"/>
+                <path d="M12 8v8"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">ChatGPT</span>
+              <span class="platform-detail">Favors llms.txt + rich content</span>
+            </div>
+            <div class="platform-score-wrap">
+              <span class="platform-score-badge good">Good</span>
+              <span class="platform-score-value mono">73<small>/100</small></span>
+            </div>
+          </div>
+
+          <div class="platform-item animate-on-scroll">
+            <div class="platform-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">Perplexity</span>
+              <span class="platform-detail">Search-first AI, weights llms.txt</span>
+            </div>
+            <div class="platform-score-wrap">
+              <span class="platform-score-badge good">Good</span>
+              <span class="platform-score-value mono">73<small>/100</small></span>
+            </div>
+          </div>
+
+          <div class="platform-item animate-on-scroll">
+            <div class="platform-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">Google AI</span>
+              <span class="platform-detail">Gemini prioritizes JSON-LD schema</span>
+            </div>
+            <div class="platform-score-wrap">
+              <span class="platform-score-badge warning">Warning</span>
+              <span class="platform-score-value mono">45<small>/100</small></span>
+            </div>
+          </div>
+
+          <div class="platform-item animate-on-scroll">
+            <div class="platform-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="platform-info">
+              <span class="platform-name">Bing Copilot</span>
+              <span class="platform-detail">Balanced schema + meta signals</span>
+            </div>
+            <div class="platform-score-wrap">
+              <span class="platform-score-badge good">Good</span>
+              <span class="platform-score-value mono">70<small>/100</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem {
+    background: var(--bg-section);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .problem-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .problem-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .platform-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .platform-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+
+  .platform-item:hover {
+    border-color: var(--border-hover);
+  }
+
+  .platform-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+  }
+
+  .platform-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .platform-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .platform-detail {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .platform-score-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .platform-score-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .platform-score-badge.good {
+    background: rgba(54, 244, 164, 0.12);
+    color: var(--accent);
+  }
+
+  .platform-score-badge.warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+  }
+
+  .platform-score-value {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .platform-score-value small {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  @media (max-width: 1024px) {
+    .problem-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .platform-detail {
+      display: none;
+    }
+  }
+</style>

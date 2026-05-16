@@ -1,0 +1,564 @@
+---
+const plans = [
+  {
+    name: "Free",
+    monthly: 0,
+    annually: 0,
+    period: "",
+    description: "Try the basics — no credit card needed",
+    features: [
+      "5 AI credits / month",
+      "1 audit / month",
+      "Basic AEO score",
+      "AI Quick Fix & Rewrite",
+      "AI Image Alt Text",
+      "AI Visibility scanner",
+    ],
+    cta: "Install Free",
+    ctaClass: "btn btn-ghost",
+    featured: false,
+  },
+  {
+    name: "Pro",
+    monthly: 23,
+    annually: 19,
+    annualTotal: 228,
+    savings: "Save $48/yr",
+    description: "Full audit suite for growing stores",
+    features: [
+      "100 AI credits / month",
+      "Unlimited audits",
+      "Full issue center + history",
+      "Bulk Fix (batch AI)",
+      "Schema Blocks (JSON-LD)",
+      "llms.txt deploy + Query Lab",
+      "Scheduled audits",
+    ],
+    cta: "Choose Pro",
+    ctaClass: "btn btn-primary",
+    featured: false,
+  },
+  {
+    name: "Growth",
+    monthly: 47,
+    annually: 39,
+    annualTotal: 468,
+    savings: "Save $96/yr",
+    description: "Everything in Pro, plus competitive edge",
+    features: [
+      "300 AI credits / month",
+      "Everything in Pro",
+      "Competitor benchmarking (3)",
+      "llms.txt auto-updates",
+      "AI Visibility — full scan",
+      "Query Lab — deep analysis",
+    ],
+    cta: "Choose Growth",
+    ctaClass: "btn btn-accent",
+    featured: true,
+    badge: "Best value",
+  },
+  {
+    name: "Agency",
+    monthly: 119,
+    annually: 99,
+    annualTotal: 1188,
+    savings: "Save $240/yr",
+    description: "Multi-store management for agencies",
+    features: [
+      "500 AI credits (unlimited)",
+      "Everything in Growth",
+      "Competitor benchmarking (5)",
+      "Manage up to 5 child stores",
+    ],
+    cta: "Choose Agency",
+    ctaClass: "btn btn-primary",
+    featured: false,
+  },
+];
+
+const comparisonRows = [
+  { label: "AI credits / month", free: "5", pro: "100", growth: "300", agency: "500 ∞" },
+  { label: "Audits / month", free: "1", pro: "Unlimited", growth: "Unlimited", agency: "Unlimited" },
+  { label: "AEO score", free: "Basic", pro: "Full", growth: "Full", agency: "Full" },
+  { label: "AI Quick Fix & Rewrite", free: "✓", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "Bulk Fix (batch AI)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "Schema Blocks (JSON-LD)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "llms.txt deploy", free: "—", pro: "✓", growth: "✓ auto", agency: "✓ auto" },
+  { label: "Query Lab", free: "—", pro: "Basic", growth: "Deep", agency: "Deep" },
+  { label: "AI Visibility scan", free: "Basic", pro: "—", growth: "Full", agency: "Full" },
+  { label: "Competitor benchmarking", free: "—", pro: "—", growth: "3 competitors", agency: "5 competitors" },
+  { label: "Scheduled audits", free: "—", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "Issue history", free: "—", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "Child stores", free: "—", pro: "—", growth: "—", agency: "Up to 5" },
+];
+---
+
+<section class="pricing section" id="pricing" data-od-id="pricing-section">
+  <div class="container">
+    <div class="pricing-header text-center">
+      <span class="overline animate-on-scroll">Pricing</span>
+      <h2 class="display animate-on-scroll text-balance">
+        Simple plans. Real value.
+      </h2>
+      <p class="body-lg animate-on-scroll" style="max-width: 44ch; margin: 0 auto;">
+        Start free, upgrade when you're ready.
+        Annual billing saves up to 20%.
+      </p>
+
+      <!-- Monthly / Annual toggle -->
+      <div class="billing-toggle animate-on-scroll" role="group" aria-label="Billing period">
+        <button
+          class="toggle-btn active"
+          id="toggle-monthly"
+          aria-pressed="true"
+          data-od-id="billing-toggle-monthly"
+        >Monthly</button>
+        <button
+          class="toggle-btn"
+          id="toggle-annual"
+          aria-pressed="false"
+          data-od-id="billing-toggle-annual"
+        >
+          Annual
+          <span class="toggle-badge">Save 20%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Plan cards -->
+    <div class="pricing-grid stagger">
+      {plans.map((plan) => (
+        <div class="pricing-card-wrap" style="position: relative; display: flex; flex-direction: column;">
+          {plan.badge && (
+            <span class="pricing-badge badge" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 8px; z-index: 2; white-space: nowrap;">{plan.badge}</span>
+          )}
+          <div
+            class={`pricing-card card animate-on-scroll ${plan.featured ? "pricing-featured" : ""}`}
+            data-od-id={`pricing-card-${plan.name.toLowerCase()}`}
+          >
+            <div class="pricing-tier-name">{plan.name}</div>
+            <div class="pricing-price">
+              <span
+                class="pricing-amount mono tabular-nums"
+                data-monthly={plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
+                data-annual={plan.annually === 0 ? "Free" : `$${plan.annually}`}
+              >
+                {plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
+              </span>
+              {plan.monthly > 0 && <span class="pricing-period">/mo</span>}
+            </div>
+            {plan.annualTotal && (
+              <div class="pricing-annual tabular-nums">
+                <span class="pricing-annual-total" data-monthly={`$${plan.annualTotal + (plan.monthly - plan.annually) * 12}/yr`} data-annual={`$${plan.annualTotal}/yr billed annually`}>
+                  <span class="pricing-savings">{plan.savings}</span>
+                </span>
+              </div>
+            )}
+            <p class="pricing-desc body-sm">{plan.description}</p>
+            <ul class="pricing-features">
+              {plan.features.map((f) => (
+                <li>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="https://apps.shopify.com/" class={plan.ctaClass} style="width: 100%; margin-top: auto;">
+              {plan.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Feature comparison table -->
+    <div class="comparison-wrap animate-on-scroll" data-od-id="pricing-comparison">
+      <button class="comparison-toggle" id="comparison-toggle" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+        Compare all features
+      </button>
+
+      <div class="comparison-table-wrap" id="comparison-table" hidden>
+        <table class="comparison-table" role="table">
+          <caption class="sr-only">Feature comparison across all Novus plans</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="col-feature">Feature</th>
+              <th scope="col" class="col-plan">Free</th>
+              <th scope="col" class="col-plan">Pro</th>
+              <th scope="col" class="col-plan col-featured">Growth</th>
+              <th scope="col" class="col-plan">Agency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row) => (
+              <tr>
+                <td class="row-label">{row.label}</td>
+                <td class={row.free === "—" ? "cell-empty" : "cell-val"}>{row.free}</td>
+                <td class={row.pro === "—" ? "cell-empty" : "cell-val"}>{row.pro}</td>
+                <td class={`col-featured ${row.growth === "—" ? "cell-empty" : "cell-val"}`}>{row.growth}</td>
+                <td class={row.agency === "—" ? "cell-empty" : "cell-val"}>{row.agency}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // --- Billing toggle ---
+  const monthlyBtn = document.getElementById("toggle-monthly");
+  const annualBtn = document.getElementById("toggle-annual");
+  const amounts = document.querySelectorAll(".pricing-amount[data-monthly]");
+
+  function setBilling(mode) {
+    const isAnnual = mode === "annual";
+    monthlyBtn.classList.toggle("active", !isAnnual);
+    annualBtn.classList.toggle("active", isAnnual);
+    monthlyBtn.setAttribute("aria-pressed", String(!isAnnual));
+    annualBtn.setAttribute("aria-pressed", String(isAnnual));
+    amounts.forEach((el) => {
+      el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+    });
+  }
+
+  monthlyBtn.addEventListener("click", () => setBilling("monthly"));
+  annualBtn.addEventListener("click", () => setBilling("annual"));
+
+  // --- Comparison table toggle ---
+  const compToggle = document.getElementById("comparison-toggle");
+  const compTable = document.getElementById("comparison-table");
+
+  compToggle.addEventListener("click", () => {
+    const expanded = compToggle.getAttribute("aria-expanded") === "true";
+    compToggle.setAttribute("aria-expanded", String(!expanded));
+    compTable.hidden = expanded;
+  });
+</script>
+
+<style>
+  .pricing-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Billing toggle */
+  .billing-toggle {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;       /* center inside flex column */
+    gap: 4px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px;
+    margin: var(--space-3) auto 0;
+  }
+
+  .toggle-btn {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .toggle-btn.active {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .toggle-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  /* Plan grid */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    align-items: stretch;
+    padding-top: 20px; /* room for badge */
+  }
+
+  /* Wrapper holds both the floating badge and the card */
+  .pricing-card-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    flex: 1;
+  }
+
+  .pricing-featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 0 32px -8px rgba(54, 244, 164, 0.12);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -14px;           /* sits above the card, inside the wrap */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pricing-tier-name {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+
+  .pricing-price {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .pricing-amount {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    transition: opacity var(--duration-fast);
+  }
+
+  .pricing-period {
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+
+  .pricing-annual {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-height: 18px;
+  }
+
+  .pricing-savings {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .pricing-desc {
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: var(--space-3) 0;
+    flex: 1;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .pricing-features svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  /* Comparison table */
+  .comparison-wrap {
+    margin-top: var(--space-8);
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .comparison-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;  /* revealed when open */
+    padding: 18px 24px;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+    letter-spacing: 0.01em;
+  }
+
+  .comparison-toggle:hover {
+    color: var(--text-primary);
+    background: var(--bg-glass);
+  }
+
+  .comparison-toggle[aria-expanded="true"] {
+    border-bottom-color: var(--border);
+    color: var(--text-primary);
+  }
+
+  .comparison-toggle svg {
+    flex-shrink: 0;
+    transition: transform var(--duration-normal) var(--ease-out);
+    color: var(--accent);
+  }
+
+  .comparison-toggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .comparison-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .comparison-table th {
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .col-feature { width: 35%; }
+  .col-plan { width: 16.25%; text-align: center; }
+
+  .col-featured {
+    background: rgba(54, 244, 164, 0.04);
+    color: var(--accent) !important;
+  }
+
+  .comparison-table tbody tr {
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background var(--duration-fast);
+  }
+
+  .comparison-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .comparison-table tbody tr:hover {
+    background: var(--bg-glass);
+  }
+
+  .row-label {
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .cell-val {
+    padding: 12px 16px;
+    text-align: center;
+    color: var(--text-primary);
+  }
+
+  .cell-empty {
+    padding: 12px 16px;
+    text-align: center;
+    color: var(--text-faint);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .pricing-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-amount {
+      font-size: 32px;
+    }
+
+    .comparison-table th,
+    .row-label,
+    .cell-val,
+    .cell-empty {
+      padding: 10px 12px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .billing-toggle {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
