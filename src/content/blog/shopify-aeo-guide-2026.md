@@ -3,7 +3,7 @@ title: "Shopify AEO Guide: Optimize for AI Search (2026)"
 description: "An Answer Engine Optimization (AEO) playbook for Shopify: llms.txt, schema, and crawler policy so ChatGPT, Perplexity, and Google AI can cite your store."
 pubDate: 2026-06-06
 updatedDate: 2026-06-06
-author: "Nexis CRO Team"
+author: "Nexis CRO Editorial Team"
 tags:
   - AEO
   - Shopify SEO

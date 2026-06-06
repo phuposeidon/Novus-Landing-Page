@@ -3,7 +3,7 @@ title: "llms.txt for Shopify Stores: Setup Guide (2026)"
 description: "How to publish llms.txt at your Shopify store root so ChatGPT, Perplexity, and Claude can discover your catalog, policies, and buying guides without wading through your full sitemap."
 pubDate: 2026-06-07
 updatedDate: 2026-06-07
-author: "Nexis CRO Team"
+author: "Nexis CRO Editorial Team"
 tags:
   - llms.txt
   - Shopify

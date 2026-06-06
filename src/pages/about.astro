@@ -1,0 +1,106 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import {
+  EDITORIAL_AUTHOR,
+  SHOPIFY_INSTALL_URL,
+  SUPPORT_EMAIL,
+} from "../config/site.ts";
+
+const title = "About — Nexis CRO Editorial Team";
+const description =
+  "Meet the Nexis CRO editorial team. We publish practical Shopify AEO, llms.txt, and AI citation guides backed by the Nexis CRO audit app.";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: EDITORIAL_AUTHOR.name,
+  url: new URL(EDITORIAL_AUTHOR.path, Astro.site).href,
+  jobTitle: EDITORIAL_AUTHOR.jobTitle,
+  description: EDITORIAL_AUTHOR.bio,
+  worksFor: {
+    "@type": "Organization",
+    name: "Nexis CRO",
+    url: Astro.site?.href,
+    sameAs: [SHOPIFY_INSTALL_URL],
+  },
+  email: SUPPORT_EMAIL,
+};
+---
+
+<Layout title={title} description={description} extraJsonLd={personSchema}>
+  <Nav />
+  <main class="about-page">
+    <div class="container about-shell">
+      <header class="about-header">
+        <p class="overline">Editorial</p>
+        <h1 class="display text-balance">{EDITORIAL_AUTHOR.name}</h1>
+        <p class="body-lg about-lead">{EDITORIAL_AUTHOR.bio}</p>
+      </header>
+
+      <section class="about-body">
+        <h2 class="heading-2">What we publish</h2>
+        <p class="body-md">
+          Guides on Answer Engine Optimization (AEO), llms.txt deployment, JSON-LD schema,
+          robots.txt policy for AI crawlers, and AI Rank Tracker setup — all verified against
+          the Nexis CRO Shopify app codebase and real merchant workflows.
+        </p>
+
+        <h2 class="heading-2">How we work</h2>
+        <p class="body-md">
+          Every article is reviewed for technical accuracy, on-page SEO, and AI-citation
+          readiness before publish. We link to primary sources (Google Search Central, Shopify
+          docs) and avoid fabricated statistics.
+        </p>
+
+        <h2 class="heading-2">Contact</h2>
+        <p class="body-md">
+          Questions or corrections? Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+          or <a href={SHOPIFY_INSTALL_URL} target="_blank" rel="noopener noreferrer">install Nexis CRO on Shopify</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .about-page {
+    padding: var(--space-8) 0 var(--space-9);
+  }
+
+  .about-shell {
+    max-width: 720px;
+  }
+
+  .about-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .about-lead {
+    color: var(--text-secondary);
+    max-width: 60ch;
+  }
+
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-body h2 {
+    margin-top: var(--space-5);
+  }
+
+  .about-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

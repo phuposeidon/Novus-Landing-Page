@@ -8,7 +8,7 @@ const blog = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
-    author: z.string().default("Nexis CRO Team"),
+    author: z.string().default("Nexis CRO Editorial Team"),
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),

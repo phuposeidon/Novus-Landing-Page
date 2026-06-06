@@ -17,6 +17,7 @@ const today = new Date().toISOString().slice(0, 10);
 const staticRoutes = [
   { loc: `${site}/`, lastmod: today },
   { loc: `${site}/blog/`, lastmod: today },
+  { loc: `${site}/about/`, lastmod: today },
   { loc: `${site}/privacy` },
 ];
 

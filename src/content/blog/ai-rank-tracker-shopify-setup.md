@@ -3,7 +3,7 @@ title: "Shopify AI Rank Tracker Setup: Track ChatGPT Citations (2026)"
 description: "Step-by-step guide to configure Nexis CRO AI Rank Tracker on Shopify: pick prompts, set brand aliases, run manual or scheduled checks, and read citation share versus competitors."
 pubDate: 2026-06-13
 updatedDate: 2026-06-13
-author: "Nexis CRO Team"
+author: "Nexis CRO Editorial Team"
 tags:
   - AI Rank Tracker
   - ChatGPT

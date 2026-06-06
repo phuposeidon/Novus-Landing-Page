@@ -3,7 +3,7 @@ title: "How to Track ChatGPT Citations for Ecommerce (2026)"
 description: "A practical framework to monitor brand mentions, citation share, and AI referral traffic when ChatGPT and Perplexity recommend products without showing up in GA4."
 pubDate: 2026-06-09
 updatedDate: 2026-06-09
-author: "Nexis CRO Team"
+author: "Nexis CRO Editorial Team"
 tags:
   - ChatGPT
   - AI Rank Tracker

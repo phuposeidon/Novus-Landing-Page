@@ -3,7 +3,7 @@ title: "AI Bot Manager for Shopify: robots.txt Guide (2026)"
 description: "Which AI crawlers to allow or block on Shopify (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) and how to edit robots.txt.liquid without breaking SEO defaults."
 pubDate: 2026-06-10
 updatedDate: 2026-06-10
-author: "Nexis CRO Team"
+author: "Nexis CRO Editorial Team"
 tags:
   - robots.txt
   - AI Crawlers

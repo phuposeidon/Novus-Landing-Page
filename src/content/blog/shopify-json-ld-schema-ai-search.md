@@ -3,7 +3,7 @@ title: "Shopify JSON-LD Schema for AI Search (2026)"
 description: "Which Product, Offer, FAQPage, and Organization schema types Shopify themes miss, and how complete JSON-LD helps ChatGPT Shopping, Perplexity, and Google AI Overviews cite your catalog."
 pubDate: 2026-06-08
 updatedDate: 2026-06-08
-author: "Nexis CRO Team"
+author: "Nexis CRO Editorial Team"
 tags:
   - Schema Markup
   - JSON-LD

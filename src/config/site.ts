@@ -6,6 +6,14 @@ export const SHOPIFY_INSTALL_URL = "https://apps.shopify.com/partners/nexis-cro"
 
 export const SUPPORT_EMAIL = "support@nexiscro.com";
 
+/** Editorial byline + E-E-A-T author page (blog JSON-LD + /about). */
+export const EDITORIAL_AUTHOR = {
+  name: "Nexis CRO Editorial Team",
+  path: "/about/",
+  jobTitle: "Shopify AEO & AI SEO specialists",
+  bio: "The Nexis CRO editorial team publishes practical guides on Answer Engine Optimization, llms.txt, schema markup, and AI citation tracking for Shopify merchants.",
+} as const;
+
 /** Public privacy policy (App Store + in-app legal card). */
 export const PRIVACY_POLICY_URL = "https://nexiscro.com/privacy";
 
@@ -37,6 +45,7 @@ export const footerProductLinks = [
 ] as const;
 
 export const footerSupportLinks = [
+  { label: "About editorial", href: EDITORIAL_AUTHOR.path },
   { label: "Contact", href: siteAnchors.contact },
   { label: "Email support", href: `mailto:${SUPPORT_EMAIL}`, external: true },
 ] as const;

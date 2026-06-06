@@ -11,7 +11,7 @@ interface Props {
 
 import Analytics from "../components/Analytics.astro";
 import WebMcp from "../components/WebMcp.astro";
-import { SHOPIFY_INSTALL_URL } from "../config/site.ts";
+import { SHOPIFY_INSTALL_URL, SUPPORT_EMAIL } from "../config/site.ts";
 import "../styles/global.css";
 
 const {
@@ -37,6 +37,12 @@ const organizationSchema = {
   description:
     "AI SEO and AEO audit app for Shopify merchants. Schema, llms.txt, AI Rank Tracker, and ChatGPT visibility.",
   sameAs: [SHOPIFY_INSTALL_URL],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: SUPPORT_EMAIL,
+    contactType: "customer support",
+    availableLanguage: "English",
+  },
 };
 
 const websiteSchema = {
@@ -88,6 +94,13 @@ const monoFontUrl =
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    {ogImagePath.endsWith(".png") && (
+      <>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+      </>
+    )}
     <meta property="og:site_name" content="Nexis CRO" />
 
     <!-- Twitter -->
@@ -114,10 +127,10 @@ const monoFontUrl =
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Nexis: AI SEO & AEO Audit",
+      "name": "Nexis CRO",
       "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "url": SHOPIFY_INSTALL_URL,
+      "operatingSystem": "Shopify",
+      "url": siteUrl,
       "installUrl": SHOPIFY_INSTALL_URL,
       "description": description,
       "offers": [
@@ -131,29 +144,21 @@ const monoFontUrl =
           "@type": "Offer",
           "price": "29",
           "priceCurrency": "USD",
-          "name": "Pro",
-          "billingPeriod": "P1M"
+          "name": "Pro"
         },
         {
           "@type": "Offer",
           "price": "59",
           "priceCurrency": "USD",
-          "name": "Growth",
-          "billingPeriod": "P1M"
+          "name": "Growth"
         },
         {
           "@type": "Offer",
           "price": "149",
           "priceCurrency": "USD",
-          "name": "Agency",
-          "billingPeriod": "P1M"
+          "name": "Agency"
         }
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "12"
-      }
+      ]
     })} />
     )}
     {jsonLdBlocks.map((block) => (
