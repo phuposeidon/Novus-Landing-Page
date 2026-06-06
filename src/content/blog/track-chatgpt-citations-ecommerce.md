@@ -133,7 +133,7 @@ When competitors replace you on a prompt you used to win:
 
 [Alhena's 2026 ecommerce visibility roundup](https://alhena.ai/blog/best-ai-visibility-tools-ecommerce/) notes ChatGPT drives a large share of AI referral traffic while Google AI Overviews appear on a substantial portion of Google searches. Monitor at least ChatGPT, Perplexity, and Google AI surfaces for US ecommerce.
 
-For Shopify merchants already running audits, [Nexis CRO AI Rank Tracker](https://nexiscro.com/#features) tracks visibility on ChatGPT, Gemini, and Perplexity over time with competitor share-of-voice and citation gap reports.
+For Shopify merchants already running audits, [Nexis CRO AI Rank Tracker](https://nexiscro.com/#features) tracks visibility on ChatGPT, Gemini, and Perplexity over time with competitor share-of-voice and citation gap reports. See the [step-by-step setup guide](/blog/ai-rank-tracker-shopify-setup/) for prompts, aliases, and plan limits.
 
 ## 30-Day Citation Tracking Sprint
 

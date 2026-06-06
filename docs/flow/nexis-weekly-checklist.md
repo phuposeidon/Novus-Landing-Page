@@ -92,5 +92,5 @@ Use this checklist each week until GSC impressions stabilize (typically 2–4 we
 | track-chatgpt-citations-ecommerce | ✅ |
 | ai-bot-manager-shopify-robots-txt | ✅ |
 | shopify-competitor-citation-gaps | ✅ |
-| ai-rank-tracker-shopify-setup | 🔲 Planned |
+| ai-rank-tracker-shopify-setup | ✅ |
 | llms-full-txt-shopify | 🔲 Planned |

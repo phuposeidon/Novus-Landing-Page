@@ -132,7 +132,7 @@ Weekly scorecard per competitor:
 | Strong citations | 5 | 8 | 3 |
 | Top cited URL type | PDP | Review blog | PDP |
 
-Automate with [AI Rank Tracker](https://nexiscro.com/#features) or a manual spreadsheet for the first month.
+Automate with [AI Rank Tracker](https://nexiscro.com/#features) or a manual spreadsheet for the first month. New to the tool? Follow the [AI Rank Tracker setup guide](/blog/ai-rank-tracker-shopify-setup/).
 
 ## 30-Day Citation Gap Sprint
 

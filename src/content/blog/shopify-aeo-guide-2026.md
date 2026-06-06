@@ -197,6 +197,7 @@ Go deeper on each layer of the AEO stack:
 - [How to Track ChatGPT Citations for Ecommerce](/blog/track-chatgpt-citations-ecommerce/): SOV, GA4 segments, and 30-day sprint
 - [AI Bot Manager for Shopify](/blog/ai-bot-manager-shopify-robots-txt/): GPTBot, ClaudeBot, PerplexityBot, robots.txt.liquid
 - [Shopify Competitor Citation Gaps](/blog/shopify-competitor-citation-gaps/): find and fix prompts competitors win
+- [AI Rank Tracker Setup](/blog/ai-rank-tracker-shopify-setup/): configure prompts, aliases, and scheduled checks in Nexis CRO
 
 ## 90-Day Shopify AEO Checklist
 
