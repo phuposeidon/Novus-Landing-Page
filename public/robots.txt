@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# AI context map: https://nexiscro.com/llms.txt
+
+Sitemap: https://nexiscro.com/sitemap.xml

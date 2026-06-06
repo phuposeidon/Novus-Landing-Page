@@ -1,0 +1,25 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server-card/v1.json",
+  "serverInfo": {
+    "name": "nexiscro-web-tools",
+    "title": "Nexis CRO Web Tools",
+    "version": "1.0.0"
+  },
+  "description": "Browser WebMCP tools exposed on https://nexiscro.com/ for agent navigation and install discovery.",
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    }
+  },
+  "endpoints": {
+    "webmcp": {
+      "url": "https://nexiscro.com/",
+      "transport": "webmcp"
+    }
+  },
+  "links": {
+    "apiCatalog": "https://nexiscro.com/.well-known/api-catalog",
+    "agentSkills": "https://nexiscro.com/.well-known/agent-skills/index.json",
+    "auth": "https://nexiscro.com/auth.md"
+  }
+}

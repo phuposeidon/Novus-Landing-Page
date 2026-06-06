@@ -1,0 +1,11 @@
+# Cloudflare Pages — Astro build output + non-secret env vars for the Worker.
+# Secrets (never commit): wrangler pages secret put RESEND_API_KEY --project-name novus-landing
+#                          wrangler pages secret put TURNSTILE_SECRET_KEY --project-name novus-landing
+name = "novus-landing"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "dist"
+
+[vars]
+CONTACT_FROM_EMAIL = "support@nexiscro.com"
+CONTACT_TO_EMAIL = "support@nexiscro.com"
+PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAADZsDyKYZ57BBYwt"

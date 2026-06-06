@@ -1,0 +1,7 @@
+{
+  "resource": "https://nexiscro.com/",
+  "authorization_servers": ["https://nexiscro.com"],
+  "bearer_methods_supported": ["header"],
+  "scopes_supported": ["content.read"],
+  "resource_documentation": "https://nexiscro.com/auth.md"
+}

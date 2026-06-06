@@ -1,4 +1,9 @@
 ---
+import { SHOPIFY_INSTALL_URL, siteAnchors } from "../config/site.ts";
+
+/** Centered in viewBox 0 0 36 36 — do not change rx without updating M18 y */
+const DONUT_PATH =
+  "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831";
 ---
 
 <section class="hero" id="hero">
@@ -6,7 +11,7 @@
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="container hero-content">
-    <div class="hero-badge animate-on-scroll">
+    <div class="hero-badge">
       <span class="badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -17,65 +22,233 @@
       </span>
     </div>
 
-    <h1 class="display-xl text-balance animate-on-scroll">
+    <h1 class="display-xl text-balance">
       Your store is invisible<br />to AI search engines.
     </h1>
 
-    <p class="body-lg hero-sub animate-on-scroll">
-      Novus audits your Shopify store for ChatGPT, Perplexity, Google AI,
+    <p class="body-lg hero-sub">
+      Nexis CRO audits your Shopify store for ChatGPT, Perplexity, Google AI,
       and Bing Copilot — then fixes what's broken with one-click AI.
     </p>
 
-    <div class="hero-cta animate-on-scroll">
-      <a href="https://apps.shopify.com/" class="btn btn-primary" id="hero-cta-primary">
+    <div class="hero-cta">
+      <a
+        href={SHOPIFY_INSTALL_URL}
+        class="btn btn-primary"
+        id="hero-cta-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-analytics-event="install_click"
+        data-analytics-location="hero"
+      >
         Start Free Audit
       </a>
-      <a href="#how-it-works" class="btn btn-ghost" id="hero-cta-secondary">
+      <a
+        href={siteAnchors.howItWorks}
+        class="btn btn-ghost"
+        id="hero-cta-secondary"
+        data-analytics-event="cta_secondary_click"
+        data-analytics-location="hero"
+        data-analytics-section="how-it-works"
+      >
         See How It Works
       </a>
     </div>
 
-    <!-- Score preview card -->
-    <div class="hero-card animate-on-scroll">
+    <!-- Real High-Fidelity App Dashboard Mockup -->
+    <div class="hero-card animate-on-scroll" aria-hidden="true">
       <div class="hero-card-header">
         <div class="hero-card-dot" style="background: #ef4444;" aria-hidden="true"></div>
         <div class="hero-card-dot" style="background: #f59e0b;" aria-hidden="true"></div>
         <div class="hero-card-dot" style="background: var(--accent);" aria-hidden="true"></div>
-        <span class="hero-card-title">AEO Score — your-store.myshopify.com</span>
+        <span class="hero-card-title">Shopify Admin — Nexis: AI SEO & AEO Audit</span>
       </div>
-      <div class="hero-scores">
-        <div class="hero-score-item">
-          <div class="hero-score-label">Catalog Quality</div>
-          <div class="hero-score-row">
-            <span class="hero-score-num mono" data-target="74">0</span>
-            <div class="score-bar"><div class="score-bar-fill good" style="width: 0%;" data-width="74%"></div></div>
+
+      <div class="hero-dashboard-inner">
+        <!-- Top 4 Analytics Cards Grid -->
+        <div class="metrics-grid">
+          <!-- Card 1: AEO Score -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">AEO SCORE</span>
+              <span class="status-badge stable">Stable</span>
+            </div>
+            <div class="metric-content">
+              <div class="score-circle-wrapper">
+                <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2.5" />
+                  <path class="circle-fill good" stroke-dasharray="76, 100" d={DONUT_PATH} fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+                <div class="circle-text">
+                  <span class="score-num mono" data-target="76">0</span>
+                  <span class="score-total">/100</span>
+                </div>
+              </div>
+              <div class="metric-details">
+                <div class="tag-row">
+                  <span class="detail-tag warning">Reach 80+</span>
+                  <span class="detail-tag critical">Has critical</span>
+                </div>
+                <span class="detail-desc">Discoverability: <strong class="text-white mono">58</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Resolution Rate -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">RESOLUTION RATE</span>
+              <span class="status-badge progress">In progress</span>
+            </div>
+            <div class="metric-content">
+              <div class="score-circle-wrapper">
+                <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2.5" />
+                  <path class="circle-fill warning" stroke-dasharray="21, 100" d={DONUT_PATH} fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+                <div class="circle-text">
+                  <span class="score-num mono" data-target="21">0</span>
+                  <span class="score-total">%</span>
+                </div>
+              </div>
+              <div class="metric-details">
+                <span class="detail-desc detail-desc-emphasis"><strong class="text-white">3 of 14</strong> fixed</span>
+                <span class="detail-desc">3 resolved total</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Open Issues -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">OPEN ISSUES</span>
+              <span class="status-badge critical-bg">1 Critical</span>
+            </div>
+            <div class="metric-content">
+              <div class="score-circle-wrapper">
+                <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2.5" />
+                  <path class="circle-fill danger" stroke-dasharray="78, 100" d={DONUT_PATH} fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" />
+                </svg>
+                <div class="circle-text">
+                  <span class="score-num mono" data-target="11">0</span>
+                  <span class="score-total">open</span>
+                </div>
+              </div>
+              <div class="metric-details">
+                <span class="detail-link">Review and fix →</span>
+                <span class="detail-desc">14 found in last scan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: AI Credits -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">AI CREDITS</span>
+              <span class="status-badge unlimited">Unlimited</span>
+            </div>
+            <div class="metric-content">
+              <div class="score-circle-wrapper">
+                <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(54,244,164,0.1)" stroke-width="2" stroke-dasharray="3 3" />
+                </svg>
+                <div class="circle-text circle-text--solo">
+                  <span class="score-num green-text infinity-symbol">∞</span>
+                </div>
+              </div>
+              <div class="metric-details">
+                <span class="detail-link">View plan & billing →</span>
+                <span class="detail-desc">Pro package active</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="hero-score-item">
-          <div class="hero-score-label">Structured Data</div>
-          <div class="hero-score-row">
-            <span class="hero-score-num mono" data-target="62">0</span>
-            <div class="score-bar"><div class="score-bar-fill warning" style="width: 0%;" data-width="62%"></div></div>
+
+        <!-- Main Split Workspace Layout -->
+        <div class="workspace-grid">
+          <!-- Left Workspace: What to Fix First -->
+          <div class="workspace-left">
+            <div class="card-title-bar">
+              <div class="flex-align">
+                <svg class="info-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <p class="workspace-heading">What to fix first</p>
+              </div>
+              <span class="high-impact-tag">HIGH IMPACT</span>
+            </div>
+
+            <div class="issues-list">
+              <div class="issue-item">
+                <div class="issue-info">
+                  <span class="issue-name">Refund policy should be present</span>
+                  <span class="issue-badge critical">CRITICAL</span>
+                </div>
+                <span class="issue-cat">Storefront content · Policy and FAQ Coverage</span>
+              </div>
+
+              <div class="issue-item">
+                <div class="issue-info">
+                  <span class="issue-name">Most products should have rich descriptions</span>
+                  <span class="issue-badge high">HIGH</span>
+                </div>
+                <span class="issue-cat">Storefront content · AI Query Readiness</span>
+              </div>
+
+              <div class="issue-item">
+                <div class="issue-info">
+                  <span class="issue-name">Product descriptions should be detailed</span>
+                  <span class="issue-badge high">HIGH</span>
+                </div>
+                <span class="issue-cat">The Complete Snowboard · Product · Catalog Quality</span>
+              </div>
+
+              <div class="issue-item">
+                <div class="issue-info">
+                  <span class="issue-name">Terms policy should be present</span>
+                  <span class="issue-badge high">HIGH</span>
+                </div>
+                <span class="issue-cat">Storefront content · Policy and FAQ Coverage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Workspace: Choose Audit Depth -->
+          <div class="workspace-right">
+            <div class="card-title-bar">
+              <p class="workspace-heading">Choose audit depth</p>
+              <span class="scan-depth-btn">Scan depth</span>
+            </div>
+            <p class="depth-desc">Start free with Standard, then use Deep or Full for richer AI-grounded scoring.</p>
+
+            <div class="audit-tiers">
+              <div class="audit-tier active-tier">
+                <div class="tier-header">
+                  <span class="tier-name">Deep Scan</span>
+                  <span class="tier-cost">1+ up to 2 credits</span>
+                </div>
+                <p class="tier-desc">Deeper crawl + prioritized issues; optional sampled AI quotability scoring.</p>
+                <label class="tier-checkbox">
+                  <input type="checkbox" checked disabled />
+                  <span>Include AI quotability review (extra credits only when configured)</span>
+                </label>
+                <button class="tier-btn primary-btn">Run Deep scan</button>
+              </div>
+
+              <div class="audit-tier">
+                <div class="tier-header">
+                  <span class="tier-name">Full Report</span>
+                  <span class="tier-cost yellow-text">3 credits</span>
+                </div>
+                <p class="tier-desc">Largest coverage run — strongest signal for merchants upgrading their full AEO program.</p>
+                <button class="tier-btn secondary-btn">Run Full report</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="hero-score-item">
-          <div class="hero-score-label">Content Clarity</div>
-          <div class="hero-score-row">
-            <span class="hero-score-num mono" data-target="100">0</span>
-            <div class="score-bar"><div class="score-bar-fill good" style="width: 0%;" data-width="100%"></div></div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-card-footer">
-        <span class="hero-issues">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          8 issues found — 1 critical
-        </span>
-        <span class="hero-fix-btn">AI Quick Fix →</span>
       </div>
     </div>
   </div>
@@ -91,8 +264,9 @@
     animated = true;
 
     // Animate numbers
-    document.querySelectorAll(".hero-score-num").forEach((el) => {
+    document.querySelectorAll(".score-num").forEach((el) => {
       const target = parseInt(el.dataset.target, 10);
+      if (isNaN(target)) return;
       const duration = 1400;
       const start = performance.now();
 
@@ -104,18 +278,11 @@
       };
       requestAnimationFrame(tick);
     });
-
-    // Animate bars
-    document.querySelectorAll(".score-bar-fill").forEach((el) => {
-      setTimeout(() => {
-        el.style.width = el.dataset.width;
-      }, 200);
-    });
   };
 
   const obs = new IntersectionObserver(
     (entries) => { if (entries[0].isIntersecting) animateScores(); },
-    { threshold: 0.3 }
+    { threshold: 0.2 }
   );
   if (heroCard) obs.observe(heroCard);
 </script>
@@ -123,11 +290,14 @@
 <style>
   .hero {
     position: relative;
-    padding: calc(var(--nav-height) + 80px) 0 100px;
+    padding: calc(var(--nav-height) + 60px) 0 100px;
     min-height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
+    background-image: radial-gradient(rgba(54, 244, 164, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: center;
   }
 
   .hero-glow {
@@ -154,6 +324,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
   }
 
   .hero-badge {
@@ -175,27 +346,36 @@
     gap: var(--space-4);
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-10);
   }
 
-  /* Score card */
+  /* Expanded, High-Fidelity App Dashboard Workspace Mockup */
   .hero-card {
+    --dash-label: 11px;
+    --dash-badge: 10px;
+    --dash-body: 13px;
+    --dash-caption: 12px;
+    --dash-heading: 15px;
+    --dash-score: 18px;
+    --dash-muted: #c4c4cc;
+    --dash-subtle: #a8a8b2;
     width: 100%;
-    max-width: 560px;
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    max-width: 1040px;
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: var(--shadow-elevated);
+    box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.7);
+    text-align: left;
   }
 
   .hero-card-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-section);
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0d0d0d;
   }
 
   .hero-card-dot {
@@ -206,85 +386,474 @@
 
   .hero-card-title {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--dash-subtle);
     margin-left: 8px;
     font-family: var(--font-mono);
+    letter-spacing: 0.02em;
   }
 
-  .hero-scores {
-    padding: 24px 24px 16px;
+  .hero-dashboard-inner {
+    padding: var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--space-6);
   }
 
-  .hero-score-item {
+  /* Top 4 Metrics Cards Grid */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .metric-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
+    gap: 14px;
+  }
+
+  .metric-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     gap: 8px;
   }
 
-  .hero-score-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    letter-spacing: 0.01em;
+  .metric-title {
+    font-size: var(--dash-label);
+    font-weight: 600;
+    color: var(--dash-subtle);
+    letter-spacing: 0.06em;
   }
 
-  .hero-score-row {
+  .status-badge {
+    font-size: var(--dash-badge);
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .status-badge.stable {
+    background: rgba(54, 244, 164, 0.1);
+    color: var(--accent);
+  }
+
+  .status-badge.progress {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+  }
+
+  .status-badge.critical-bg {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+
+  .status-badge.unlimited {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+  }
+
+  .metric-content {
     display: flex;
     align-items: center;
     gap: 16px;
   }
 
-  .hero-score-num {
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--text-primary);
-    min-width: 42px;
-    text-align: right;
+  /* Donut charts */
+  .score-circle-wrapper {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
   }
 
-  .hero-card-footer {
+  .circle-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    display: block;
+    overflow: visible;
+  }
+
+  .circle-fill {
+    transition: stroke-dasharray 1s ease-out;
+  }
+
+  /* Number on exact circle center; label hangs below */
+  .circle-text {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .circle-text .score-num {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--dash-score);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .circle-text .score-total {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 10px);
+    transform: translateX(-50%);
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--dash-muted);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .circle-text--solo .score-num {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .green-text {
+    color: var(--accent) !important;
+  }
+
+  .text-white {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .metric-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .detail-tag {
+    font-size: var(--dash-badge);
+    padding: 2px 7px;
+    border-radius: 3px;
+    width: max-content;
+    font-weight: 600;
+  }
+
+  .detail-tag.warning {
+    background: rgba(245, 158, 11, 0.18);
+    color: #fbbf24;
+  }
+
+  .detail-tag.critical {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+  }
+
+  .detail-desc {
+    font-size: var(--dash-caption);
+    color: var(--dash-muted);
+    line-height: 1.45;
+  }
+
+  .detail-desc-emphasis {
+    font-size: var(--dash-body);
+  }
+
+  .detail-link {
+    font-size: var(--dash-caption);
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+    line-height: 1.4;
+  }
+
+  /* Split Workspace Layout */
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .workspace-left, .workspace-right {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 22px;
+  }
+
+  .card-title-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 24px;
-    border-top: 1px solid var(--border);
-    background: var(--bg-section);
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 12px;
+    gap: 12px;
   }
 
-  .hero-issues {
+  .flex-align {
     display: flex;
     align-items: center;
+    gap: 10px;
+  }
+
+  .workspace-heading {
+    font-size: var(--dash-heading);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .high-impact-tag {
+    font-size: var(--dash-badge);
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--dash-muted);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  /* Issues List */
+  .issues-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .issue-item {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  .hero-fix-btn {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent);
     cursor: pointer;
+    transition: border-color var(--duration-fast), background-color var(--duration-fast);
   }
 
-  @media (max-width: 640px) {
+  .issue-item:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .issue-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .issue-name {
+    font-size: var(--dash-body);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .issue-badge {
+    font-size: var(--dash-badge);
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+
+  .issue-badge.critical {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+  }
+
+  .issue-badge.high {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+  }
+
+  .issue-cat {
+    font-size: var(--dash-caption);
+    color: var(--dash-subtle);
+    line-height: 1.45;
+  }
+
+  /* Scan depth styles */
+  .scan-depth-btn {
+    font-size: var(--dash-badge);
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .depth-desc {
+    font-size: var(--dash-body);
+    color: var(--dash-muted);
+    line-height: 1.55;
+    margin-bottom: var(--space-4);
+  }
+
+  .audit-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .audit-tier {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .audit-tier.active-tier {
+    border-color: rgba(54, 244, 164, 0.3);
+    background: rgba(54, 244, 164, 0.03);
+  }
+
+  .tier-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .tier-name {
+    font-size: var(--dash-body);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .tier-cost {
+    font-size: var(--dash-caption);
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .yellow-text {
+    color: #fbbf24 !important;
+  }
+
+  .tier-desc {
+    font-size: var(--dash-caption);
+    color: var(--dash-subtle);
+    line-height: 1.55;
+  }
+
+  .tier-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: var(--dash-caption);
+    color: var(--dash-muted);
+    line-height: 1.45;
+    cursor: not-allowed;
+  }
+
+  .tier-checkbox input {
+    accent-color: var(--accent);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tier-btn {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: var(--dash-body);
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+
+  .tier-btn.primary-btn {
+    background: var(--text-primary);
+    color: #000;
+  }
+
+  .tier-btn.secondary-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+  }
+
+  .infinity-symbol {
+    font-size: 26px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+    margin: 0;
+  }
+
+  /* Responsive styling */
+  @media (max-width: 1080px) {
+    .hero-card {
+      max-width: 920px;
+    }
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 880px) {
     .hero {
       padding-top: calc(var(--nav-height) + 48px);
       min-height: auto;
     }
 
     .hero h1 {
-      font-size: 36px;
+      font-size: 42px;
+    }
+
+    .workspace-grid {
+      grid-template-columns: 1fr;
     }
 
     .hero-card {
       max-width: 100%;
     }
+  }
 
-    .hero-score-num {
-      font-size: 22px;
+  @media (max-width: 560px) {
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero h1 {
+      font-size: 32px;
     }
   }
 </style>

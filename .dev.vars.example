@@ -1,0 +1,9 @@
+# Copy to .dev.vars for local dev (gitignored). Never commit real keys.
+RESEND_API_KEY=re_xxxxxxxxx
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+CONTACT_FROM_EMAIL=onboarding@resend.dev
+CONTACT_TO_EMAIL=you@example.com
+
+# Public site key — also set PUBLIC_TURNSTILE_SITE_KEY in wrangler.toml [vars] or:
+# PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA npm run dev
+# Cloudflare test keys (always pass): site 1x00000000000000000000AA / secret above

@@ -1,0 +1,101 @@
+---
+import { GA4_MEASUREMENT_ID, ANALYTICS_SECTIONS } from "../config/analytics.ts";
+
+const trackedSections = ANALYTICS_SECTIONS;
+---
+
+<!-- Google tag (gtag.js) -->
+<script
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
+></script>
+<script is:inline define:vars={{ GA4_MEASUREMENT_ID, trackedSections }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", GA4_MEASUREMENT_ID, {
+    send_page_view: true,
+    cookie_flags: "SameSite=None;Secure",
+  });
+
+  /** @param {string} eventName @param {Record<string, string | number | boolean>} [params] */
+  window.nexisTrack = function (eventName, params) {
+    if (typeof gtag === "function") {
+      gtag("event", eventName, params || {});
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Declarative click tracking via data-analytics-* attributes
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      if (!(target instanceof Element)) return;
+      var el = target.closest("[data-analytics-event]");
+      if (!el) return;
+
+      /** @type {Record<string, string>} */
+      var params = {};
+      if (el.dataset.analyticsLocation) params.location = el.dataset.analyticsLocation;
+      if (el.dataset.analyticsSection) params.section = el.dataset.analyticsSection;
+      if (el.dataset.analyticsPlan) params.plan_name = el.dataset.analyticsPlan;
+      if (el.dataset.analyticsLabel) params.link_text = el.dataset.analyticsLabel;
+
+      window.nexisTrack(el.dataset.analyticsEvent, params);
+    });
+
+    // Section visibility — fire once per section
+    var seenSections = new Set();
+    var sectionObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = entry.target.id;
+          if (!id || seenSections.has(id)) return;
+          seenSections.add(id);
+          window.nexisTrack("section_view", {
+            section: id,
+            engagement_time_msec: Math.round(entry.time || 0),
+          });
+        });
+      },
+      { threshold: 0.35, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    trackedSections.forEach(function (sectionId) {
+      var section = document.getElementById(sectionId);
+      if (section) sectionObserver.observe(section);
+    });
+
+    // FAQ expand
+    document.querySelectorAll(".faq-item").forEach(function (details) {
+      details.addEventListener("toggle", function () {
+        if (!details.open) return;
+        var question = details.querySelector(".faq-question span");
+        window.nexisTrack("faq_open", {
+          question: question ? question.textContent.trim() : "unknown",
+        });
+      });
+    });
+
+    // Scroll depth milestones
+    var depthMarks = [25, 50, 75, 90];
+    var firedDepth = new Set();
+    function onScrollDepth() {
+      var doc = document.documentElement;
+      var scrollTop = window.scrollY || doc.scrollTop;
+      var maxScroll = doc.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+      var pct = Math.round((scrollTop / maxScroll) * 100);
+      depthMarks.forEach(function (mark) {
+        if (pct >= mark && !firedDepth.has(mark)) {
+          firedDepth.add(mark);
+          window.nexisTrack("scroll_depth", { percent: mark });
+        }
+      });
+    }
+    window.addEventListener("scroll", onScrollDepth, { passive: true });
+    onScrollDepth();
+  });
+</script>

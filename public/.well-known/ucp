@@ -1,0 +1,45 @@
+{
+  "ucp": {
+    "version": "2026-01-11",
+    "services": {
+      "dev.ucp.shopping": [
+        {
+          "version": "2026-01-11",
+          "spec": "https://ucp.dev/specification/overview/",
+          "transport": "rest",
+          "endpoint": "https://nexiscro.com/openapi.json",
+          "schema": "https://nexiscro.com/openapi.json"
+        }
+      ]
+    },
+    "capabilities": {
+      "com.nexiscro.marketing.catalog": [
+        {
+          "version": "2026-01-11",
+          "spec": "https://nexiscro.com/openapi.json",
+          "schema": "https://nexiscro.com/openapi.json"
+        }
+      ],
+      "com.nexiscro.commerce.checkout_handoff": [
+        {
+          "version": "2026-01-11",
+          "spec": "https://nexiscro.com/.well-known/acp.json",
+          "schema": "https://nexiscro.com/.well-known/acp.json"
+        }
+      ]
+    },
+    "payment_handlers": {},
+    "endpoints": {
+      "catalog": "https://nexiscro.com/index.md",
+      "pricing": "https://nexiscro.com/#pricing",
+      "install": "https://apps.shopify.com/partners/nexis-cro"
+    }
+  },
+  "protocol_version": "2026-01-11",
+  "services": ["dev.ucp.shopping"],
+  "capabilities": ["com.nexiscro.marketing.catalog", "com.nexiscro.commerce.checkout_handoff"],
+  "endpoints": {
+    "rest": "https://nexiscro.com/openapi.json",
+    "acp": "https://nexiscro.com/.well-known/acp.json"
+  }
+}

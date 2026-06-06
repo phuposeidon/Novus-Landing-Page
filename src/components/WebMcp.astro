@@ -1,0 +1,90 @@
+---
+import { SHOPIFY_INSTALL_URL } from "../config/site.ts";
+
+/** WebMCP — expose marketing-site tools to browser agents (Chrome WebMCP API) */
+---
+
+<script is:inline define:vars={{ installUrl: SHOPIFY_INSTALL_URL }}>
+  (function initWebMcp() {
+    const mc = typeof navigator !== "undefined" ? navigator.modelContext : undefined;
+    if (!mc || typeof mc.registerTool !== "function") return;
+
+    const SITE = "https://nexiscro.com";
+    const INSTALL_URL = installUrl;
+
+    const tools = [
+      {
+        name: "get_site_summary",
+        description: "Return a markdown summary of Nexis CRO product, pricing, and install URL.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        async execute() {
+          const res = await fetch(SITE + "/index.md");
+          const text = res.ok ? await res.text() : "Nexis CRO — AI SEO & AEO Audit for Shopify. Install: " + INSTALL_URL;
+          return { content: [{ type: "text", text }] };
+        },
+      },
+      {
+        name: "get_install_url",
+        description: "Return the Shopify App Store install URL for Nexis CRO.",
+        inputSchema: {
+          type: "object",
+          properties: {},
+          additionalProperties: false,
+        },
+        async execute() {
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify({ installUrl: INSTALL_URL, label: "Install Free on Shopify" }, null, 2),
+              },
+            ],
+          };
+        },
+      },
+      {
+        name: "navigate_to_section",
+        description: "Navigate the browser to a section on nexiscro.com (features, pricing, faq, contact, how-it-works).",
+        inputSchema: {
+          type: "object",
+          properties: {
+            section: {
+              type: "string",
+              enum: ["features", "how-it-works", "pricing", "faq", "contact"],
+              description: "Target section id on the homepage",
+            },
+          },
+          required: ["section"],
+          additionalProperties: false,
+        },
+        async execute({ section }) {
+          const hash = "#" + section;
+          window.location.href = SITE + "/" + hash;
+          return { content: [{ type: "text", text: "Navigating to " + SITE + "/" + hash }] };
+        },
+      },
+    ];
+
+    const controllers = tools.map((tool) => {
+      try {
+        return mc.registerTool(tool);
+      } catch {
+        return null;
+      }
+    });
+
+    window.addEventListener(
+      "pagehide",
+      () => {
+        controllers.forEach((controller) => {
+          if (controller && typeof controller.abort === "function") controller.abort();
+        });
+      },
+      { once: true }
+    );
+  })();
+</script>

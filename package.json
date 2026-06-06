@@ -1,5 +1,5 @@
 {
-  "name": "novus-landing",
+  "name": "nexis-landing",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -8,12 +8,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/generate-agent-skills-index.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-llms.mjs && astro build && node scripts/patch-routes.mjs",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dns-aid": "node scripts/setup-dns-aid.mjs",
+    "deploy": "npm run build && wrangler pages deploy dist/ --project-name novus-landing --commit-dirty=true"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.0.0",
     "astro": "^5.7.0",
-    "@astrojs/cloudflare": "^12.0.0"
+    "resend": "^6.12.4"
   }
 }

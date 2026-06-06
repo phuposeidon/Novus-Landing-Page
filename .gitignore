@@ -12,13 +12,27 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
 .env.production
+.dev.vars
 
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+
+# Cursor IDE / local agent tooling (claude-blog skills live in ~/.cursor)
+.cursor/
+
+# Cloudflare local state
+.wrangler/
+
+# Build-time generated public assets (see scripts/generate-*.mjs)
+public/sitemap.xml
+public/llms.txt
+public/.well-known/agent-skills/index.json
+
+# Raw screen recordings (deploy the compressed file in public/videos/)
+public/Novus*.mp4

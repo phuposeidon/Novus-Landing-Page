@@ -1,4 +1,9 @@
 ---
+import { SUPPORT_EMAIL } from "../config/site.ts";
+import { resolveTurnstileSiteKey } from "../config/turnstile.ts";
+
+const turnstileSiteKey = resolveTurnstileSiteKey(Astro.locals.runtime?.env);
+const turnstileEnabled = Boolean(turnstileSiteKey);
 ---
 
 <section class="contact section" id="contact" data-od-id="contact-section">
@@ -24,7 +29,12 @@
             </div>
             <div>
               <div class="contact-channel-label">Email</div>
-              <a href="mailto:support@novus-seo.com" class="contact-channel-value">support@novus-seo.com</a>
+              <a
+                href={`mailto:${SUPPORT_EMAIL}`}
+                class="contact-channel-value"
+                data-analytics-event="contact_email_click"
+                data-analytics-location="contact"
+              >{SUPPORT_EMAIL}</a>
             </div>
           </div>
 
@@ -113,6 +123,23 @@
           <span class="form-error" id="message-error" role="alert" aria-live="polite"></span>
         </div>
 
+        <!-- Honeypot — hidden from users, bots often fill this -->
+        <input
+          type="text"
+          name="company"
+          id="contact-company"
+          class="contact-hp"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+
+        {turnstileEnabled && (
+          <div class="turnstile-wrap">
+            <div id="contact-turnstile" />
+          </div>
+        )}
+
         <button type="submit" class="btn btn-primary" id="contact-submit" style="width: 100%;">
           Send Message
         </button>
@@ -124,11 +151,46 @@
   </div>
 </section>
 
-<script is:inline>
+{turnstileEnabled && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileOnLoad" async defer />
+)}
+
+<script is:inline define:vars={{ turnstileEnabled, turnstileSiteKey }}>
+  window.turnstileOnLoad = function () {
+    if (!turnstileEnabled || !turnstileSiteKey || !window.turnstile) return;
+    window.turnstile.render("#contact-turnstile", {
+      sitekey: turnstileSiteKey,
+      theme: "dark",
+    });
+  };
+
   (function () {
     const form = document.getElementById("contact-form");
     const statusEl = document.getElementById("form-status");
     const submitBtn = document.getElementById("contact-submit");
+
+    function getTurnstileToken() {
+      if (!turnstileEnabled) return "";
+      const responseField = form.querySelector(
+        'input[name="cf-turnstile-response"], textarea[name="cf-turnstile-response"]',
+      );
+      if (responseField && "value" in responseField && responseField.value) {
+        return String(responseField.value);
+      }
+      if (window.turnstile && typeof window.turnstile.getResponse === "function") {
+        return window.turnstile.getResponse("#contact-turnstile") || "";
+      }
+      return "";
+    }
+
+    function resetTurnstile() {
+      if (!turnstileEnabled || !window.turnstile) return;
+      try {
+        window.turnstile.reset("#contact-turnstile");
+      } catch (_) {
+        /* widget not ready */
+      }
+    }
 
     // --- Validation messages (adaptive per craft/form-validation.md) ---
     function getErrorMessage(input) {
@@ -196,6 +258,14 @@
       statusEl.className = "form-status success";
       submitBtn.textContent = "Sent ✓";
       form.reset();
+      const subjectEl = document.getElementById("contact-subject");
+      const subject = subjectEl instanceof HTMLSelectElement ? subjectEl.value : "unknown";
+      if (window.nexisTrack) {
+        window.nexisTrack("generate_lead", {
+          form_subject: subject || "unknown",
+          form_location: "contact",
+        });
+      }
     }
 
     form.addEventListener("submit", (e) => {
@@ -218,26 +288,57 @@
         return;
       }
 
+      if (turnstileEnabled && !getTurnstileToken()) {
+        showServerError("Complete the security check before sending.");
+        return;
+      }
+
+      // Read FormData before disabling inputs — disabled fields are omitted from FormData
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get("name") ?? "").trim(),
+        email: String(formData.get("email") ?? "").trim(),
+        subject: String(formData.get("subject") ?? "").trim(),
+        message: String(formData.get("message") ?? "").trim(),
+        company: String(formData.get("company") ?? "").trim(),
+        turnstileToken: getTurnstileToken(),
+      };
+
       setSubmitting(true);
 
-      // Simulate submission — replace with real endpoint fetch()
-      setTimeout(() => {
-        const success = true; // flip to false to test error state
-        if (success) {
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then(async (res) => {
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            throw new Error(data.error || "Request failed");
+          }
+          return data;
+        })
+        .then(() => {
           showSuccess();
+          resetTurnstile();
           setSubmitting(false);
-          submitBtn.disabled = true; // keep disabled until next timeout
+          submitBtn.disabled = true;
           setTimeout(() => {
             submitBtn.disabled = false;
             submitBtn.textContent = "Send Message";
             statusEl.textContent = "";
             statusEl.className = "form-status";
           }, 5000);
-        } else {
+        })
+        .catch((err) => {
           setSubmitting(false);
-          showServerError("Something went wrong on our end. Please try again or email us directly.");
-        }
-      }, 1200);
+          resetTurnstile();
+          const msg =
+            err instanceof Error && err.message && err.message !== "Request failed"
+              ? err.message
+              : "Something went wrong on our end. Please try again or email us directly.";
+          showServerError(msg);
+        });
     });
   })();
 </script>
@@ -379,6 +480,21 @@
     resize: vertical;
     min-height: 120px;
     line-height: 1.5;
+  }
+
+  .contact-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .turnstile-wrap {
+    display: flex;
+    justify-content: center;
+    min-height: 65px;
   }
 
   .form-status {

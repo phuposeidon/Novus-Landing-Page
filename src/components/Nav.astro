@@ -1,33 +1,36 @@
 ---
+import { BLOG_URL, SHOPIFY_INSTALL_URL, siteAnchors } from "../config/site.ts";
+import BrandLogo from "./BrandLogo.astro";
 ---
 
 <header class="nav" id="nav" data-od-id="nav">
   <div class="nav-inner container">
-    <a href="/" class="nav-logo" aria-label="Novus home">
-      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="32" height="32" rx="8" fill="currentColor" fill-opacity="0.08"/>
-        <text x="6" y="23" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#36F4A4">N</text>
-      </svg>
-      <span>Novus</span>
+    <a href="/" class="nav-logo" aria-label="Nexis CRO home">
+      <BrandLogo size={34} showWordmark />
     </a>
 
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="#features">Features</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
+      <a href={siteAnchors.features} data-analytics-event="nav_anchor_click" data-analytics-section="features" data-analytics-location="nav">Features</a>
+      <a href={siteAnchors.howItWorks} data-analytics-event="nav_anchor_click" data-analytics-section="how-it-works" data-analytics-location="nav">How It Works</a>
+      <a href={siteAnchors.pricing} data-analytics-event="nav_anchor_click" data-analytics-section="pricing" data-analytics-location="nav">Pricing</a>
+      <a href={BLOG_URL} data-analytics-event="nav_anchor_click" data-analytics-section="blog" data-analytics-location="nav">Blog</a>
+      <a href={siteAnchors.faq} data-analytics-event="nav_anchor_click" data-analytics-section="faq" data-analytics-location="nav">FAQ</a>
+      <a href={siteAnchors.contact} data-analytics-event="nav_anchor_click" data-analytics-section="contact" data-analytics-location="nav">Contact</a>
     </nav>
 
     <a
-      href="https://apps.shopify.com/"
+      href={SHOPIFY_INSTALL_URL}
       class="btn btn-primary btn-sm nav-cta"
       id="nav-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-analytics-event="install_click"
+      data-analytics-location="nav"
     >
       Install Free on Shopify
     </a>
 
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
         <line x1="4" y1="7" x2="20" y2="7" class="line-top" />
         <line x1="4" y1="12" x2="20" y2="12" class="line-mid" />
@@ -35,47 +38,67 @@
       </svg>
     </button>
   </div>
-
-  <!-- Mobile menu -->
-  <div class="nav-mobile" id="nav-mobile">
-    <nav class="nav-mobile-links">
-      <a href="#features">Features</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a href="https://apps.shopify.com/" class="btn btn-primary" style="margin-top: 16px;">
-        Install Free on Shopify
-      </a>
-    </nav>
-  </div>
 </header>
 
+<!-- Mobile menu: sibling of header so fixed positioning isn't clipped by nav backdrop-filter -->
+<div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+  <nav class="nav-mobile-links" aria-label="Mobile navigation">
+    <a href={siteAnchors.features} data-analytics-event="nav_anchor_click" data-analytics-section="features" data-analytics-location="nav_mobile">Features</a>
+    <a href={siteAnchors.howItWorks} data-analytics-event="nav_anchor_click" data-analytics-section="how-it-works" data-analytics-location="nav_mobile">How It Works</a>
+    <a href={siteAnchors.pricing} data-analytics-event="nav_anchor_click" data-analytics-section="pricing" data-analytics-location="nav_mobile">Pricing</a>
+    <a href={BLOG_URL} data-analytics-event="nav_anchor_click" data-analytics-section="blog" data-analytics-location="nav_mobile">Blog</a>
+    <a href={siteAnchors.faq} data-analytics-event="nav_anchor_click" data-analytics-section="faq" data-analytics-location="nav_mobile">FAQ</a>
+    <a href={siteAnchors.contact} data-analytics-event="nav_anchor_click" data-analytics-section="contact" data-analytics-location="nav_mobile">Contact</a>
+    <a
+      href={SHOPIFY_INSTALL_URL}
+      class="btn btn-primary nav-mobile-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-analytics-event="install_click"
+      data-analytics-location="nav_mobile"
+    >
+      Install Free on Shopify
+    </a>
+  </nav>
+</div>
+
 <script is:inline>
-  // Scroll: add .scrolled for bg change
-  const nav = document.getElementById("nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  (function initMobileNav() {
+    const nav = document.getElementById("nav");
+    const toggle = document.getElementById("nav-toggle");
+    const mobile = document.getElementById("nav-mobile");
+    if (!nav || !toggle || !mobile) return;
 
-  // Mobile toggle
-  const toggle = document.getElementById("nav-toggle");
-  const mobile = document.getElementById("nav-mobile");
-  toggle.addEventListener("click", () => {
-    const expanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!expanded));
-    mobile.classList.toggle("open", !expanded);
-    document.body.style.overflow = !expanded ? "hidden" : "";
-  });
+    const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
-  // Close mobile on link click
-  mobile.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      toggle.setAttribute("aria-expanded", "false");
-      mobile.classList.remove("open");
-      document.body.style.overflow = "";
+    function setMobileMenu(open) {
+      toggle.setAttribute("aria-expanded", String(open));
+      mobile.classList.toggle("is-open", open);
+      mobile.setAttribute("aria-hidden", String(!open));
+      nav.classList.toggle("nav-menu-open", open);
+      document.body.classList.toggle("nav-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      setMobileMenu(!expanded);
     });
-  });
+
+    mobile.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMobileMenu(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setMobileMenu(false);
+      }
+    });
+  })();
 </script>
 
 <style>
@@ -108,10 +131,7 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-primary);
+    gap: 12px;
     letter-spacing: -0.02em;
   }
 
@@ -146,6 +166,8 @@
 
   .nav-toggle {
     display: none;
+    position: relative;
+    z-index: 102;
     background: none;
     border: none;
     color: var(--text-primary);
@@ -155,53 +177,24 @@
     min-height: 44px;
     align-items: center;
     justify-content: center;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .nav-mobile {
-    display: none;
+  .nav.nav-menu-open {
+    background: rgba(0, 0, 0, 0.98);
+    border-bottom-color: var(--border);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   @media (max-width: 768px) {
     .nav-links,
     .nav-cta {
-      display: none;
+      display: none !important;
     }
 
     .nav-toggle {
       display: flex;
-    }
-
-    .nav-mobile {
-      display: block;
-      position: fixed;
-      top: var(--nav-height);
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--duration-normal) var(--ease-out);
-    }
-
-    .nav-mobile.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .nav-mobile-links {
-      display: flex;
-      flex-direction: column;
-      padding: var(--space-7) var(--space-5);
-      gap: var(--space-5);
-    }
-
-    .nav-mobile-links a {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--text-primary);
     }
   }
 </style>

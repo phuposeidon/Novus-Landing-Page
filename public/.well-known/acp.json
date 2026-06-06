@@ -1,0 +1,26 @@
+{
+  "protocol": {
+    "name": "acp",
+    "version": "2025-09-29"
+  },
+  "api_base_url": "https://nexiscro.com/",
+  "transports": ["https", "webmcp"],
+  "capabilities": {
+    "services": [
+      "catalog",
+      "pricing",
+      "checkout_handoff"
+    ]
+  },
+  "checkout": {
+    "provider": "shopify",
+    "install_url": "https://apps.shopify.com/partners/nexis-cro",
+    "billing": "shopify_managed",
+    "documentation": "https://nexiscro.com/auth.md"
+  },
+  "links": {
+    "openapi": "https://nexiscro.com/openapi.json",
+    "ucp": "https://nexiscro.com/.well-known/ucp",
+    "pricing": "https://nexiscro.com/#pricing"
+  }
+}

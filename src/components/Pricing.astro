@@ -1,4 +1,6 @@
 ---
+import { SHOPIFY_INSTALL_URL } from "../config/site.ts";
+
 const plans = [
   {
     name: "Free",
@@ -9,10 +11,10 @@ const plans = [
     features: [
       "5 AI credits / month",
       "1 audit / month",
-      "Basic AEO score",
       "AI Quick Fix & Rewrite",
       "AI Image Alt Text",
-      "AI Visibility scanner",
+      "AI Visibility Scanner (Basic)",
+      "AI Rank Tracker (1 prompt, 5 checks)",
     ],
     cta: "Install Free",
     ctaClass: "btn btn-ghost",
@@ -20,19 +22,19 @@ const plans = [
   },
   {
     name: "Pro",
-    monthly: 23,
-    annually: 19,
-    annualTotal: 228,
-    savings: "Save $48/yr",
+    monthly: 29,
+    annually: 23,
+    annualTotal: 278,
+    savings: "Save $70/yr",
     description: "Full audit suite for growing stores",
     features: [
       "100 AI credits / month",
-      "Unlimited audits",
-      "Full issue center + history",
-      "Bulk Fix (batch AI)",
-      "Schema Blocks (JSON-LD)",
-      "llms.txt deploy + Query Lab",
-      "Scheduled audits",
+      "Unlimited audits + history",
+      "AI Rank Tracker (5 prompts, scheduled)",
+      "AEO Description Optimizer",
+      "Bulk Fix (batch AI fixes)",
+      "Schema Blocks & AI Bot Manager",
+      "llms.txt deploy & Query Lab",
     ],
     cta: "Choose Pro",
     ctaClass: "btn btn-primary",
@@ -40,18 +42,18 @@ const plans = [
   },
   {
     name: "Growth",
-    monthly: 47,
-    annually: 39,
-    annualTotal: 468,
-    savings: "Save $96/yr",
+    monthly: 59,
+    annually: 47,
+    annualTotal: 566,
+    savings: "Save $142/yr",
     description: "Everything in Pro, plus competitive edge",
     features: [
       "300 AI credits / month",
       "Everything in Pro",
-      "Competitor benchmarking (3)",
-      "llms.txt auto-updates",
-      "AI Visibility — full scan",
-      "Query Lab — deep analysis",
+      "AI Rank Tracker (20 prompts, 3 models)",
+      "Citation Gap Insights & Alerts",
+      "AI Buying Guide Generator",
+      "Competitor Benchmarking (3)",
     ],
     cta: "Choose Growth",
     ctaClass: "btn btn-accent",
@@ -60,16 +62,17 @@ const plans = [
   },
   {
     name: "Agency",
-    monthly: 119,
-    annually: 99,
-    annualTotal: 1188,
-    savings: "Save $240/yr",
+    monthly: 149,
+    annually: 119,
+    annualTotal: 1430,
+    savings: "Save $358/yr",
     description: "Multi-store management for agencies",
     features: [
-      "500 AI credits (unlimited)",
+      "500 AI credits (unlimited usage)",
       "Everything in Growth",
-      "Competitor benchmarking (5)",
       "Manage up to 5 child stores",
+      "AI Rank Tracker (50 prompts, all models)",
+      "Competitor Benchmarking (5)",
     ],
     cta: "Choose Agency",
     ctaClass: "btn btn-primary",
@@ -81,16 +84,21 @@ const comparisonRows = [
   { label: "AI credits / month", free: "5", pro: "100", growth: "300", agency: "500 ∞" },
   { label: "Audits / month", free: "1", pro: "Unlimited", growth: "Unlimited", agency: "Unlimited" },
   { label: "AEO score", free: "Basic", pro: "Full", growth: "Full", agency: "Full" },
-  { label: "AI Quick Fix & Rewrite", free: "✓", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "AI Rank Tracker", free: "1 prompt (5 checks)", pro: "5 prompts (150 checks)", growth: "20 prompts (1200 checks)", agency: "50 prompts (5000 checks)" },
+  { label: "AEO Description Optimizer", free: "—", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "AI FAQ Generator", free: "3 products", pro: "50 products", growth: "Unlimited", agency: "Unlimited" },
+  { label: "AI Buying Guide Generator", free: "—", pro: "—", growth: "✓", agency: "✓" },
+  { label: "AI Bot Manager (robots.txt)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
+  { label: "Citation Gap Insights", free: "—", pro: "—", growth: "✓", agency: "✓" },
   { label: "Bulk Fix (batch AI)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
   { label: "Schema Blocks (JSON-LD)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
-  { label: "llms.txt deploy", free: "—", pro: "✓", growth: "✓ auto", agency: "✓ auto" },
+  { label: "llms.txt deploy", free: "—", pro: "✓", growth: "✓ auto-update", agency: "✓ auto-update" },
   { label: "Query Lab", free: "—", pro: "Basic", growth: "Deep", agency: "Deep" },
   { label: "AI Visibility scan", free: "Basic", pro: "—", growth: "Full", agency: "Full" },
   { label: "Competitor benchmarking", free: "—", pro: "—", growth: "3 competitors", agency: "5 competitors" },
   { label: "Scheduled audits", free: "—", pro: "✓", growth: "✓", agency: "✓" },
   { label: "Issue history", free: "—", pro: "✓", growth: "✓", agency: "✓" },
-  { label: "Child stores", free: "—", pro: "—", growth: "—", agency: "Up to 5" },
+  { label: "Child stores managed", free: "—", pro: "—", growth: "—", agency: "Up to 5" },
 ];
 ---
 
@@ -166,7 +174,16 @@ const comparisonRows = [
                 </li>
               ))}
             </ul>
-            <a href="https://apps.shopify.com/" class={plan.ctaClass} style="width: 100%; margin-top: auto;">
+            <a
+              href={SHOPIFY_INSTALL_URL}
+              class={plan.ctaClass}
+              style="width: 100%; margin-top: auto;"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="install_click"
+              data-analytics-location="pricing"
+              data-analytics-plan={plan.name}
+            >
               {plan.cta}
             </a>
           </div>
@@ -185,7 +202,7 @@ const comparisonRows = [
 
       <div class="comparison-table-wrap" id="comparison-table" hidden>
         <table class="comparison-table" role="table">
-          <caption class="sr-only">Feature comparison across all Novus plans</caption>
+          <caption class="sr-only">Feature comparison across all Nexis CRO plans</caption>
           <thead>
             <tr>
               <th scope="col" class="col-feature">Feature</th>
@@ -227,6 +244,9 @@ const comparisonRows = [
     amounts.forEach((el) => {
       el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
     });
+    if (window.nexisTrack) {
+      window.nexisTrack("billing_toggle", { billing_period: mode });
+    }
   }
 
   monthlyBtn.addEventListener("click", () => setBilling("monthly"));
@@ -240,6 +260,9 @@ const comparisonRows = [
     const expanded = compToggle.getAttribute("aria-expanded") === "true";
     compToggle.setAttribute("aria-expanded", String(!expanded));
     compTable.hidden = expanded;
+    if (window.nexisTrack) {
+      window.nexisTrack("comparison_toggle", { expanded: !expanded });
+    }
   });
 </script>
 

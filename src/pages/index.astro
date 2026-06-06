@@ -5,11 +5,16 @@ import Hero from "../components/Hero.astro";
 import Problem from "../components/Problem.astro";
 import Demo from "../components/Demo.astro";
 import Features from "../components/Features.astro";
+import FeaturesBanner from "../components/FeaturesBanner.astro";
 import Pricing from "../components/Pricing.astro";
 import FAQ from "../components/FAQ.astro";
 import Contact from "../components/Contact.astro";
+import BlogPreview from "../components/BlogPreview.astro";
 import CTA from "../components/CTA.astro";
 import Footer from "../components/Footer.astro";
+
+/** SSR homepage so middleware can serve Markdown via Accept negotiation */
+export const prerender = false;
 ---
 
 <Layout>
@@ -19,8 +24,10 @@ import Footer from "../components/Footer.astro";
     <Problem />
     <Demo />
     <Features />
+    <FeaturesBanner />
     <Pricing />
     <FAQ />
+    <BlogPreview />
     <Contact />
     <CTA />
   </main>

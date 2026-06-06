@@ -1,0 +1,20 @@
+{
+  "issuer": "https://nexiscro.com",
+  "authorization_endpoint": "https://nexiscro.com/api/agent-auth/authorize",
+  "token_endpoint": "https://nexiscro.com/api/agent-auth/token",
+  "registration_endpoint": "https://nexiscro.com/api/agent-auth/register",
+  "jwks_uri": "https://nexiscro.com/.well-known/jwks.json",
+  "grant_types_supported": ["client_credentials"],
+  "response_types_supported": ["token"],
+  "token_endpoint_auth_methods_supported": ["none", "client_secret_post"],
+  "scopes_supported": ["content.read"],
+  "agent_auth": {
+    "skill": "https://nexiscro.com/.well-known/agent-skills/nexis-cro-site.md",
+    "register_uri": "https://nexiscro.com/api/agent-auth/register",
+    "identity_types_supported": ["anonymous"],
+    "anonymous": {
+      "credential_types_supported": ["bearer"],
+      "claim_uri": "https://nexiscro.com/api/agent-auth/claim"
+    }
+  }
+}

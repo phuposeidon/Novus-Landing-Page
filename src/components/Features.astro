@@ -1,33 +1,43 @@
 ---
 const features = [
   {
-    title: "AI Quick Fix",
-    description: "One-click fixes for meta descriptions, product content, and policy pages. Choose from 3 tones — professional, friendly, or concise.",
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+    title: "AI Rank Tracker",
+    description: "Track your store's visibility on ChatGPT, Gemini, and Perplexity over time. Monitor brand mentions, keywords, and share of voice (SOV) against competitors.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 16 8.5 11 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
   },
   {
-    title: "Schema Blocks",
-    description: "Automatic JSON-LD injection for 8 page types — Organization, Product, Collection, Blog, FAQ, and more. Enable once in Theme Editor.",
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l2-2-2-2"/><path d="M8 18l-2-2 2-2"/><path d="M12 2v20"/><rect x="3" y="6" width="18" height="12" rx="2"/></svg>`,
+    title: "AI Quick Fix & Description Optimizer",
+    description: "One-click rewrites for meta descriptions, product content, and policies. Optimize product copy so LLMs can perfectly parse and recommend your catalog.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
   },
   {
-    title: "AI Context File",
-    description: "Deploy and auto-update your llms.txt — the file AI engines read to understand your store. No code changes needed.",
+    title: "AI Context File (llms.txt)",
+    description: "Automatically generate, deploy, and auto-update your store's llms.txt. This file acts as a structured guide for AI crawlers to index your catalog instantly.",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
   },
   {
-    title: "AI Visibility Scanner",
-    description: "Platform-specific score cards for ChatGPT, Perplexity, Google AI, and Bing Copilot. See exactly how each engine evaluates your store.",
-    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`,
+    title: "Schema Blocks & Theme Injection",
+    description: "Automatic JSON-LD schema injection for 8 page types — Organization, Product, Collection, Blog, and FAQ. Turn on instantly from your Shopify Theme Editor.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l2-2-2-2"/><path d="M8 18l-2-2 2-2"/><path d="M12 2v20"/><rect x="3" y="6" width="18" height="12" rx="2"/></svg>`,
   },
   {
-    title: "Competitor Benchmarking",
-    description: "Compare your AEO score against up to 5 competitor stores. Know exactly where you stand and what to prioritize.",
+    title: "AI Content Lab",
+    description: "Generate high-converting AI FAQs for products and in-depth AI Buying Guides (Growth+) designed to capture engine recommendations.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
+  },
+  {
+    title: "AI Bot Manager & robots.txt",
+    description: "Protect your site bandwidth or allow/block specific AI web crawlers (like GPTBot, ClaudeBot, and PerplexityBot) with customizable robots.txt rules.",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+  },
+  {
+    title: "Citation Gaps & Competitors",
+    description: "Track up to 5 competitors. Identify citation gaps — where engines cite competitors instead of you — and receive step-by-step optimization plans.",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
   },
   {
-    title: "Scheduled Audits",
-    description: "Set it and forget it. Automatic weekly or monthly re-scans with email alerts when new issues appear or scores drop.",
+    title: "AI Visibility Scans & Scheduled Audits",
+    description: "Platform-specific scorecards for major AI engines. Run manual deep audits or schedule regular weekly/monthly background scans with email alerts.",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
   },
 ];
@@ -64,7 +74,7 @@ const features = [
 
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
 

@@ -1,0 +1,69 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Nexis CRO Marketing & Commerce Handoff API",
+    "version": "1.0.0",
+    "description": "Public marketing discovery and Shopify checkout handoff for Nexis CRO."
+  },
+  "servers": [
+    {
+      "url": "https://nexiscro.com"
+    }
+  ],
+  "x-service-info": {
+    "categories": ["marketing", "commerce-handoff"],
+    "provider": "Nexis CRO"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getHomepage",
+        "summary": "Marketing homepage (HTML or Markdown via Accept)",
+        "responses": {
+          "200": {
+            "description": "Homepage content"
+          }
+        }
+      }
+    },
+    "/api/agent-premium": {
+      "get": {
+        "operationId": "getPremiumAccess",
+        "summary": "Probe paid subscription (x402 / Shopify billing handoff)",
+        "x-payment-info": {
+          "intent": "charge",
+          "method": "stripe",
+          "amount": "2900",
+          "currency": "USD",
+          "description": "Nexis CRO Pro monthly — complete purchase via Shopify App Store after install"
+        },
+        "responses": {
+          "402": {
+            "description": "Payment required — x402 PAYMENT-REQUIRED header"
+          },
+          "200": {
+            "description": "Access granted after payment handoff"
+          }
+        }
+      }
+    },
+    "/api/agent-auth/register": {
+      "post": {
+        "operationId": "registerAgent",
+        "summary": "Anonymous agent registration for public content scope",
+        "x-payment-info": {
+          "intent": "session",
+          "method": "card",
+          "amount": "0",
+          "currency": "USD",
+          "description": "Free anonymous registration for public marketing content"
+        },
+        "responses": {
+          "201": {
+            "description": "Agent client registered"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,394 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { CONTACT_FORM_URL, PRIVACY_POLICY_URL, SUPPORT_EMAIL } from "../config/site";
+
+const title = "Privacy Policy — Nexis CRO";
+const description =
+  "How Nexis CRO collects, uses, and protects information for our website, support, and Shopify apps.";
+
+const sections = [
+  { id: "who-we-are", label: "Who we are" },
+  { id: "information-we-collect", label: "Information we collect" },
+  { id: "how-we-use", label: "How we use information" },
+  { id: "shopify-apps", label: "Shopify apps & customer data" },
+  { id: "ai-processing", label: "AI features & subprocessors" },
+  { id: "legal-compliance", label: "Legal compliance" },
+  { id: "retention", label: "Retention" },
+  { id: "your-rights", label: "Your rights" },
+  { id: "children", label: "Children" },
+  { id: "changes", label: "Changes" },
+  { id: "contact", label: "Contact" },
+] as const;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main class="legal-page">
+    <div class="container legal-shell">
+      <header class="legal-header">
+        <p class="legal-eyebrow">Legal</p>
+        <h1>Privacy Policy</h1>
+        <p class="legal-meta">
+          Effective date: June 1, 2026 · Last updated: June 8, 2026
+        </p>
+        <p class="legal-lead">
+          Nexis CRO (“we”, “us”) develops Shopify applications and related websites. As a
+          Shopify app partner, we follow Shopify’s requirements for protected customer data. This
+          policy explains what we collect, how we use it, and your choices.
+        </p>
+      </header>
+
+      <div class="legal-grid">
+        <nav class="legal-toc" aria-label="On this page">
+          <p class="legal-toc-title">On this page</p>
+          <ul>
+            {sections.map((section) => (
+              <li>
+                <a href={`#${section.id}`}>{section.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <article class="legal-body">
+          <section id="who-we-are">
+            <h2>Who we are</h2>
+            <p>
+              Nexis CRO provides <strong>Nexis CRO: AI SEO &amp; AEO Audit</strong>, a Shopify
+              embedded app that audits stores for AI search readiness, surfaces issues, and offers
+              optional AI-powered fixes and visibility tools. Our marketing site is{" "}
+              <a href="https://nexiscro.com">nexiscro.com</a>; the app is hosted at{" "}
+              <a href="https://app.nexiscro.com">app.nexiscro.com</a>.
+            </p>
+            <p>
+              For general privacy inquiries, contact us using the details in the Contact section
+              below.
+            </p>
+          </section>
+
+          <section id="information-we-collect">
+            <h2>Information we collect</h2>
+            <p>We may collect:</p>
+            <ul>
+              <li>
+                <strong>Website and marketing.</strong> Technical data (IP address, browser type,
+                pages viewed), cookies or similar technologies where permitted, and information you
+                submit through contact forms (name, email, message).
+              </li>
+              <li>
+                <strong>Shopify apps.</strong> Data required to operate the app for your store —
+                only to the extent necessary and as permitted by Shopify APIs and the scopes you
+                approve at install. This can include products, collections, pages, policies, theme
+                and storefront signals, images, and shop configuration.
+              </li>
+              <li>
+                <strong>Support.</strong> Content you send when you contact us, including email
+                threads and attachments you choose to provide.
+              </li>
+              <li>
+                <strong>Billing.</strong> Subscription and usage metadata processed through Shopify
+                managed billing or App Pricing; we do not store full payment card numbers.
+              </li>
+            </ul>
+          </section>
+
+          <section id="how-we-use">
+            <h2>How we use information</h2>
+            <p>We use information to:</p>
+            <ul>
+              <li>Provide, maintain, and improve our websites and apps</li>
+              <li>Run audits, rank checks, reports, and features you request</li>
+              <li>Authenticate users, prevent abuse, and protect security</li>
+              <li>Respond to support requests and communicate service changes</li>
+              <li>Comply with law and enforce our terms</li>
+            </ul>
+            <p>
+              We do <strong>not</strong> sell your personal information and we do not rent or share
+              customer data accessed through our apps with third parties for their own marketing.
+            </p>
+          </section>
+
+          <section id="shopify-apps">
+            <h2>Shopify apps &amp; customer data</h2>
+            <p>
+              For data our app accesses through Shopify to serve your store, we use it only to
+              deliver app functionality. We follow Shopify’s requirements for protected customer
+              data and implement mandatory GDPR webhooks (customer data request, customer redact,
+              shop redact).
+            </p>
+            <p>We apply the following practices:</p>
+            <ul>
+              <li>
+                <strong>Minimal access</strong> — we request only the scopes needed for stated
+                features.
+              </li>
+              <li>
+                <strong>Shopify’s guidelines</strong> — we follow Shopify’s rules for managing
+                protected customer data.
+              </li>
+              <li>
+                <strong>Security in transit</strong> — API interactions use encryption (HTTPS/TLS).
+              </li>
+              <li>
+                <strong>No standalone customer database</strong> — we do not build a separate
+                marketing database of your end-customers from Shopify data.
+              </li>
+            </ul>
+            <p>
+              If you uninstall Nexis CRO, API permissions are revoked. We process uninstall and
+              redaction webhooks and do not retain Shopify customer data for ongoing use beyond what
+              is required for legal, security, or billing records.
+            </p>
+          </section>
+
+          <section id="ai-processing">
+            <h2>AI features &amp; subprocessors</h2>
+            <p>
+              When you use optional AI features (rewrites, rank tracker, query lab, alt text,
+              buying guides, FAQ generation, etc.), relevant store content may be sent to our AI
+              provider layer for processing.
+            </p>
+            <ul>
+              <li>
+                <strong>OpenAI</strong> — processes AI requests using models such as GPT-4o-mini
+                (configured on the app host).
+              </li>
+            </ul>
+            <p>
+              Only enable AI features if you are comfortable with this processing. Merchants remain
+              responsible for ensuring they have appropriate rights to submit content for AI
+              processing.
+            </p>
+            <p>
+              For more detail on in-app data use, see{" "}
+              <a href="https://app.nexiscro.com/app/privacy">Data &amp; AI privacy</a> inside the
+              embedded app (requires install).
+            </p>
+          </section>
+
+          <section id="legal-compliance">
+            <h2>Legal compliance</h2>
+            <p>
+              We design our services to comply with applicable data protection laws, including, where
+              relevant, the GDPR and the CCPA (and similar U.S. state laws). As part of Shopify’s
+              ecosystem, we help merchants meet technical requirements; merchants remain responsible
+              for their storefronts and customer relationships.
+            </p>
+          </section>
+
+          <section id="retention">
+            <h2>Retention</h2>
+            <p>
+              Shopify app data is retained only as long as needed to provide the service, comply with
+              law, resolve disputes, or enforce agreements. Audit results, settings, and usage logs
+              may persist while your shop remains installed; uninstall and GDPR webhooks trigger
+              deletion or anonymization where applicable.
+            </p>
+            <p>
+              Website, support, and security log data may be retained for shorter operational
+              periods unless a longer period is required by law.
+            </p>
+          </section>
+
+          <section id="your-rights">
+            <h2>Your rights</h2>
+            <p>
+              As a Shopify merchant, you control much of your store data in Shopify Admin. Depending
+              on where you live, you may have rights to access, correct, delete, or export personal
+              data about you, or to object to or restrict certain processing.
+            </p>
+            <p>
+              To exercise rights with respect to data Nexis CRO processes, contact{" "}
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>. You may lodge a complaint with
+              your local supervisory authority.
+            </p>
+          </section>
+
+          <section id="children">
+            <h2>Children</h2>
+            <p>
+              Our services are directed to businesses and are not intended for children under 16. We
+              do not knowingly collect personal information from children.
+            </p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes</h2>
+            <p>
+              We may update this Privacy Policy to reflect changes in our apps, websites, or legal
+              requirements. We will post the revised version at{" "}
+              <a href={PRIVACY_POLICY_URL}>{PRIVACY_POLICY_URL}</a> and update the “Last updated”
+              date. Material changes may require additional notice where required by law.
+            </p>
+          </section>
+
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>
+              For questions about our privacy practices or how customer data is used:
+            </p>
+            <ul>
+              <li>
+                Email: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+              </li>
+              <li>
+                Website: <a href="https://nexiscro.com">https://nexiscro.com</a>
+              </li>
+              <li>
+                Contact form: <a href={CONTACT_FORM_URL}>{CONTACT_FORM_URL}</a>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-page {
+    padding: calc(var(--space-8) + 72px) 0 var(--space-8);
+    background: var(--bg-void);
+  }
+
+  .legal-shell {
+    max-width: 1100px;
+  }
+
+  .legal-header {
+    margin-bottom: var(--space-7);
+    max-width: 720px;
+  }
+
+  .legal-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 var(--space-3);
+  }
+
+  .legal-header h1 {
+    margin: 0 0 var(--space-3);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    color: var(--text-primary);
+  }
+
+  .legal-meta {
+    margin: 0 0 var(--space-4);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .legal-lead {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .legal-grid {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .legal-toc {
+    position: sticky;
+    top: 96px;
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-deep);
+  }
+
+  .legal-toc-title {
+    margin: 0 0 var(--space-3);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+
+  .legal-toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legal-toc a {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .legal-toc a:hover {
+    color: var(--accent);
+  }
+
+  .legal-body section {
+    padding-bottom: var(--space-6);
+    margin-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legal-body section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .legal-body h2 {
+    margin: 0 0 var(--space-4);
+    font-size: 1.35rem;
+    color: var(--text-primary);
+  }
+
+  .legal-body p,
+  .legal-body li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .legal-body p {
+    margin: 0 0 var(--space-4);
+  }
+
+  .legal-body ul {
+    margin: 0 0 var(--space-4);
+    padding-left: 1.25rem;
+  }
+
+  .legal-body li {
+    margin-bottom: var(--space-2);
+  }
+
+  .legal-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .legal-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .legal-toc {
+      position: static;
+    }
+  }
+</style>

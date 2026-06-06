@@ -1,0 +1,209 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "AI search guides for Shopify",
+  description:
+    "Practical AEO and GEO playbooks: llms.txt, schema markup, crawler policy, and citation tracking for Shopify merchants.",
+  url: new URL("/blog/", Astro.site).href,
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Nexis CRO",
+    url: Astro.site?.href,
+  },
+};
+---
+
+<Layout
+  title="Blog — AI SEO & AEO for Shopify | Nexis CRO"
+  description="Guides on Answer Engine Optimization (AEO), llms.txt, schema markup, and AI search visibility for Shopify merchants."
+  includeAppSchema={false}
+  extraJsonLd={collectionSchema}
+  rssAlternate={true}
+>
+  <Nav />
+
+  <main class="blog-index">
+    <div class="container">
+      <header class="blog-index-header">
+        <span class="overline">Resources</span>
+        <h1 class="display">AI search guides for Shopify</h1>
+        <p class="body-lg blog-index-lead">
+          Practical AEO and GEO playbooks for Shopify merchants: llms.txt setup, JSON-LD schema for AI search,
+          ChatGPT citation tracking, robots.txt for GPTBot and PerplexityBot, and competitor citation gap analysis.
+        </p>
+      </header>
+
+      <ul class="post-grid">
+        {posts.map((post) => (
+          <li class="post-grid-item">
+            <article class="post-card card">
+              <time datetime={post.data.pubDate.toISOString()} class="post-date">
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+              <h2 class="heading-3 post-title">
+                <a
+                  href={`/blog/${post.id}/`}
+                  data-analytics-event="blog_card_click"
+                  data-analytics-location="blog_index"
+                  data-analytics-label={post.data.title}
+                >{post.data.title}</a>
+              </h2>
+              <p class="body-sm post-excerpt">{post.data.description}</p>
+              {post.data.tags.length > 0 && (
+                <ul class="post-tags">
+                  {post.data.tags.map((tag) => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+              )}
+              <span class="post-read" aria-hidden="true">Read guide →</span>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+
+  <Footer />
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof window.nexisTrack === "function") {
+        window.nexisTrack("blog_index_view", { location: "blog_index" });
+      }
+    });
+  </script>
+</Layout>
+
+<style>
+  .blog-index {
+    flex: 1;
+    padding-top: calc(var(--nav-height, 72px) + var(--space-8));
+    padding-bottom: var(--space-9);
+  }
+
+  .blog-index-lead {
+    max-width: 62ch;
+    color: var(--text-secondary);
+  }
+
+  .blog-index-header {
+    max-width: 62ch;
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-9);
+  }
+
+  .post-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    align-items: stretch;
+  }
+
+  .post-grid-item {
+    min-width: 0;
+  }
+
+  .post-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    position: relative;
+  }
+
+  .post-card:hover {
+    border-color: rgba(54, 244, 164, 0.22);
+    box-shadow: 0 0 0 1px rgba(54, 244, 164, 0.06);
+  }
+
+  .post-card:hover .post-read {
+    color: var(--accent);
+  }
+
+  .post-date {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .post-title {
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .post-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+  }
+
+  .post-title a:hover {
+    color: var(--accent);
+  }
+
+  .post-excerpt {
+    flex: 1;
+    margin: 0;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tag {
+    font-size: 0.6875rem;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .post-read {
+    margin-top: var(--space-2);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color var(--duration-fast);
+  }
+
+  @media (max-width: 900px) {
+    .post-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

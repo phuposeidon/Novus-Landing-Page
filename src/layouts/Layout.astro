@@ -2,15 +2,63 @@
 interface Props {
   title?: string;
   description?: string;
+  ogType?: string;
+  ogImagePath?: string;
+  includeAppSchema?: boolean;
+  extraJsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  rssAlternate?: boolean;
 }
 
+import Analytics from "../components/Analytics.astro";
+import WebMcp from "../components/WebMcp.astro";
+import { SHOPIFY_INSTALL_URL } from "../config/site.ts";
+import "../styles/global.css";
+
 const {
-  title = "Novus — AI SEO & AEO Audit for Shopify",
+  title = "Nexis CRO — AI SEO & AEO Audit for Shopify",
   description = "Audit your Shopify store for ChatGPT, Perplexity, Google AI, and Bing Copilot. Fix what's broken with one-click AI. Schema blocks, llms.txt, and more.",
+  ogType = "website",
+  ogImagePath = "/og-image.svg",
+  includeAppSchema = true,
+  extraJsonLd,
+  rssAlternate = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/og-image.png", Astro.site);
+const ogImage = new URL(ogImagePath, Astro.site);
+const siteUrl = Astro.site?.href ?? "https://nexiscro.com";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Nexis CRO",
+  url: siteUrl,
+  logo: new URL("/brand-mark.svg", Astro.site).href,
+  description:
+    "AI SEO and AEO audit app for Shopify merchants. Schema, llms.txt, AI Rank Tracker, and ChatGPT visibility.",
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Nexis CRO",
+  url: siteUrl,
+  description,
+  publisher: { "@type": "Organization", name: "Nexis CRO" },
+};
+
+const baseJsonLd = [organizationSchema, websiteSchema];
+const extraBlocks = extraJsonLd
+  ? Array.isArray(extraJsonLd)
+    ? extraJsonLd
+    : [extraJsonLd]
+  : [];
+const jsonLdBlocks = [...baseJsonLd, ...extraBlocks];
+
+const interFontUrl =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap";
+const monoFontUrl =
+  "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap";
 ---
 
 <!doctype html>
@@ -24,14 +72,22 @@ const ogImage = new URL("/og-image.png", Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {rssAlternate && (
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="Nexis CRO Blog"
+        href={new URL("/blog/rss.xml", Astro.site)}
+      />
+    )}
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="Novus" />
+    <meta property="og:site_name" content="Nexis CRO" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -42,21 +98,26 @@ const ogImage = new URL("/og-image.png", Astro.site);
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Fonts: Inter + JetBrains Mono from Google Fonts -->
+    <!-- Fonts: non-blocking — system stack paints LCP immediately, Inter swaps in -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="style" href={interFontUrl} />
+    <link rel="stylesheet" href={interFontUrl} media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={interFontUrl} /></noscript>
 
-    <!-- JSON-LD: SoftwareApplication -->
+    <!-- Analytics DNS (script loads deferred at end of body) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    {includeAppSchema && (
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Novus: AI SEO & AEO Audit",
+      "name": "Nexis: AI SEO & AEO Audit",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
+      "url": SHOPIFY_INSTALL_URL,
+      "installUrl": SHOPIFY_INSTALL_URL,
       "description": description,
       "offers": [
         {
@@ -67,21 +128,21 @@ const ogImage = new URL("/og-image.png", Astro.site);
         },
         {
           "@type": "Offer",
-          "price": "23",
+          "price": "29",
           "priceCurrency": "USD",
           "name": "Pro",
           "billingPeriod": "P1M"
         },
         {
           "@type": "Offer",
-          "price": "47",
+          "price": "59",
           "priceCurrency": "USD",
           "name": "Growth",
           "billingPeriod": "P1M"
         },
         {
           "@type": "Offer",
-          "price": "119",
+          "price": "149",
           "priceCurrency": "USD",
           "name": "Agency",
           "billingPeriod": "P1M"
@@ -93,19 +154,38 @@ const ogImage = new URL("/og-image.png", Astro.site);
         "reviewCount": "12"
       }
     })} />
-
-    <!-- Styles -->
-    <style is:global>
-      @import "../styles/global.css";
-    </style>
+    )}
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
   </head>
 
   <body>
-    <slot />
+    <div class="site-frame">
+      <slot />
+    </div>
+
+    <!-- Mono font — below the fold, load async -->
+    <link rel="stylesheet" href={monoFontUrl} media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={monoFontUrl} /></noscript>
+
+    <Analytics />
+
+    <WebMcp />
 
     <!-- Scroll-triggered animations -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
+        const animated = document.querySelectorAll(".animate-on-scroll");
+
+        // Reveal anything already in the viewport immediately (no IO wait)
+        animated.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.92) {
+            el.classList.add("visible");
+          }
+        });
+
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
@@ -114,9 +194,11 @@ const ogImage = new URL("/og-image.png", Astro.site);
               }
             });
           },
-          { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+          { threshold: 0.08, rootMargin: "0px 0px -24px 0px" }
         );
-        document.querySelectorAll(".animate-on-scroll").forEach((el) => observer.observe(el));
+        animated.forEach((el) => {
+          if (!el.classList.contains("visible")) observer.observe(el);
+        });
       });
     </script>
   </body>

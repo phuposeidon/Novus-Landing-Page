@@ -1,8 +1,8 @@
-# Novus — Landing Page
+# Nexis CRO — Landing Page
 
-Marketing landing page for **Novus: AI SEO & AEO Audit**, a Shopify app that audits storefronts for AI search engine readiness.
+Marketing landing page for **Nexis: AI SEO & AEO Audit**, a Shopify app that audits storefronts for AI search engine readiness.
 
-**Live**: [novus-landing-5qv.pages.dev](https://novus-landing-5qv.pages.dev)
+**Live**: [nexiscro.com](https://nexiscro.com)
 
 ## Tech Stack
 
@@ -56,7 +56,7 @@ src/
 2. **Problem** — Split layout with ChatGPT/Perplexity/Google AI/Bing Copilot score cards
 3. **Demo** — Interactive audit simulation with sequential terminal-style line reveals
 4. **Features** — AI Quick Fix, Schema Blocks, llms.txt, AI Visibility, Benchmarking, Scheduled Audits
-5. **Pricing** — Free / Pro ($23) / Growth ($47, recommended) / Agency ($119)
+5. **Pricing** — Free / Pro ($29) / Growth ($59, recommended) / Agency ($149)
 6. **FAQ** — 7 product-specific questions with native `<details>` (no JS)
 7. **Contact** — Name/email/subject/message form + support info
 8. **CTA** — Final conversion band with accent glow
@@ -77,10 +77,10 @@ Deployed to Cloudflare Pages via Wrangler:
 
 ```bash
 npm run build
-npx wrangler pages deploy dist/ --project-name novus-landing
+npx wrangler pages deploy dist/ --project-name nexis-landing
 ```
 
-To connect a custom domain, go to **Cloudflare Dashboard → Pages → novus-landing → Custom domains**.
+To connect a custom domain, go to **Cloudflare Dashboard → Pages → nexis-landing → Custom domains**.
 
 ## Design Principles
 

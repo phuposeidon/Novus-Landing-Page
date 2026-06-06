@@ -1,0 +1,38 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://nexiscro.com/",
+      "service-doc": [
+        {
+          "href": "https://nexiscro.com/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://nexiscro.com/index.md",
+          "type": "text/markdown"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://nexiscro.com/.well-known/agent-skills/index.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://nexiscro.com/",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "https://apps.shopify.com/partners/nexis-cro",
+      "service-doc": [
+        {
+          "href": "https://apps.shopify.com/partners/nexis-cro",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}
