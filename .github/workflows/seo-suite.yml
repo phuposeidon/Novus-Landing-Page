@@ -1,0 +1,97 @@
+name: SEO Suite
+
+on:
+  # Manual trigger: pick a workflow to print its runbook into the job log.
+  workflow_dispatch:
+    inputs:
+      workflow:
+        description: "Which seo-suite workflow runbook to emit"
+        type: choice
+        default: weekly-loop
+        options:
+          - full-pipeline
+          - weekly-loop
+          - audit-only
+          - content-sprint
+          - distribute
+      arg:
+        description: "Keyword / topic / file (optional)"
+        type: string
+        required: false
+  # Weekly cadence: validate the suite and open the Monday tracking issue.
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate:
+    name: Validate suite (manifest + structure + dry-run)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run seo-suite self-tests
+        run: bash seo-suite/tests/run-tests.sh
+      - name: Install dry-run (no writes)
+        run: bash seo-suite/install.sh --dry-run
+
+  runbook:
+    name: Emit workflow runbook
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Print runbook
+        run: node scripts/seo-run.mjs "${{ inputs.workflow }}" "${{ inputs.arg }}"
+      - name: Job summary
+        run: |
+          {
+            echo "## seo-suite › ${{ inputs.workflow }}"
+            echo ""
+            echo "Runbook printed in the step log above."
+            echo "Execute the slash-command steps inside a Claude Code session."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  weekly-issue:
+    name: Open weekly SEO loop issue
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create tracking issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = [
+              '## Weekly SEO loop',
+              '',
+              'Run the Mon→Fri cadence from `seo-suite/workflows/weekly-loop.md`.',
+              '',
+              '- [ ] **Mon — Discover:** `/seo audit` + `/blog flow find` → pick 1 topic',
+              '- [ ] **Tue — Create:** `/blog write` (BRAND.md + VOICE.md)',
+              '- [ ] **Wed — Illustrate+Optimize:** `/banana generate`, `/blog seo-check`, `/blog geo`, `/seo schema`',
+              '- [ ] **Thu — Ship:** `npm run build && npm run deploy` + GSC indexing',
+              '- [ ] **Fri — Distribute+Measure:** `/blog repurpose`, `/market social`, `/seo google`, `/blog flow win`',
+              '',
+              'Backlog: `docs/flow/content-queue.md` · Checklist: `docs/flow/nexis-weekly-checklist.md`',
+            ].join('\n');
+            const today = new Date().toISOString().slice(0, 10);
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `SEO weekly loop — ${today}`,
+              body,
+              labels: ['seo', 'automation'],
+            });

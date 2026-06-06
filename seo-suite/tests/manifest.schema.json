@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "seo-suite manifest",
+  "type": "object",
+  "required": ["name", "version", "pipeline", "tools"],
+  "properties": {
+    "name": { "const": "nexis-seo-suite" },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "claudeSkillsDir": { "type": "string" },
+    "claudeAgentsDir": { "type": "string" },
+    "cacheDir": { "type": "string" },
+    "pipeline": {
+      "type": "array",
+      "items": { "enum": ["discover", "create", "illustrate", "optimize", "distribute", "measure"] }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "repo", "ref", "license", "command", "installer", "installMode", "stages", "provides", "verify"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "repo": { "type": "string", "pattern": "^https://github.com/.*\\.git$" },
+          "ref": { "type": "string" },
+          "license": { "type": "string" },
+          "command": { "type": "string", "pattern": "^/" },
+          "installer": { "enum": ["install.sh", "sync"] },
+          "installMode": { "enum": ["skills-only", "vendored", "full"] },
+          "stages": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "enum": ["discover", "create", "illustrate", "optimize", "distribute", "measure"] }
+          },
+          "provides": {
+            "type": "object",
+            "required": ["primarySkill"],
+            "properties": {
+              "primarySkill": { "type": "string" },
+              "skillGlob": { "type": "string" },
+              "agentGlob": { "type": ["string", "null"] }
+            }
+          },
+          "verify": {
+            "type": "object",
+            "required": ["command"],
+            "properties": {
+              "skill": { "type": "string" },
+              "command": { "type": "string", "pattern": "^/" }
+            }
+          }
+        }
+      }
+    },
+    "apiKeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "usedBy", "required"],
+        "properties": {
+          "name": { "type": "string" },
+          "usedBy": { "type": "array", "items": { "type": "string" } },
+          "required": { "type": "boolean" },
+          "where": { "type": "string" },
+          "get": { "type": "string" }
+        }
+      }
+    }
+  }
+}

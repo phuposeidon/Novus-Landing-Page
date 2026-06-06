@@ -1,5 +1,9 @@
 # FLOW SEO automation — Nexis CRO
 
+> **FLOW is one of five tools** in the unified [SEO Suite](../seo-suite/README.md).
+> See [docs/seo-suite.md](./seo-suite.md) for the full pipeline (`/seo`, `/blog`,
+> `/blog flow`, `/banana`, `/market`). This page covers the FLOW piece specifically.
+
 Evidence-led SEO workflow using [FLOW](https://github.com/AgriciDaniel/flow) (Find · Leverage · Optimize · Win) integrated with [claude-blog](https://github.com/AgriciDaniel/claude-blog).
 
 **Attribution:** Framework and prompts (c) Daniel Agrici, CC BY 4.0. Source: github.com/AgriciDaniel/flow

@@ -14,6 +14,12 @@
     "dns-aid": "node scripts/setup-dns-aid.mjs",
     "flow:sync": "python3 scripts/sync-flow.py --allow-drift",
     "flow:install": "node scripts/install-cursor-skills.mjs",
+    "seo:install": "bash seo-suite/install.sh",
+    "seo:install:full": "bash seo-suite/install.sh --full",
+    "seo:doctor": "bash seo-suite/doctor.sh",
+    "seo:run": "node scripts/seo-run.mjs",
+    "seo:test": "bash seo-suite/tests/run-tests.sh",
+    "seo:uninstall": "bash seo-suite/install.sh --uninstall",
     "deploy": "npm run build && wrangler pages deploy dist/ --project-name novus-landing --commit-dirty=true"
   },
   "dependencies": {

@@ -1,0 +1,128 @@
+{
+  "$schema": "./tests/manifest.schema.json",
+  "name": "nexis-seo-suite",
+  "version": "1.0.0",
+  "description": "Unified, triggerable SEO + content + marketing automation built on five Claude Code skill packs. Drives multi-platform organic growth (Google + AI search) for Nexis CRO.",
+  "claudeSkillsDir": "~/.claude/skills",
+  "claudeAgentsDir": "~/.claude/agents",
+  "cacheDir": "~/.cache/seo-suite",
+  "pipeline": ["discover", "create", "illustrate", "optimize", "distribute", "measure"],
+  "tools": [
+    {
+      "id": "claude-seo",
+      "label": "Claude SEO",
+      "repo": "https://github.com/AgriciDaniel/claude-seo.git",
+      "ref": "v2.0.0",
+      "license": "MIT",
+      "command": "/seo",
+      "installer": "install.sh",
+      "installMode": "skills-only",
+      "stages": ["discover", "optimize", "measure"],
+      "provides": {
+        "primarySkill": "seo",
+        "skillGlob": "seo*",
+        "agentGlob": "seo-*.md"
+      },
+      "runtime": { "python": ">=3.10" },
+      "optional": {
+        "playwright": "SPA rendering + screenshots (heavy, opt-in via --full)",
+        "pythonDeps": "requirements.txt: weasyprint, matplotlib, trafilatura, htmldate (opt-in via --full)",
+        "googleApi": "~/.config/claude-seo — GSC, PageSpeed, CrUX, GA4 (run /seo google setup)",
+        "mcpExtensions": ["dataforseo", "firecrawl", "ahrefs", "seranking", "profound", "bing-webmaster", "unlighthouse", "banana"]
+      },
+      "verify": { "skill": "seo", "command": "/seo audit" }
+    },
+    {
+      "id": "claude-blog",
+      "label": "Claude Blog",
+      "repo": "https://github.com/AgriciDaniel/claude-blog.git",
+      "ref": "main",
+      "license": "MIT",
+      "command": "/blog",
+      "installer": "install.sh",
+      "installMode": "skills-only",
+      "stages": ["create", "optimize", "distribute"],
+      "provides": {
+        "primarySkill": "blog",
+        "skillGlob": "blog*",
+        "agentGlob": "blog-*.md"
+      },
+      "runtime": { "python": ">=3.10" },
+      "optional": {
+        "googleAiApiKey": "GOOGLE_AI_API_KEY — image + audio generation",
+        "googleApi": "blog-google sub-skill — GSC/GA4/PSI"
+      },
+      "editorialContext": ["BRAND.md", "VOICE.md"],
+      "verify": { "skill": "blog", "command": "/blog write" }
+    },
+    {
+      "id": "flow",
+      "label": "FLOW (evidence-led framework)",
+      "repo": "https://github.com/AgriciDaniel/flow.git",
+      "ref": "main",
+      "license": "CC-BY-4.0",
+      "command": "/blog flow",
+      "installer": "sync",
+      "installMode": "vendored",
+      "stages": ["discover", "distribute", "measure"],
+      "provides": {
+        "primarySkill": "blog-flow",
+        "skillGlob": "blog-flow",
+        "agentGlob": null
+      },
+      "vendoredPath": "skills/blog-flow/references",
+      "syncScript": "scripts/sync-flow.py",
+      "attribution": "Framework and prompts (c) Daniel Agrici, CC BY 4.0. Source: github.com/AgriciDaniel/flow",
+      "verify": { "skill": "blog-flow", "command": "/blog flow" }
+    },
+    {
+      "id": "banana-claude",
+      "label": "Banana (AI image generation)",
+      "repo": "https://github.com/AgriciDaniel/banana-claude.git",
+      "ref": "v1.4.1",
+      "license": "MIT",
+      "command": "/banana",
+      "installer": "install.sh",
+      "installMode": "skills-only",
+      "stages": ["illustrate"],
+      "provides": {
+        "primarySkill": "banana",
+        "skillGlob": "banana",
+        "agentGlob": "brief-constructor.md"
+      },
+      "runtime": { "node": ">=18" },
+      "optional": {
+        "googleAiApiKey": "GOOGLE_AI_API_KEY — required for actual generation (free at aistudio.google.com/apikey)",
+        "imagemagick": "post-processing: crop, bg-removal, resize (optional)"
+      },
+      "dataDir": "~/.banana",
+      "verify": { "skill": "banana", "command": "/banana generate" }
+    },
+    {
+      "id": "ai-marketing-claude",
+      "label": "AI Marketing Suite",
+      "repo": "https://github.com/zubair-trabzada/ai-marketing-claude.git",
+      "ref": "main",
+      "license": "MIT",
+      "command": "/market",
+      "installer": "install.sh",
+      "installMode": "skills-only",
+      "stages": ["discover", "create", "distribute", "measure"],
+      "provides": {
+        "primarySkill": "market",
+        "skillGlob": "market*",
+        "agentGlob": "market-*.md"
+      },
+      "runtime": { "python": ">=3.10" },
+      "optional": {
+        "reportlab": "pip install reportlab — client-ready PDF reports"
+      },
+      "verify": { "skill": "market", "command": "/market audit" }
+    }
+  ],
+  "apiKeys": [
+    { "name": "GOOGLE_AI_API_KEY", "usedBy": ["banana-claude", "claude-blog"], "required": false, "where": "env or MCP config", "get": "https://aistudio.google.com/apikey" },
+    { "name": "GOOGLE_API_KEY", "usedBy": ["claude-seo", "claude-blog"], "required": false, "where": "~/.config/claude-seo/google-api.json", "get": "/seo google setup" },
+    { "name": "GITHUB_TOKEN", "usedBy": ["flow"], "required": false, "where": "env (sync rate limits)", "get": "gh auth login" }
+  ]
+}
