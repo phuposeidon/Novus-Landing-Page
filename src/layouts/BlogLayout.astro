@@ -64,16 +64,14 @@ const articleSchema = {
   headline: title,
   description,
   author: {
-    "@type": "Person",
+    "@type": "Organization",
     name: author,
     url: new URL(EDITORIAL_AUTHOR.path, Astro.site).href,
-    jobTitle: EDITORIAL_AUTHOR.jobTitle,
-    worksFor: { "@type": "Organization", name: "Nexis CRO", url: new URL("/", Astro.site).href },
   },
   publisher: {
     "@type": "Organization",
     name: "Nexis CRO",
-    logo: { "@type": "ImageObject", url: new URL("/brand-mark.svg", Astro.site).href },
+    logo: { "@type": "ImageObject", url: new URL("/brand-mark.png", Astro.site).href },
   },
   datePublished: pubDate.toISOString(),
   dateModified: (updatedDate ?? pubDate).toISOString(),

@@ -14,24 +14,27 @@ const title = "About — Nexis CRO Editorial Team";
 const description =
   "Meet the Nexis CRO editorial team. We publish practical Shopify AEO, llms.txt, and AI citation guides backed by the Nexis CRO audit app.";
 
-const personSchema = {
+const editorialOrgSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
+  "@type": "Organization",
   name: EDITORIAL_AUTHOR.name,
   url: new URL(EDITORIAL_AUTHOR.path, Astro.site).href,
-  jobTitle: EDITORIAL_AUTHOR.jobTitle,
   description: EDITORIAL_AUTHOR.bio,
-  worksFor: {
+  parentOrganization: {
     "@type": "Organization",
     name: "Nexis CRO",
     url: Astro.site?.href,
     sameAs: [SHOPIFY_INSTALL_URL],
   },
-  email: SUPPORT_EMAIL,
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: SUPPORT_EMAIL,
+    contactType: "editorial",
+  },
 };
 ---
 
-<Layout title={title} description={description} extraJsonLd={personSchema}>
+<Layout title={title} description={description} extraJsonLd={editorialOrgSchema}>
   <Nav />
   <main class="about-page">
     <div class="container about-shell">
