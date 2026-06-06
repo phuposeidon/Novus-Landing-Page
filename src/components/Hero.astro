@@ -28,7 +28,7 @@ const DONUT_PATH =
 
     <p class="body-lg hero-sub">
       Nexis CRO audits your Shopify store for ChatGPT, Perplexity, Google AI,
-      and Bing Copilot — then fixes what's broken with one-click AI.
+      and Bing Copilot — then fixes what's broken in one click. No code, no guesswork.
     </p>
 
     <div class="hero-cta">
@@ -44,16 +44,18 @@ const DONUT_PATH =
         Start Free Audit
       </a>
       <a
-        href={siteAnchors.howItWorks}
+        href={siteAnchors.demo}
         class="btn btn-ghost"
         id="hero-cta-secondary"
         data-analytics-event="cta_secondary_click"
         data-analytics-location="hero"
-        data-analytics-section="how-it-works"
+        data-analytics-section="demo"
       >
-        See How It Works
+        See the Product
       </a>
     </div>
+
+    <p class="hero-trust">Free forever plan · No credit card · 2-min Shopify install</p>
 
     <!-- Real High-Fidelity App Dashboard Mockup -->
     <div class="hero-card animate-on-scroll" aria-hidden="true">
@@ -346,7 +348,14 @@ const DONUT_PATH =
     gap: var(--space-4);
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-trust {
+    margin: 0 0 var(--space-10);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-align: center;
   }
 
   /* Expanded, High-Fidelity App Dashboard Workspace Mockup */

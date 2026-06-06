@@ -27,6 +27,7 @@ export const APP_REVIEW_SCREENCAST_URL = "https://app.nexiscro.com/app-review/";
 export const siteAnchors = {
   features: "/#features",
   howItWorks: "/#how-it-works",
+  demo: "/#demo",
   pricing: "/#pricing",
   resources: "/#resources",
   faq: "/#faq",

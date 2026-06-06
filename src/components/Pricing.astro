@@ -117,15 +117,15 @@ const comparisonRows = [
       <!-- Monthly / Annual toggle -->
       <div class="billing-toggle animate-on-scroll" role="group" aria-label="Billing period">
         <button
-          class="toggle-btn active"
+          class="toggle-btn"
           id="toggle-monthly"
-          aria-pressed="true"
+          aria-pressed="false"
           data-od-id="billing-toggle-monthly"
         >Monthly</button>
         <button
-          class="toggle-btn"
+          class="toggle-btn active"
           id="toggle-annual"
-          aria-pressed="false"
+          aria-pressed="true"
           data-od-id="billing-toggle-annual"
         >
           Annual
@@ -251,6 +251,7 @@ const comparisonRows = [
 
   monthlyBtn.addEventListener("click", () => setBilling("monthly"));
   annualBtn.addEventListener("click", () => setBilling("annual"));
+  setBilling("annual");
 
   // --- Comparison table toggle ---
   const compToggle = document.getElementById("comparison-toggle");

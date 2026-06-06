@@ -19,6 +19,10 @@
           Nexis CRO was built specifically for this — auditing the signals that AI search engines
           actually use to decide which stores to surface.
         </p>
+        <p class="problem-stat body-sm animate-on-scroll">
+          AI-referred Shopify orders grew <strong>13× year-over-year</strong> in Q1 2026 (Shopify).
+          Stores that aren't optimized for AI search miss that traffic entirely.
+        </p>
       </div>
 
       <div class="problem-visual animate-on-scroll">
@@ -114,6 +118,19 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
+  }
+
+  .problem-stat {
+    margin: 0;
+    padding: var(--space-4);
+    border-left: 3px solid var(--accent);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .problem-stat strong {
+    color: var(--text-primary);
   }
 
   .problem-visual {
