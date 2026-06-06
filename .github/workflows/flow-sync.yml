@@ -1,0 +1,38 @@
+name: FLOW prompt sync
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Sync FLOW prompts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/sync-flow.py --allow-drift
+
+      - name: Create PR if prompts changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync FLOW SEO prompts"
+          title: "chore: sync FLOW SEO prompts"
+          body: |
+            Automated weekly sync from [AgriciDaniel/flow](https://github.com/AgriciDaniel/flow).
+
+            Review prompt diffs before merge. Attribution: Daniel Agrici, CC BY 4.0.
+          branch: chore/flow-sync
+          delete-branch: true

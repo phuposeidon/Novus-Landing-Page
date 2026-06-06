@@ -12,6 +12,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "dns-aid": "node scripts/setup-dns-aid.mjs",
+    "flow:sync": "python3 scripts/sync-flow.py --allow-drift",
+    "flow:install": "node scripts/install-cursor-skills.mjs",
     "deploy": "npm run build && wrangler pages deploy dist/ --project-name novus-landing --commit-dirty=true"
   },
   "dependencies": {

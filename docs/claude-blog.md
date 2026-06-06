@@ -29,3 +29,12 @@ See the [claude-blog README](https://github.com/AgriciDaniel/claude-blog#command
 - Posts: `src/content/blog/*.md`
 - Listing: `/blog`
 - Post URLs: `/blog/<slug>/`
+
+## FLOW SEO framework
+
+Evidence-led workflow from [AgriciDaniel/flow](https://github.com/AgriciDaniel/flow). See **`docs/flow-seo.md`** for setup, weekly checklist, and `/blog flow` commands.
+
+```bash
+npm run flow:sync      # pull latest FLOW prompts
+npm run flow:install   # copy skills/ → .cursor/skills/
+```
