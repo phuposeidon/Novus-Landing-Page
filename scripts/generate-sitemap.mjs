@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * Regenerate public/sitemap.xml from static routes + src/content/blog/*.md
+ * priority and changefreq omitted — Google ignores them (per Google docs).
  */
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -14,9 +15,9 @@ const site = "https://nexiscro.com";
 const today = new Date().toISOString().slice(0, 10);
 
 const staticRoutes = [
-  { loc: `${site}/`, changefreq: "weekly", priority: "1.0", lastmod: today },
-  { loc: `${site}/blog/`, changefreq: "weekly", priority: "0.9", lastmod: today },
-  { loc: `${site}/privacy`, changefreq: "yearly", priority: "0.3" },
+  { loc: `${site}/`, lastmod: today },
+  { loc: `${site}/blog/`, lastmod: today },
+  { loc: `${site}/privacy` },
 ];
 
 function parseDate(content, key) {
@@ -38,12 +39,7 @@ for (const file of blogFiles) {
   const slug = file.replace(/\.md$/, "");
   const lastmod = parseDate(content, "updatedDate") ?? parseDate(content, "pubDate");
 
-  blogRoutes.push({
-    loc: `${site}/blog/${slug}/`,
-    changefreq: "monthly",
-    priority: slug === "shopify-aeo-guide-2026" ? "0.85" : "0.8",
-    lastmod,
-  });
+  blogRoutes.push({ loc: `${site}/blog/${slug}/`, lastmod });
 }
 
 blogRoutes.sort((a, b) => (b.lastmod ?? "").localeCompare(a.lastmod ?? ""));
@@ -57,8 +53,6 @@ ${urls
     const lastmod = u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : "";
     return `  <url>
     <loc>${u.loc}</loc>${lastmod}
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
   </url>`;
   })
   .join("\n")}

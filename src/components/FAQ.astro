@@ -29,8 +29,19 @@ const faqs = [
     answer: "The Free plan is permanently free with 5 AI credits/month and 1 audit/month — no trial period, no credit card required. You can upgrade to Pro, Growth, or Agency anytime from within the app.",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
 ---
 
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 <section class="faq section" id="faq">
   <div class="container">
     <div class="faq-header text-center">
