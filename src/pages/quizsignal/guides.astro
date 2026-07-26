@@ -1,0 +1,162 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { QUIZSIGNAL, BLOG_URL } from "../../config/site";
+
+const title = `Guides — ${QUIZSIGNAL.name}`;
+const description =
+  "Setup and CRO guides for Nexis CRO: Quiz Signal — theme blocks, recommendation rules, and quiz funnels on Shopify.";
+
+/** Planned guides — replace href with /blog/... when posts ship. */
+const guides = [
+  {
+    title: "Add the Quiz Signal theme block",
+    summary:
+      "Install the app, open the theme editor, and place the quiz funnel block on a page or product template.",
+    status: "Coming soon",
+    href: null as string | null,
+  },
+  {
+    title: "Map quiz answers to product recommendations",
+    summary:
+      "Use product rules so each answer path returns catalog matches shoppers can buy.",
+    status: "Coming soon",
+    href: null,
+  },
+  {
+    title: "Capture emails and sync to Klaviyo",
+    summary:
+      "Turn on email capture in results, connect your Klaviyo key, and send outcomes into flows.",
+    status: "Coming soon",
+    href: null,
+  },
+  {
+    title: "Nexis CRO blog (AEO & Shopify)",
+    summary:
+      "AI search and storefront guides from the Nexis CRO editorial team — useful alongside quiz CRO work.",
+    status: "Live",
+    href: BLOG_URL,
+  },
+] as const;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main class="qs-guides-page">
+    <div class="container qs-guides-shell">
+      <header class="qs-guides-header">
+        <p class="overline">{QUIZSIGNAL.shortName}</p>
+        <h1 class="display text-balance">Guides</h1>
+        <p class="body-lg qs-guides-lead">
+          Practical setup notes for merchants. Dedicated Quiz Signal articles will land here and on
+          the <a href={BLOG_URL}>blog</a>. Meanwhile see the{" "}
+          <a href={QUIZSIGNAL.faq}>FAQ</a> and{" "}
+          <a href={QUIZSIGNAL.hub}>product hub</a>.
+        </p>
+      </header>
+
+      <ul class="guide-list">
+        {
+          guides.map((guide) => (
+            <li class="guide-card">
+              <div class="guide-card-top">
+                <h2 class="heading-2">{guide.title}</h2>
+                <span class="guide-status">{guide.status}</span>
+              </div>
+              <p class="body-md">{guide.summary}</p>
+              {guide.href ? (
+                <a class="guide-link" href={guide.href}>
+                  Open →
+                </a>
+              ) : (
+                <span class="guide-link muted">In progress</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .qs-guides-page {
+    padding: calc(var(--space-8) + 72px) 0 var(--space-9);
+  }
+
+  .qs-guides-shell {
+    max-width: 720px;
+  }
+
+  .qs-guides-header {
+    margin-bottom: var(--space-7);
+  }
+
+  .qs-guides-lead {
+    margin: var(--space-4) 0 0;
+    color: var(--text-secondary);
+  }
+
+  .qs-guides-lead a {
+    color: var(--accent);
+  }
+
+  .guide-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .guide-card {
+    padding: var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-deep);
+  }
+
+  .guide-card-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .guide-card h2 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .guide-status {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .guide-card p {
+    margin: 0 0 var(--space-4);
+    color: var(--text-secondary);
+  }
+
+  .guide-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .guide-link.muted {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+</style>

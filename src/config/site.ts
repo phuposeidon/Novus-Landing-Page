@@ -17,6 +17,25 @@ export const EDITORIAL_AUTHOR = {
 /** Public privacy policy (App Store + in-app legal card). */
 export const PRIVACY_POLICY_URL = "https://nexiscro.com/privacy";
 
+/** Nexis CRO: Quiz Signal — marketing + legal (host stays on nexiscro.com; app on Fly). */
+export const QUIZSIGNAL = {
+  name: "Nexis CRO: Quiz Signal",
+  shortName: "Quiz Signal",
+  /** Shopify app host (OAuth / admin) — not for marketing pages. */
+  appUrl: "https://quizsignal.nexiscro.com",
+  /** App Store install URL — update when the public listing handle is final. */
+  installUrl: "https://apps.shopify.com/quizsignal",
+  hub: "/quizsignal/",
+  pricing: "/quizsignal/pricing/",
+  privacy: "/quizsignal/privacy/",
+  faq: "/quizsignal/faq/",
+  guides: "/quizsignal/guides/",
+  pricingAbsolute: "https://nexiscro.com/quizsignal/pricing/",
+  privacyAbsolute: "https://nexiscro.com/quizsignal/privacy/",
+  faqAbsolute: "https://nexiscro.com/quizsignal/faq/",
+  guidesAbsolute: "https://nexiscro.com/quizsignal/guides/",
+} as const;
+
 /** Marketing site contact form anchor. */
 export const CONTACT_FORM_URL = "https://nexiscro.com/#contact";
 
@@ -28,6 +47,7 @@ export const siteAnchors = {
   features: "/#features",
   howItWorks: "/#how-it-works",
   demo: "/#demo",
+  agency: "/#agency",
   pricing: "/#pricing",
   resources: "/#resources",
   faq: "/#faq",
@@ -37,10 +57,13 @@ export const siteAnchors = {
 /** Footer / nav links — omit entries until destination pages exist. */
 export const BLOG_URL = "/blog";
 
+export const COMPARE_URL = "/compare";
+
 export const footerProductLinks = [
   { label: "Features", href: siteAnchors.features },
   { label: "Pricing", href: siteAnchors.pricing },
   { label: "Blog", href: BLOG_URL },
+  { label: "Compare", href: COMPARE_URL },
   { label: "FAQ", href: siteAnchors.faq },
   { label: "Install on Shopify", href: SHOPIFY_INSTALL_URL, external: true },
 ] as const;

@@ -1,0 +1,187 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { QUIZSIGNAL, SUPPORT_EMAIL } from "../../config/site";
+
+const title = `FAQ — ${QUIZSIGNAL.name}`;
+const description =
+  "Common questions about Nexis CRO: Quiz Signal — quizzes, recommendations, plans, AI credits, and theme setup.";
+
+const faqs = [
+  {
+    question: "What does Quiz Signal do?",
+    answer:
+      "Quiz Signal lets you build storefront quizzes that recommend products from your Shopify catalog based on shopper answers. You publish a theme block, map answers to recommendation rules, and review completions in the admin.",
+  },
+  {
+    question: "Does it work with any Shopify theme?",
+    answer:
+      "Yes. You add the Quiz Signal theme app extension block in the theme editor. It works with Online Store 2.0 themes that support app blocks. No custom theme code is required for the standard setup.",
+  },
+  {
+    question: "What is on the Free plan?",
+    answer:
+      "Free includes a small number of quizzes and monthly completions, Quiz Studio builder access, recommendation rules, and a monthly allotment of AI credits. Growth unlocks unlimited quizzes and completions, higher AI credits, custom templates, and related paid features.",
+  },
+  {
+    question: "How do AI credits work?",
+    answer:
+      "AI credits power hosted quiz generation in the admin. Free and Growth plans include a monthly credit allotment. Optional one-time credit packs may be available in billing. Credits are for merchant AI features — shoppers taking a quiz do not spend your AI credits.",
+  },
+  {
+    question: "Can quiz results sync to Klaviyo?",
+    answer:
+      "Yes. You can connect a Klaviyo private API key in settings and sync quiz outcomes for follow-up flows. Sync only runs when you configure it; shopper emails are only sent if your quiz captures them.",
+  },
+  {
+    question: "Where is my data stored?",
+    answer:
+      "The app runs on our application host. Quiz configuration and responses are stored to operate the product. See the Quiz Signal Privacy Policy for details on retention, GDPR webhooks, and subprocessors.",
+  },
+  {
+    question: "Is there a free trial for Growth?",
+    answer:
+      "Growth includes a 14-day trial through Shopify billing when you upgrade from the app. The Free plan stays available without a credit card.",
+  },
+  {
+    question: "How do I get support?",
+    answer: `Email ${SUPPORT_EMAIL} or use the contact form on nexiscro.com. Include your shop domain and a short description of the issue.`,
+  },
+] as const;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Layout title={title} description={description} extraJsonLd={faqSchema}>
+  <Nav />
+  <main class="qs-faq-page">
+    <div class="container qs-faq-shell">
+      <header class="qs-faq-header">
+        <p class="overline">{QUIZSIGNAL.shortName}</p>
+        <h1 class="display text-balance">Frequently asked questions</h1>
+        <p class="body-lg qs-faq-lead">
+          Quick answers about setup, plans, and data. More detail:{" "}
+          <a href={QUIZSIGNAL.pricing}>Pricing</a> ·{" "}
+          <a href={QUIZSIGNAL.privacy}>Privacy Policy</a> ·{" "}
+          <a href={QUIZSIGNAL.guides}>Guides</a> ·{" "}
+          <a href={QUIZSIGNAL.hub}>Product hub</a>
+        </p>
+      </header>
+
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>{faq.question}</span>
+                <svg
+                  class="faq-chevron"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </summary>
+              <div class="faq-answer">
+                <p>{faq.answer}</p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .qs-faq-page {
+    padding: calc(var(--space-8) + 72px) 0 var(--space-9);
+  }
+
+  .qs-faq-shell {
+    max-width: 720px;
+  }
+
+  .qs-faq-header {
+    margin-bottom: var(--space-7);
+  }
+
+  .qs-faq-lead {
+    margin: var(--space-4) 0 0;
+    color: var(--text-secondary);
+  }
+
+  .qs-faq-lead a {
+    color: var(--accent);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 20px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 0 20px;
+  }
+
+  .faq-answer p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+</style>

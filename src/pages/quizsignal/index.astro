@@ -1,0 +1,103 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { QUIZSIGNAL, SUPPORT_EMAIL, siteAnchors } from "../../config/site";
+
+const title = `${QUIZSIGNAL.name} — Product recommendation quizzes for Shopify`;
+const description =
+  "Build storefront quizzes that recommend catalog products from shopper answers. Theme block, admin builder, and optional Klaviyo sync.";
+
+const links = [
+  { label: "Pricing", href: QUIZSIGNAL.pricing },
+  { label: "Privacy Policy", href: QUIZSIGNAL.privacy },
+  { label: "FAQ", href: QUIZSIGNAL.faq },
+  { label: "Guides", href: QUIZSIGNAL.guides },
+] as const;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main class="qs-hub">
+    <div class="container qs-shell">
+      <p class="overline">Shopify app</p>
+      <h1 class="display text-balance">{QUIZSIGNAL.name}</h1>
+      <p class="body-lg qs-lead">
+        Create storefront product quizzes that recommend catalog matches from shopper answers.
+        Publish a theme block, map answers to products, and sync preferences for follow-up.
+      </p>
+
+      <div class="qs-actions">
+        <a class="btn btn-primary" href={QUIZSIGNAL.installUrl} target="_blank" rel="noopener noreferrer">
+          Install on Shopify
+        </a>
+        <a class="btn btn-ghost" href={siteAnchors.contact}>Contact</a>
+      </div>
+
+      <section class="qs-cards" aria-labelledby="qs-resources-heading">
+        <h2 id="qs-resources-heading" class="heading-2">Resources</h2>
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="body-md qs-note">
+          App host (merchants):{" "}
+          <a href={QUIZSIGNAL.appUrl}>{QUIZSIGNAL.appUrl.replace("https://", "")}</a>
+          · Support: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .qs-hub {
+    padding: calc(var(--space-8) + 72px) 0 var(--space-9);
+  }
+
+  .qs-shell {
+    max-width: 720px;
+  }
+
+  .qs-lead {
+    margin: var(--space-4) 0 var(--space-6);
+    color: var(--text-secondary);
+  }
+
+  .qs-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .qs-cards h2 {
+    margin: 0 0 var(--space-4);
+  }
+
+  .qs-cards ul {
+    list-style: none;
+    margin: 0 0 var(--space-5);
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .qs-cards a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .qs-note {
+    color: var(--text-muted);
+  }
+</style>

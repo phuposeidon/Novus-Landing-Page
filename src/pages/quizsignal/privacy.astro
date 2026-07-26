@@ -1,0 +1,359 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import {
+  CONTACT_FORM_URL,
+  PRIVACY_POLICY_URL,
+  QUIZSIGNAL,
+  SUPPORT_EMAIL,
+} from "../../config/site";
+
+const title = `Privacy Policy — ${QUIZSIGNAL.name}`;
+const description = `How Nexis CRO collects and protects data for ${QUIZSIGNAL.name}, our Shopify product-quiz app.`;
+
+const sections = [
+  { id: "who-we-are", label: "Who we are" },
+  { id: "information-we-collect", label: "Information we collect" },
+  { id: "how-we-use", label: "How we use information" },
+  { id: "shopify-apps", label: "Shopify apps & customer data" },
+  { id: "ai-processing", label: "AI features & subprocessors" },
+  { id: "integrations", label: "Integrations" },
+  { id: "legal-compliance", label: "Legal compliance" },
+  { id: "retention", label: "Retention" },
+  { id: "your-rights", label: "Your rights" },
+  { id: "children", label: "Children" },
+  { id: "changes", label: "Changes" },
+  { id: "contact", label: "Contact" },
+] as const;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main class="legal-page">
+    <div class="container legal-shell">
+      <header class="legal-header">
+        <p class="legal-eyebrow">Legal · {QUIZSIGNAL.shortName}</p>
+        <h1>Privacy Policy</h1>
+        <p class="legal-meta">
+          Effective date: July 26, 2026 · Last updated: July 26, 2026
+        </p>
+        <p class="legal-lead">
+          This page describes privacy practices for{" "}
+          <strong>{QUIZSIGNAL.name}</strong>, a Shopify app by Nexis CRO. For our company-wide
+          policy covering the marketing site and other apps, see also the{" "}
+          <a href={PRIVACY_POLICY_URL}>Nexis CRO Privacy Policy</a>.
+        </p>
+      </header>
+
+      <div class="legal-grid">
+        <nav class="legal-toc" aria-label="On this page">
+          <p class="legal-toc-title">On this page</p>
+          <ul>
+            {
+              sections.map((section) => (
+                <li>
+                  <a href={`#${section.id}`}>{section.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <article class="legal-body">
+          <section id="who-we-are">
+            <h2>Who we are</h2>
+            <p>
+              Nexis CRO provides <strong>{QUIZSIGNAL.name}</strong>, an embedded Shopify app that
+              helps merchants build storefront product-recommendation quizzes, map answers to
+              catalog products, and optionally sync outcomes for follow-up. Product pages for this
+              app live at{" "}
+              <a href={QUIZSIGNAL.hub}>nexiscro.com/quizsignal</a>; the app is hosted at{" "}
+              <a href={QUIZSIGNAL.appUrl}>{QUIZSIGNAL.appUrl.replace("https://", "")}</a>.
+            </p>
+          </section>
+
+          <section id="information-we-collect">
+            <h2>Information we collect</h2>
+            <p>When you use Quiz Signal, we may process:</p>
+            <ul>
+              <li>
+                <strong>Shop and session data.</strong> Shop domain, offline access tokens, and
+                session records required to authenticate the embedded admin app.
+              </li>
+              <li>
+                <strong>Quiz configuration.</strong> Quiz definitions, questions, design settings,
+                recommendation rules, and related admin content you create.
+              </li>
+              <li>
+                <strong>Quiz responses.</strong> Answers submitted on the storefront, optional
+                email or customer identifiers when captured, timestamps, and recommendation
+                outcomes needed to operate the product.
+              </li>
+              <li>
+                <strong>Catalog signals.</strong> Product and related Admin API data within the
+                scopes you approve, used to power recommendations and enrichment features you
+                enable.
+              </li>
+              <li>
+                <strong>Billing metadata.</strong> Plan and usage information via Shopify billing.
+                We do not store full payment card numbers.
+              </li>
+              <li>
+                <strong>Support.</strong> Messages and attachments you send to{" "}
+                {SUPPORT_EMAIL}.
+              </li>
+            </ul>
+          </section>
+
+          <section id="how-we-use">
+            <h2>How we use information</h2>
+            <p>We use this information to:</p>
+            <ul>
+              <li>Provide quiz publishing, storefront delivery, and recommendation results</li>
+              <li>Show analytics and response history in the merchant admin</li>
+              <li>Run optional AI quiz generation and related credit accounting</li>
+              <li>Sync outcomes to destinations you configure (for example Klaviyo)</li>
+              <li>Authenticate access, prevent abuse, provide support, and meet legal duties</li>
+            </ul>
+            <p>
+              We do <strong>not</strong> sell personal information and we do not rent or share
+              customer data accessed through the app with third parties for their own marketing.
+            </p>
+          </section>
+
+          <section id="shopify-apps">
+            <h2>Shopify apps &amp; customer data</h2>
+            <p>
+              Data accessed through Shopify is used only to deliver Quiz Signal features for your
+              store. We implement Shopify’s mandatory compliance webhooks (customer data request,
+              customer redact, and shop redact) so merchants can fulfill GDPR and similar
+              obligations.
+            </p>
+          </section>
+
+          <section id="ai-processing">
+            <h2>AI features &amp; subprocessors</h2>
+            <p>
+              Optional AI quiz generation may send prompts and related context to our AI provider
+              (for example OpenAI) to produce draft quizzes. Do not include sensitive personal data
+              in prompts you control. Subprocessors that help us host or operate the service may
+              include infrastructure providers (such as our application host) and email or
+              analytics tools used for support and the marketing site.
+            </p>
+          </section>
+
+          <section id="integrations">
+            <h2>Integrations</h2>
+            <p>
+              If you connect Klaviyo or similar tools, quiz-related fields you choose to sync are
+              sent to that provider under your account and their privacy terms. You control whether
+              those integrations are enabled.
+            </p>
+          </section>
+
+          <section id="legal-compliance">
+            <h2>Legal compliance</h2>
+            <p>
+              We process data as needed to provide the service, under merchant instructions for
+              storefront and customer data, and as required by law. Merchants remain responsible for
+              their own privacy notices to shoppers where quiz forms collect personal data.
+            </p>
+          </section>
+
+          <section id="retention">
+            <h2>Retention</h2>
+            <p>
+              We retain shop, quiz, and response data while the app is installed and as needed for
+              backups, security, and legal obligations. After uninstall or shop redact webhooks, we
+              delete or anonymize associated data in line with Shopify’s timelines and our
+              retention practices.
+            </p>
+          </section>
+
+          <section id="your-rights">
+            <h2>Your rights</h2>
+            <p>
+              Depending on your location, you may have rights to access, correct, delete, or export
+              personal information, or to object to certain processing. Merchants and shoppers can
+              contact us at the address below; shoppers may also contact the merchant who collected
+              their quiz answers.
+            </p>
+          </section>
+
+          <section id="children">
+            <h2>Children</h2>
+            <p>
+              Quiz Signal is not directed to children under 16. We do not knowingly collect
+              personal information from children.
+            </p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes</h2>
+            <p>
+              We may update this policy from time to time. The “Last updated” date at the top will
+              change when we do. Continued use of the app after an update constitutes acceptance of
+              the revised policy where permitted by law.
+            </p>
+          </section>
+
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>
+              Email <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> or use our{" "}
+              <a href={CONTACT_FORM_URL}>contact form</a>. Product hub:{" "}
+              <a href={QUIZSIGNAL.hub}>{QUIZSIGNAL.hub}</a>.
+            </p>
+          </section>
+        </article>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .legal-page {
+    padding: calc(var(--space-8) + 72px) 0 var(--space-8);
+    background: var(--bg-void);
+  }
+
+  .legal-shell {
+    max-width: 1100px;
+  }
+
+  .legal-header {
+    margin-bottom: var(--space-7);
+    max-width: 720px;
+  }
+
+  .legal-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 var(--space-3);
+  }
+
+  .legal-header h1 {
+    margin: 0 0 var(--space-3);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    color: var(--text-primary);
+  }
+
+  .legal-meta {
+    margin: 0 0 var(--space-4);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .legal-lead {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .legal-grid {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .legal-toc {
+    position: sticky;
+    top: 96px;
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-deep);
+  }
+
+  .legal-toc-title {
+    margin: 0 0 var(--space-3);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+
+  .legal-toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legal-toc a {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .legal-toc a:hover {
+    color: var(--accent);
+  }
+
+  .legal-body section {
+    padding-bottom: var(--space-6);
+    margin-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legal-body section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .legal-body h2 {
+    margin: 0 0 var(--space-4);
+    font-size: 1.35rem;
+    color: var(--text-primary);
+  }
+
+  .legal-body p,
+  .legal-body li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .legal-body p {
+    margin: 0 0 var(--space-4);
+  }
+
+  .legal-body ul {
+    margin: 0 0 var(--space-4);
+    padding-left: 1.25rem;
+  }
+
+  .legal-body li {
+    margin-bottom: var(--space-2);
+  }
+
+  .legal-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .legal-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .legal-toc {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,317 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { QUIZSIGNAL, SUPPORT_EMAIL } from "../../config/site";
+
+const title = `Pricing — ${QUIZSIGNAL.name}`;
+const description =
+  "Simple Shopify billing for Nexis CRO: Quiz Signal. Free forever plan, Growth at $9/month with annual discount and 14-day trial.";
+
+const plans = [
+  {
+    name: "Free",
+    priceLabel: "$0",
+    period: "forever",
+    description: "Get started — no credit card",
+    features: [
+      "2 quizzes",
+      "100 quiz completions / month",
+      "10 AI credits / month",
+      "Quiz Studio builder + premium layouts",
+      "Product recommendation rules",
+      "Revenue attribution",
+      "Import & export quizzes",
+      "Includes app branding",
+    ],
+    cta: "Install Free",
+    ctaClass: "btn btn-ghost",
+    featured: false,
+    trial: null as string | null,
+  },
+  {
+    name: "Growth",
+    priceLabel: "$9",
+    period: "/ month",
+    annualNote: "or $86.40 / year (20% off)",
+    description: "Unlimited quizzes + custom templates",
+    features: [
+      "Unlimited quizzes & completions",
+      "200 AI credits / month",
+      "AI Quiz Maker",
+      "Custom quiz & results templates",
+      "A/B testing",
+      "Advanced analytics",
+      "Email capture + Klaviyo sync",
+      "Remove app branding",
+    ],
+    cta: "Start 14-day trial",
+    ctaClass: "btn btn-accent",
+    featured: true,
+    trial: "14-day free trial via Shopify billing",
+  },
+] as const;
+
+const creditPacks = [
+  { name: "Starter", price: "$3" },
+  { name: "Plus", price: "$7" },
+  { name: "Pro", price: "$20" },
+] as const;
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main class="qs-pricing-page">
+    <div class="container qs-pricing-shell">
+      <header class="qs-pricing-header">
+        <p class="overline">{QUIZSIGNAL.shortName}</p>
+        <h1 class="display text-balance">Simple pricing</h1>
+        <p class="body-lg qs-pricing-lead">
+          Start free. Upgrade to Growth when you need unlimited quizzes and higher AI credits.
+          Billing is managed through Shopify.{" "}
+          <a href={QUIZSIGNAL.faq}>FAQ</a> · <a href={QUIZSIGNAL.hub}>Product hub</a>
+        </p>
+      </header>
+
+      <div class="plan-grid">
+        {
+          plans.map((plan) => (
+            <article class:list={["plan-card", { featured: plan.featured }]}>
+              {plan.featured && <p class="plan-badge">Most popular</p>}
+              <h2 class="heading-2">{plan.name}</h2>
+              <p class="plan-price">
+                <span class="plan-amount">{plan.priceLabel}</span>
+                <span class="plan-period">{plan.period}</span>
+              </p>
+              {"annualNote" in plan && plan.annualNote && (
+                <p class="plan-annual">{plan.annualNote}</p>
+              )}
+              <p class="body-md plan-desc">{plan.description}</p>
+              {plan.trial && <p class="plan-trial">{plan.trial}</p>}
+              <ul class="plan-features">
+                {plan.features.map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+              <a
+                class={plan.ctaClass}
+                href={QUIZSIGNAL.installUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {plan.cta}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <section class="credit-packs" aria-labelledby="credits-heading">
+        <h2 id="credits-heading" class="heading-2">Optional AI credit packs</h2>
+        <p class="body-md">
+          One-time packs for extra hosted AI quiz generation. Credits do not expire with the pack
+          purchase; monthly plan credits still reset on the plan schedule.
+        </p>
+        <ul class="pack-list">
+          {
+            creditPacks.map((pack) => (
+              <li>
+                <strong>{pack.name}</strong>
+                <span>{pack.price}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <p class="body-md qs-pricing-foot">
+        Questions? <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+      </p>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .qs-pricing-page {
+    padding: calc(var(--space-8) + 72px) 0 var(--space-9);
+  }
+
+  .qs-pricing-shell {
+    max-width: 960px;
+  }
+
+  .qs-pricing-header {
+    max-width: 640px;
+    margin-bottom: var(--space-7);
+  }
+
+  .qs-pricing-lead {
+    margin: var(--space-4) 0 0;
+    color: var(--text-secondary);
+  }
+
+  .qs-pricing-lead a {
+    color: var(--accent);
+  }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-bottom: var(--space-8);
+  }
+
+  .plan-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-deep);
+  }
+
+  .plan-card.featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .plan-card h2 {
+    margin: 0;
+  }
+
+  .plan-price {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .plan-amount {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .plan-period {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  .plan-annual,
+  .plan-trial,
+  .plan-desc {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+
+  .plan-trial {
+    font-size: 14px;
+    color: var(--accent);
+  }
+
+  .plan-features {
+    list-style: none;
+    margin: var(--space-2) 0 var(--space-4);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .plan-features li {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .plan-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 2px;
+  }
+
+  .plan-card .btn {
+    align-self: flex-start;
+    text-decoration: none;
+  }
+
+  .credit-packs {
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-deep);
+    margin-bottom: var(--space-6);
+  }
+
+  .credit-packs h2 {
+    margin: 0 0 var(--space-3);
+  }
+
+  .credit-packs > p {
+    margin: 0 0 var(--space-4);
+    color: var(--text-secondary);
+  }
+
+  .pack-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .pack-list li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .pack-list strong {
+    color: var(--text-primary);
+  }
+
+  .qs-pricing-foot {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .qs-pricing-foot a {
+    color: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .plan-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

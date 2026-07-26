@@ -18,7 +18,13 @@ const staticRoutes = [
   { loc: `${site}/`, lastmod: today },
   { loc: `${site}/blog/`, lastmod: today },
   { loc: `${site}/about/`, lastmod: today },
+  { loc: `${site}/compare/`, lastmod: today },
   { loc: `${site}/privacy` },
+  { loc: `${site}/quizsignal/`, lastmod: today },
+  { loc: `${site}/quizsignal/pricing/`, lastmod: today },
+  { loc: `${site}/quizsignal/privacy/`, lastmod: today },
+  { loc: `${site}/quizsignal/faq/`, lastmod: today },
+  { loc: `${site}/quizsignal/guides/`, lastmod: today },
 ];
 
 function parseDate(content, key) {
