@@ -1,5 +1,5 @@
 <!-- (c) Daniel Agrici, FLOW (https://github.com/AgriciDaniel/flow), CC BY 4.0 -->
-<!-- Synced from FLOW on 2026-06-06 -->
+<!-- Synced from FLOW on 2026-08-31 -->
 ---
 title: "AI detector test follow-up Prompt"
 description: "AI detector test follow-up Prompt"
