@@ -73,7 +73,7 @@
           </div>
           
           <div class="form-group">
-            <label class="input-label">Your brand aliases <span class="label-muted">(comma-separated)</span></label>
+            <span class="input-label">Your brand aliases <span class="label-muted">(comma-separated)</span></span>
             <div class="mock-input-field">
               <span class="tag">your-store.myshopify.com</span>
               <span class="tag">Nexis Premium</span>
@@ -83,12 +83,13 @@
           </div>
 
           <div class="form-group" style="margin-top: 14px;">
-            <label class="input-label">Competitor aliases — optional <span class="label-muted">(comma-separated)</span></label>
+            <span class="input-label">Competitor aliases — optional <span class="label-muted">(comma-separated)</span></span>
             <div class="mock-input-field placeholder-field">
               <span>e.g. Semrush, Ahrefs, surfer-seo.com, Moz</span>
             </div>
             <span class="field-hint">We'll alert you when a competitor is mentioned instead of your store.</span>
           </div>
+
         </div>
 
         <!-- Step 2 Card: Tracked Prompts List -->
@@ -534,10 +535,12 @@
   }
 
   .input-label {
+    display: block;
     font-size: var(--dash-body);
     font-weight: 600;
     color: var(--text-primary);
   }
+
 
   .label-muted {
     font-size: var(--dash-caption);
