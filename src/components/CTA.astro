@@ -1,59 +1,130 @@
 ---
-import { BLOG_URL, SHOPIFY_INSTALL_URL } from "../config/site.ts";
+import { BLOG_URL, PRIVACY_POLICY_URL, QUIZSIGNAL, SHOPIFY_INSTALL_URL } from "../config/site.ts";
 ---
 
 <section class="cta-band">
   <div class="cta-glow" aria-hidden="true"></div>
   <div class="container cta-inner">
     <h2 class="display animate-on-scroll text-balance">
-      Start optimizing for AI search.<br/>Free.
+      Supercharge Your Shopify Store Growth.<br/>Start Free Today.
     </h2>
-    <p class="body-lg animate-on-scroll" style="max-width: 48ch; margin: 0 auto; opacity: 0.85;">
-      Install Nexis CRO on your Shopify store. Run your first audit in 60 seconds.
-      No credit card. No trial period. Just answers.
+    <p class="body-lg animate-on-scroll" style="max-width: 52ch; margin: 0 auto; opacity: 0.85;">
+      Audit your AI search discoverability with AI SEO, or build conversion-boosting recommendation quizzes with Quiz Signal. 0 code, 2-minute setup.
     </p>
     <div class="cta-actions animate-on-scroll">
       <a
         href={SHOPIFY_INSTALL_URL}
-        class="btn btn-primary"
+        class="btn btn-primary btn-pill"
         id="cta-final"
         target="_blank"
         rel="noopener noreferrer"
         data-analytics-event="install_click"
-        data-analytics-location="cta_final"
+        data-analytics-location="cta_final_aiseo"
       >
-        Install Free on Shopify
+        <span>Install AI SEO &amp; AEO Audit</span>
+        <span class="btn-arrow-pill">↗</span>
+      </a>
+      <a
+        href={QUIZSIGNAL.installUrl}
+        class="btn btn-accent btn-pill"
+        id="cta-final-quiz"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-analytics-event="install_click"
+        data-analytics-location="cta_final_quiz"
+      >
+        <span>Install Quiz Signal</span>
+        <span class="btn-arrow-pill">↗</span>
       </a>
       <a
         href={BLOG_URL}
-        class="btn btn-ghost"
+        class="btn btn-ghost btn-pill"
         data-analytics-event="nav_anchor_click"
         data-analytics-location="cta_final"
         data-analytics-section="blog"
       >
-        Read AEO guides
+        <span>Read Guides &amp; Blog</span>
+        <span class="btn-arrow-pill">→</span>
       </a>
     </div>
+    <p class="cta-trust body-sm animate-on-scroll">
+      Free forever plans available &middot; Cancel anytime &middot;
+      <a href={PRIVACY_POLICY_URL}>Privacy policy</a>
+    </p>
   </div>
 </section>
 
 <style>
   .cta-band {
     position: relative;
-    padding: var(--space-10) 0;
+    padding: calc(var(--space-10) + 20px) 0;
     background: var(--bg-elevated);
     border-top: 1px solid var(--border);
     overflow: hidden;
     text-align: center;
   }
 
+  .cta-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-ambient-img);
+    background-size: cover;
+    background-position: center bottom;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  [data-theme="dark"] .cta-band::before {
+    opacity: 0.2;
+  }
+
   .cta-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    gap: var(--space-4);
     justify-content: center;
     margin-top: var(--space-6);
   }
+
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 15px;
+    transition: transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .btn-pill:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 12px;
+    line-height: 1;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .btn-ghost .btn-arrow-pill {
+    background: var(--bg-glass-hover);
+    border: 1px solid var(--border);
+  }
+
+  .btn-pill:hover .btn-arrow-pill {
+    transform: translateX(2px) translateY(-1px);
+  }
+
 
   .cta-glow {
     position: absolute;
@@ -64,9 +135,10 @@ import { BLOG_URL, SHOPIFY_INSTALL_URL } from "../config/site.ts";
     height: 400px;
     background: radial-gradient(
       ellipse at center,
-      rgba(54, 244, 164, 0.08) 0%,
+      var(--glow-color) 0%,
       transparent 60%
     );
+
     pointer-events: none;
   }
 
@@ -77,5 +149,20 @@ import { BLOG_URL, SHOPIFY_INSTALL_URL } from "../config/site.ts";
     flex-direction: column;
     align-items: center;
     gap: var(--space-5);
+  }
+
+  .cta-trust {
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .cta-trust a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cta-trust a:hover {
+    color: var(--accent);
   }
 </style>

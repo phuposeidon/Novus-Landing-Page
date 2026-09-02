@@ -12,11 +12,11 @@
 
 | Metric | Value |
 |--------|-------|
-| **Marketing health score** | **64 / 100** (C+) |
-| **Primary drag** | Brand & trust — **42/100** (no social proof on homepage) |
-| **Primary strength** | Content & messaging — **72/100** (hero + blog moat) |
-| **Projected after P0 fixes** | **~72–75 / 100** (trust microcopy + product demo CTA shipped) |
-| **Ceiling without reviews** | ~75 — real App Store ratings/testimonials needed for 80+ |
+| **Marketing health score** | **68 / 100** (C+) |
+| **Primary drag** | Brand & trust — **48/100** (trust strip shipped; still no reviews/testimonials) |
+| **Primary strength** | Content & messaging — **74/100** (hero + blog + compare page) |
+| **Projected after P1 fixes** | **~72–76 / 100** (agency section + compare hub + trust strip) |
+| **Ceiling without reviews** | ~76 — real App Store ratings/testimonials needed for 80+ |
 
 **Verdict:** Product positioning and technical SEO foundation are strong. Conversion is limited by missing trust signals (reviews, install count, testimonials), not by copy quality. The highest-leverage remaining work is **real social proof** — not more schema or H2 tweaks.
 
@@ -51,12 +51,12 @@ curl -sI https://www.nexiscro.com/ | grep -Ei '^HTTP|^location'
 | Category | Weight | Score | Weighted | Grade |
 |----------|--------|-------|----------|-------|
 | Content & Messaging | 25% | 72 | 18.0 | B |
-| Conversion Optimization | 20% | 52 | 10.4 | D+ |
-| SEO & Discoverability | 20% | 75 | 15.0 | B+ |
-| Competitive Positioning | 15% | 62 | 9.3 | C+ |
-| Brand & Trust | 10% | 42 | 4.2 | F |
-| Growth & Strategy | 10% | 67 | 6.7 | C+ |
-| **Total** | | | **63.6 → 64** | **C+** |
+| Conversion Optimization | 20% | 58 | 11.6 | C |
+| SEO & Discoverability | 20% | 78 | 15.6 | B+ |
+| Competitive Positioning | 15% | 72 | 10.8 | B- |
+| Brand & Trust | 10% | 48 | 4.8 | D |
+| Growth & Strategy | 10% | 72 | 7.2 | B- |
+| **Total** | | | **68.0** | **C+** |
 
 ---
 
@@ -74,8 +74,12 @@ curl -sI https://www.nexiscro.com/ | grep -Ei '^HTTP|^location'
 | 8 | Editorial author + `/about/` | ✅ Shipped | Organization author (not Person team name) |
 | 9 | App Store rating in hero | ⏳ Blocked | Needs real review count — do not fabricate |
 | 10 | Testimonials section | ⏳ Blocked | Needs 2+ named merchant quotes |
-| 11 | `/compare` page | 📋 Planned | Comparison-intent traffic |
-| 12 | Agency landing section | 📋 Planned | Highest LTV segment |
+| 11 | `/compare` page | ✅ Shipped | `src/pages/compare.astro` — feature matrix + FAQ schema |
+| 12 | Agency landing section | ✅ Shipped | `Agency.astro` — `#agency` on homepage |
+| 13 | Trust strip (4 signals) | ✅ Shipped | `TrustStrip.astro` — App Store, engines, privacy, billing |
+| 14 | Mobile hero subheadline trim | ✅ Shipped | `Hero.astro` — shorter variant ≤560px |
+| 15 | Footer App Store badge | ✅ Shipped | `Footer.astro` — links to listing |
+| 16 | Pricing/CTA risk reversal | ✅ Shipped | Cancel anytime · privacy link |
 
 ---
 
@@ -304,6 +308,7 @@ Save output to `seo-suite/MARKETING-AUDIT.md` and update the **Implemented since
 |------|--------|
 | 2026-06-06 | Initial audit — score 64/100 |
 | 2026-06-06 | Review pass: verification snapshot, implemented table, corrected SEO notes, P0 hero/pricing/problem shipped |
+| 2026-06-06 | P1 market run: TrustStrip, Agency section, `/compare/`, mobile hero, footer badge, risk-reversal copy |
 
 ---
 

@@ -1,0 +1,781 @@
+---
+import { QUIZSIGNAL, SUPPORT_EMAIL } from "../config/site.ts";
+
+const quizFeatures = [
+  {
+    title: "AI Quiz Maker & Studio",
+    description: "Describe your store or select a collection — AI creates engaging questions, options, and recommendation rules in under 60 seconds.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
+  },
+  {
+    title: "Smart Recommendation Logic",
+    description: "Map answers to specific products, curated collections, or complete multi-step routines with custom match percentage scores.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  },
+  {
+    title: "0-Code Shopify Theme App Block",
+    description: "Add the Quiz block directly via your Shopify Theme Editor (OS 2.0). Matches your store's typography and color scheme automatically.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
+  },
+  {
+    title: "Zero-Party Data & Klaviyo Sync",
+    description: "Collect shopper emails, product preferences, and intent data. Sync seamlessly to Klaviyo lists and Shopify customer segments for high-ROI campaigns.",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+  },
+];
+---
+
+<section class="quiz-section section" id="quizsignal">
+  <div class="container">
+    <!-- Header -->
+    <div class="quiz-header text-center">
+      <span class="overline animate-on-scroll">Storefront Conversion Optimization</span>
+      <h2 class="display animate-on-scroll text-balance">
+        Nexis CRO: Quiz Signal
+      </h2>
+      <p class="body-lg animate-on-scroll" style="max-width: 58ch; margin: var(--space-3) auto 0;">
+        Shoppers leave when they are overwhelmed by too many choices. Quiz Signal turns answers into tailored product recommendations that guide buyers directly to checkout.
+      </p>
+    </div>
+
+    <!-- Main 2-Column Showcase (Interactive Simulator + Value Prop) -->
+    <div class="quiz-interactive-grid">
+      <!-- Left: Interactive Live Quiz Simulator -->
+      <div class="quiz-simulator-card animate-on-scroll">
+        <div class="simulator-topbar">
+          <div class="sim-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="sim-url">your-store.myshopify.com/pages/routine-finder</span>
+          <span class="sim-badge">Live Storefront Block</span>
+        </div>
+
+        <div class="quiz-widget-inner" id="quiz-widget">
+          <!-- Step 1 -->
+          <div class="sim-step" id="sim-step-1">
+            <div class="sim-progress-bar"><div class="sim-progress-fill" style="width: 33%;"></div></div>
+            <div class="sim-step-meta">
+              <span class="sim-step-num">Step 1 of 3</span>
+              <span class="sim-step-category">Primary Goal</span>
+            </div>
+            <h3 class="sim-question">What is your main skincare goal?</h3>
+            <div class="sim-options">
+              <button type="button" class="sim-opt-btn" data-answer="glow" data-next="2">
+                <span class="opt-icon">✨</span>
+                <span class="opt-text">
+                  <strong>Deep Hydration &amp; Barrier Glow</strong>
+                  <small>Replenish moisture and restore radiance</small>
+                </span>
+                <span class="opt-arrow">→</span>
+              </button>
+              <button type="button" class="sim-opt-btn" data-answer="clear" data-next="2">
+                <span class="opt-icon">🌿</span>
+                <span class="opt-text">
+                  <strong>Blemish &amp; Oil Control</strong>
+                  <small>Calm breakouts and balance sebum</small>
+                </span>
+                <span class="opt-arrow">→</span>
+              </button>
+              <button type="button" class="sim-opt-btn" data-answer="firm" data-next="2">
+                <span class="opt-icon">⚡</span>
+                <span class="opt-text">
+                  <strong>Anti-Aging &amp; Elasticity</strong>
+                  <small>Smooth fine lines and boost firmness</small>
+                </span>
+                <span class="opt-arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="sim-step is-hidden" id="sim-step-2">
+            <div class="sim-progress-bar"><div class="sim-progress-fill" style="width: 66%;"></div></div>
+            <div class="sim-step-meta">
+              <span class="sim-step-num">Step 2 of 3</span>
+              <span class="sim-step-category">Skin Type</span>
+            </div>
+            <h3 class="sim-question">How does your skin feel by midday?</h3>
+            <div class="sim-options">
+              <button type="button" class="sim-opt-btn" data-answer="dry" data-next="3">
+                <span class="opt-icon">🏜️</span>
+                <span class="opt-text">
+                  <strong>Tight, flaky, or dry</strong>
+                  <small>Needs rich nourishing lipids</small>
+                </span>
+                <span class="opt-arrow">→</span>
+              </button>
+              <button type="button" class="sim-opt-btn" data-answer="oily" data-next="3">
+                <span class="opt-icon">💧</span>
+                <span class="opt-text">
+                  <strong>Shiny in the T-zone or all over</strong>
+                  <small>Needs lightweight oil-free hydration</small>
+                </span>
+                <span class="opt-arrow">→</span>
+              </button>
+            </div>
+            <button type="button" class="sim-back-btn" data-prev="1">← Back to previous question</button>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="sim-step is-hidden" id="sim-step-3">
+            <div class="sim-progress-bar"><div class="sim-progress-fill" style="width: 95%;"></div></div>
+            <div class="sim-step-meta">
+              <span class="sim-step-num">Step 3 of 3</span>
+              <span class="sim-step-category">Preferences</span>
+            </div>
+            <h3 class="sim-question">Where should we send your routine &amp; 10% coupon?</h3>
+            <div class="sim-email-capture">
+              <input type="email" class="sim-email-input" id="sim-user-email" placeholder="alex@example.com" value="shopper@shopify.com" />
+              <button type="button" class="btn btn-primary sim-submit-btn" id="sim-finish-btn">
+                Reveal My Recommended Matches →
+              </button>
+              <p class="sim-privacy-note">🔒 Zero-party consent &middot; Syncs directly to Klaviyo</p>
+            </div>
+            <button type="button" class="sim-back-btn" data-prev="2">← Back</button>
+          </div>
+
+          <!-- Result Screen -->
+          <div class="sim-step is-hidden" id="sim-step-result">
+            <div class="result-header">
+              <div class="result-confetti">🎉</div>
+              <span class="result-tag">YOUR TAILORED STOREFRONT MATCH</span>
+              <h3 class="result-title">Here is your recommended regimen</h3>
+            </div>
+
+            <div class="result-product-box">
+              <div class="result-score-badge">98.4% Match</div>
+              <div class="result-prod-body">
+                <div class="result-prod-icon">🧴</div>
+                <div class="result-prod-info">
+                  <h4 class="result-prod-name">Hydra-Barrier Ceramide Elixir</h4>
+                  <p class="result-prod-why">✓ Matches dry skin type &middot; Ceramide NP + Multi-Molecular Hyaluronic Acid</p>
+                  <div class="result-prod-pricing">
+                    <span class="curr-price mono">$48.00</span>
+                    <span class="strike-price mono">$58.00</span>
+                    <span class="save-badge">Save $10 with Routine Bundle</span>
+                  </div>
+                </div>
+              </div>
+              <a
+                href={QUIZSIGNAL.installUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary btn-block sim-cta-add"
+              >
+                Add to Cart &middot; 1-Click Checkout
+              </a>
+            </div>
+
+            <button type="button" class="sim-restart-btn" id="sim-restart-btn">
+              🔄 Retake Demo Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Value Proposition & Impact Stats -->
+      <div class="quiz-info-col">
+        <div class="quiz-impact-cards">
+          <div class="impact-card animate-on-scroll">
+            <span class="impact-stat mono text-accent">3.8×</span>
+            <span class="impact-label">Higher Storefront Conversion</span>
+            <p class="impact-desc">Guided quiz takers convert at significantly higher rates than unassisted catalog browsers.</p>
+          </div>
+
+          <div class="impact-card animate-on-scroll">
+            <span class="impact-stat mono text-accent">+24%</span>
+            <span class="impact-label">Average Order Value Lift</span>
+            <p class="impact-desc">Recommend complementary routine bundles and multi-product regimens on result pages.</p>
+          </div>
+
+          <div class="impact-card animate-on-scroll">
+            <span class="impact-stat mono text-accent">100%</span>
+            <span class="impact-label">Zero-Party Data Ownership</span>
+            <p class="impact-desc">Capture direct shopper preferences and build Klaviyo email segments that consistently convert.</p>
+          </div>
+        </div>
+
+        <div class="quiz-cta-box animate-on-scroll">
+          <div class="quiz-cta-copy">
+            <h4 class="quiz-cta-title">Ready to build your first quiz?</h4>
+            <p class="quiz-cta-text">Includes free plan with 2 live quizzes and 100 completions every month.</p>
+          </div>
+          <div class="quiz-cta-buttons">
+            <a
+              href={QUIZSIGNAL.installUrl}
+              class="btn btn-accent"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="install_click"
+              data-analytics-location="quiz_section"
+            >
+              Install Quiz Signal on Shopify
+            </a>
+            <a
+              href={QUIZSIGNAL.hub}
+              class="btn btn-ghost"
+            >
+              Product Hub &amp; Guides →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 Features Grid -->
+    <div class="quiz-features-grid stagger">
+      {quizFeatures.map((feat) => (
+        <div class="quiz-feature-box card animate-on-scroll">
+          <div class="quiz-feat-icon" set:html={feat.icon} />
+          <h3 class="heading-3">{feat.title}</h3>
+          <p class="body-sm">{feat.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function initQuizSimulator() {
+    const s1 = document.getElementById("sim-step-1");
+    const s2 = document.getElementById("sim-step-2");
+    const s3 = document.getElementById("sim-step-3");
+    const sResult = document.getElementById("sim-step-result");
+    const finishBtn = document.getElementById("sim-finish-btn");
+    const restartBtn = document.getElementById("sim-restart-btn");
+    const bar = document.querySelector(".sim-progress-fill");
+
+    function goToStep(fromStep, toStep) {
+      if (bar) {
+        if (toStep === 1) bar.style.width = "33%";
+        if (toStep === 2) bar.style.width = "66%";
+        if (toStep === 3) bar.style.width = "90%";
+        if (toStep === 4) bar.style.width = "100%";
+      }
+
+      const allSteps = [s1, s2, s3, sResult];
+      const targetStep = toStep === 1 ? s1 : toStep === 2 ? s2 : toStep === 3 ? s3 : sResult;
+
+      if (window.gsap && targetStep) {
+        allSteps.forEach((s) => {
+          if (s && s !== targetStep && !s.classList.contains("is-hidden")) {
+            gsap.to(s, {
+              opacity: 0,
+              x: -12,
+              duration: 0.15,
+              onComplete: () => {
+                s.classList.add("is-hidden");
+                targetStep.classList.remove("is-hidden");
+                gsap.fromTo(targetStep, { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" });
+              },
+            });
+          }
+        });
+      } else {
+        allSteps.forEach((s) => s?.classList.add("is-hidden"));
+        if (toStep === 1) s1?.classList.remove("is-hidden");
+        if (toStep === 2) s2?.classList.remove("is-hidden");
+        if (toStep === 3) s3?.classList.remove("is-hidden");
+        if (toStep === 4) sResult?.classList.remove("is-hidden");
+      }
+    }
+
+    document.querySelectorAll(".sim-opt-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const next = parseInt(btn.dataset.next || "1", 10);
+        goToStep(0, next);
+      });
+    });
+
+    document.querySelectorAll(".sim-back-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const prev = parseInt(btn.dataset.prev || "1", 10);
+        goToStep(0, prev);
+      });
+    });
+
+    finishBtn?.addEventListener("click", () => {
+      goToStep(0, 4);
+    });
+
+    restartBtn?.addEventListener("click", () => {
+      goToStep(0, 1);
+    });
+  })();
+</script>
+
+<style>
+  .quiz-section {
+    position: relative;
+    padding: var(--space-10) 0;
+    background: var(--bg-section);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quiz-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .quiz-interactive-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-7);
+    align-items: stretch;
+    margin-bottom: var(--space-9);
+  }
+
+  /* Simulator Card */
+  .quiz-simulator-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-elevated);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .simulator-topbar {
+    background: var(--bg-mockup-bar);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sim-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .sim-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot.red { background: #ef4444; }
+  .dot.yellow { background: #f59e0b; }
+  .dot.green { background: var(--accent); }
+
+  .sim-url {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sim-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(54, 244, 164, 0.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+
+  .quiz-widget-inner {
+    padding: var(--space-6);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .sim-step.is-hidden {
+    display: none !important;
+  }
+
+  .sim-progress-bar {
+    height: 4px;
+    background: var(--bg-glass-hover);
+    border-radius: var(--radius-pill);
+    margin-bottom: var(--space-4);
+    overflow: hidden;
+  }
+
+  .sim-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: var(--radius-pill);
+    transition: width var(--duration-normal) var(--ease-out);
+  }
+
+  .sim-step-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .sim-question {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .sim-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sim-opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--duration-fast) var(--ease-out);
+    font-family: inherit;
+  }
+
+  .sim-opt-btn:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+
+  .opt-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .opt-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .opt-text strong {
+    font-size: 14px;
+    color: var(--text-primary);
+  }
+
+  .opt-text small {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .opt-arrow {
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: transform var(--duration-fast);
+  }
+
+  .sim-opt-btn:hover .opt-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .sim-back-btn {
+    margin-top: var(--space-4);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color var(--duration-fast);
+  }
+
+  .sim-back-btn:hover {
+    color: var(--text-primary);
+  }
+
+  /* Email Capture */
+  .sim-email-capture {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: var(--space-3);
+  }
+
+  .sim-email-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color var(--duration-fast);
+  }
+
+  .sim-email-input:focus {
+    border-color: var(--accent);
+  }
+
+  .sim-privacy-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  /* Result Box */
+  .result-header {
+    text-align: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .result-confetti {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+
+  .result-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .result-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 4px;
+  }
+
+  .result-product-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(54, 244, 164, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    position: relative;
+    margin-bottom: var(--space-3);
+  }
+
+  .result-score-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent);
+    color: var(--btn-accent-text);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+  }
+
+
+  .result-prod-body {
+    display: flex;
+    gap: 14px;
+    margin-bottom: var(--space-4);
+  }
+
+  .result-prod-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(54, 244, 164, 0.1);
+    border: 1px solid rgba(54, 244, 164, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .result-prod-info {
+    flex: 1;
+  }
+
+  .result-prod-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .result-prod-why {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .result-prod-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .curr-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .strike-price {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  .save-badge {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(54, 244, 164, 0.12);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .sim-restart-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    display: block;
+    margin: 8px auto 0;
+    padding: 4px;
+    transition: color var(--duration-fast);
+  }
+
+  .sim-restart-btn:hover {
+    color: var(--text-primary);
+  }
+
+  /* Right column */
+  .quiz-info-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .quiz-impact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .impact-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .impact-stat {
+    font-size: 28px;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .impact-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .impact-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .quiz-cta-box {
+    background: radial-gradient(circle at top right, rgba(54, 244, 164, 0.1) 0%, var(--bg-elevated) 70%);
+    border: 1px solid rgba(54, 244, 164, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+  }
+
+  .quiz-cta-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .quiz-cta-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .quiz-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  /* 4 Features Grid */
+  .quiz-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+  }
+
+  .quiz-feature-box {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .quiz-feat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--accent-dim);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 1024px) {
+    .quiz-interactive-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quiz-features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .quiz-features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quiz-widget-inner {
+      padding: var(--space-4);
+    }
+  }
+</style>

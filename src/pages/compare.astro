@@ -1,0 +1,339 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { SHOPIFY_INSTALL_URL } from "../config/site.ts";
+
+const title = "Nexis CRO vs Traditional SEO Tools — Shopify AEO Comparison";
+const description =
+  "Compare Nexis CRO with traditional SEO tools and manual checklists. See why Shopify merchants choose purpose-built AEO audits for ChatGPT, Perplexity, and Google AI.";
+
+const comparisonRows = [
+  {
+    feature: "Built for Shopify",
+    nexis: "Native app — products, policies, theme",
+    traditional: "Generic site crawler",
+    manual: "Spreadsheet + guesswork",
+  },
+  {
+    feature: "AI engine audits",
+    nexis: "ChatGPT, Perplexity, Google AI, Bing",
+    traditional: "Google rankings only",
+    manual: "Not checked",
+  },
+  {
+    feature: "llms.txt deploy",
+    nexis: "One-click + auto-update",
+    traditional: "Not offered",
+    manual: "Manual file upload",
+  },
+  {
+    feature: "JSON-LD schema blocks",
+    nexis: "8 page types, theme injection",
+    traditional: "Limited or plugin-dependent",
+    manual: "Developer required",
+  },
+  {
+    feature: "AI Rank Tracker",
+    nexis: "Citation SOV vs competitors",
+    traditional: "Keyword rank only",
+    manual: "Manual prompt testing",
+  },
+  {
+    feature: "One-click AI fixes",
+    nexis: "Bulk rewrite from audit issues",
+    traditional: "Recommendations only",
+    manual: "Hours of copywriting",
+  },
+  {
+    feature: "Time to first audit",
+    nexis: "~60 seconds after install",
+    traditional: "Hours of setup",
+    manual: "Days per store",
+  },
+  {
+    feature: "Free plan",
+    nexis: "Yes — no credit card",
+    traditional: "Rarely",
+    manual: "N/A",
+  },
+  {
+    feature: "Starting price",
+    nexis: "Free → $23/mo (annual Pro)",
+    traditional: "$99+/mo typical",
+    manual: "Agency hours",
+  },
+];
+
+const faqItems = [
+  {
+    q: "Is Nexis CRO a replacement for Semrush or Ahrefs?",
+    a: "No — Nexis CRO complements traditional SEO tools. They optimize for Google rankings; Nexis CRO audits the signals AI search engines use to cite and recommend Shopify stores (llms.txt, schema, content quotability, AI bot access).",
+  },
+  {
+    q: "What makes Nexis CRO different from a generic SEO plugin?",
+    a: "Nexis CRO is a Shopify embedded app that crawls your Admin catalog, policies, and theme — then scores AEO readiness across four AI engines. Generic plugins rarely check llms.txt, AI crawler robots.txt, or citation share-of-voice.",
+  },
+  {
+    q: "Can agencies use Nexis CRO for multiple clients?",
+    a: "Yes. The Agency plan ($44/mo or $29/mo billed annually) supports up to 5 child stores with 50 rank-tracker prompts and 500 AI credits.",
+  },
+];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Shopify AEO audit approaches compared",
+  itemListOrder: "https://schema.org/ItemListOrderDescending",
+  numberOfItems: 3,
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Nexis CRO",
+      url: Astro.site?.href,
+      description: "Purpose-built Shopify AEO audit app",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Traditional SEO tools",
+      description: "Google-focused rank and keyword tools",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Manual AEO checklist",
+      description: "Spreadsheet-based AI readiness review",
+    },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  extraJsonLd={[itemListSchema, faqSchema]}
+>
+  <Nav />
+  <main class="compare-page">
+    <div class="container compare-shell">
+      <header class="compare-header text-center">
+        <p class="overline">Compare</p>
+        <h1 class="display text-balance">Nexis CRO vs Traditional SEO for Shopify AEO</h1>
+        <p class="body-lg compare-lead">
+          Traditional SEO tools were built for Google. AI search engines need different signals —
+          structured data, llms.txt, quotable product copy, and crawler policy.
+          Here's how purpose-built AEO auditing compares.
+        </p>
+        <a
+          href={SHOPIFY_INSTALL_URL}
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="install_click"
+          data-analytics-location="compare_hero"
+        >
+          Start Free Audit
+        </a>
+      </header>
+
+      <section class="compare-table-section" aria-labelledby="compare-table-heading">
+        <h2 id="compare-table-heading" class="heading-2 text-center">
+          Feature comparison
+        </h2>
+        <p class="body-sm compare-note text-center">
+          Traditional SEO pricing varies by vendor; figures are typical market ranges as of June 2026.
+        </p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <caption class="sr-only">
+              Nexis CRO compared with traditional SEO tools and manual AEO checklists
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Capability</th>
+                <th scope="col" class="col-nexis">Nexis CRO</th>
+                <th scope="col">Traditional SEO</th>
+                <th scope="col">Manual checklist</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr>
+                  <th scope="row" class="row-feature">{row.feature}</th>
+                  <td class="col-nexis">{row.nexis}</td>
+                  <td>{row.traditional}</td>
+                  <td>{row.manual}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="compare-verdict" aria-labelledby="verdict-heading">
+        <h2 id="verdict-heading" class="heading-2">When to choose Nexis CRO</h2>
+        <ul class="verdict-list">
+          <li>You sell on Shopify and want AI engines to cite your products</li>
+          <li>You need llms.txt, schema blocks, and robots.txt for AI crawlers in one app</li>
+          <li>You want citation tracking vs competitors — not just Google keyword ranks</li>
+          <li>You're an agency managing multiple Shopify merchants on AEO retainers</li>
+        </ul>
+      </section>
+
+      <section class="compare-faq" aria-labelledby="compare-faq-heading">
+        <h2 id="compare-faq-heading" class="heading-2">Comparison FAQ</h2>
+        <dl class="faq-list">
+          {faqItems.map((item) => (
+            <>
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </>
+          ))}
+        </dl>
+      </section>
+
+      <section class="compare-cta text-center">
+        <h2 class="heading-2">Run your first AEO audit free</h2>
+        <p class="body-md">Install on Shopify. No credit card. Results in about 60 seconds.</p>
+        <a
+          href={SHOPIFY_INSTALL_URL}
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="install_click"
+          data-analytics-location="compare_footer"
+        >
+          Install Free on Shopify
+        </a>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .compare-page {
+    padding-top: calc(var(--nav-height) + var(--space-8));
+    padding-bottom: var(--space-10);
+  }
+
+  .compare-shell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-9);
+    max-width: 960px;
+  }
+
+  .compare-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .compare-lead {
+    max-width: 58ch;
+    color: var(--text-secondary);
+  }
+
+  .compare-note {
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .compare-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg-deep);
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+
+  .compare-table thead th {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    background: var(--bg-elevated);
+  }
+
+  .col-nexis {
+    background: rgba(54, 244, 164, 0.04);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .row-feature {
+    font-weight: 600;
+    color: var(--text-secondary);
+    width: 28%;
+  }
+
+  .verdict-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-left: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  .verdict-list li {
+    line-height: 1.5;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .faq-list dt {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .faq-list dd {
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .compare-cta {
+    padding: var(--space-7);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+</style>

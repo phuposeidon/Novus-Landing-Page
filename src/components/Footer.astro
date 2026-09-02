@@ -1,70 +1,143 @@
 ---
 import {
+  footerAppLinks,
   footerLegalLinks,
   footerProductLinks,
   footerSupportLinks,
+  SHOPIFY_INSTALL_URL,
 } from "../config/site.ts";
 import BrandLogo from "./BrandLogo.astro";
 ---
 
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <a href="/" class="footer-logo" aria-label="Nexis CRO home">
-        <BrandLogo size={28} showWordmark wordmarkClass="footer-wordmark" />
-      </a>
-      <p class="footer-tagline">AI SEO & AEO Audit for Shopify</p>
+  <div class="container">
+    <div class="footer-main">
+      <!-- Left Column: Brand & Trust -->
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Nexis CRO home">
+          <BrandLogo size={30} showWordmark wordmarkClass="footer-wordmark" />
+        </a>
+        <p class="footer-tagline">
+          The complete Shopify growth suite for AI Search &amp; Answer Engine Optimization (AEO) and quiz recommendation funnels.
+        </p>
+
+        <div class="footer-badges">
+          <a
+            href={SHOPIFY_INSTALL_URL}
+            class="footer-app-badge"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="install_click"
+            data-analytics-location="footer_badge"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M15.34 3.5c-.05 0-.1.02-.14.04-.04-.26-.28-.46-.55-.46h-1.1c-.27 0-.5.2-.55.46-.04-.02-.09-.04-.14-.04-1.1 0-2 .9-2 2v.2c0 .11.09.2.2.2h.4v11.6c0 .55.45 1 1 1h3.18c.55 0 1-.45 1-1V5.9h.4c.11 0 .2-.09.2-.2v-.2c0-1.1-.9-2-2-2z" />
+            </svg>
+            <span>Shopify App Store</span>
+            <span class="badge-arrow">↗</span>
+          </a>
+
+          <div class="footer-status-pill">
+            <span class="status-live-dot"></span>
+            <span>All AI Engines Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: 4 Clean Navigation Columns -->
+      <nav class="footer-links-grid" aria-label="Footer navigation">
+        <div class="footer-col">
+          <p class="footer-col-title">Shopify Apps</p>
+          <ul class="footer-list">
+            {footerAppLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="footer-link"
+                  data-analytics-event="nav_anchor_click"
+                  data-analytics-location="footer"
+                  data-analytics-label={link.label}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Platform</p>
+          <ul class="footer-list">
+            {footerProductLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="footer-link"
+                  data-analytics-event="nav_anchor_click"
+                  data-analytics-location="footer"
+                  data-analytics-label={link.label}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Support &amp; Docs</p>
+          <ul class="footer-list">
+            {footerSupportLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="footer-link"
+                  {...(link.external ? { rel: "noopener noreferrer" } : {})}
+                  data-analytics-event={link.external ? "contact_email_click" : "nav_anchor_click"}
+                  data-analytics-location="footer"
+                  data-analytics-label={link.label}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Legal &amp; Trust</p>
+          <ul class="footer-list">
+            {footerLegalLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="footer-link"
+                  data-analytics-event="nav_anchor_click"
+                  data-analytics-location="footer"
+                  data-analytics-label={link.label}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
     </div>
 
-    <nav class="footer-links" aria-label="Footer navigation">
-      <div class="footer-col">
-        <p class="footer-col-title">AEO Audit Features for Shopify</p>
-        {footerProductLinks.map((link) => (
-          <a
-            href={link.href}
-            {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            data-analytics-event={link.external ? "install_click" : "nav_anchor_click"}
-            data-analytics-location="footer"
-            {...(!link.external ? { "data-analytics-section": link.href.replace(/^\/?#/, "") } : {})}
-            data-analytics-label={link.label}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-      <div class="footer-col">
-        <p class="footer-col-title">Help &amp; Support</p>
-        {footerSupportLinks.map((link) => (
-          <a
-            href={link.href}
-            {...(link.external ? { rel: "noopener noreferrer" } : {})}
-            data-analytics-event={link.external ? "contact_email_click" : "nav_anchor_click"}
-            data-analytics-location="footer"
-            {...(!link.external ? { "data-analytics-section": "contact" } : {})}
-            data-analytics-label={link.label}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-      <div class="footer-col">
-        <p class="footer-col-title">Legal</p>
-        {footerLegalLinks.map((link) => (
-          <a
-            href={link.href}
-            data-analytics-event="nav_anchor_click"
-            data-analytics-location="footer"
-            data-analytics-label={link.label}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-    </nav>
-  </div>
+    <!-- Bottom Bar with Engine Compatibility Chips -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        © 2026 Nexis CRO. Built for high-growth Shopify merchants and partner agencies.
+      </p>
 
-  <div class="container footer-bottom">
-    <span>© 2026 Nexis CRO. All rights reserved.</span>
+      <div class="footer-engine-chips">
+        <span class="engine-chip">ChatGPT</span>
+        <span class="engine-chip">Perplexity</span>
+        <span class="engine-chip">Google Gemini</span>
+        <span class="engine-chip">Bing Copilot</span>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -75,37 +148,107 @@ import BrandLogo from "./BrandLogo.astro";
     background: var(--bg-deep);
   }
 
-  .footer-inner {
+  .footer-main {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.15fr 2fr;
     gap: var(--space-8);
+    align-items: start;
+    margin-bottom: var(--space-8);
   }
 
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-4);
+    max-width: 360px;
   }
 
   .footer-logo {
     display: flex;
     align-items: center;
     gap: 8px;
+    text-decoration: none;
   }
 
   .footer-logo :global(.footer-wordmark) {
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 700;
   }
 
   .footer-tagline {
-    font-size: 14px;
-    color: var(--text-muted);
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0;
   }
 
-  .footer-links {
+  .footer-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-app-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all var(--duration-fast) var(--ease-out);
+    width: fit-content;
+    text-decoration: none;
+  }
+
+  .footer-app-badge:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .badge-arrow {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform var(--duration-fast);
+  }
+
+  .footer-app-badge:hover .badge-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .footer-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 5px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-glass-hover);
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+
+  .status-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  /* 4-Column Navigation Grid */
+  .footer-links-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-6);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
   }
 
   .footer-col {
@@ -115,45 +258,97 @@ import BrandLogo from "./BrandLogo.astro";
   }
 
   .footer-col-title {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11.5px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-1);
-  }
-
-  .footer-col a {
-    font-size: 14px;
-    color: var(--text-muted);
-    transition: color var(--duration-fast);
-  }
-
-  .footer-col a:hover {
     color: var(--text-primary);
+    margin: 0 0 var(--space-1);
   }
 
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-link {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    transition: color var(--duration-fast) var(--ease-out), transform var(--duration-fast);
+    display: inline-block;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+
+  .footer-link:hover {
+    color: var(--text-primary);
+    transform: translateX(2px);
+  }
+
+  /* Bottom Bar */
   .footer-bottom {
-    margin-top: var(--space-7);
-    padding-top: var(--space-5);
+    padding-top: var(--space-6);
     border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .footer-copyright {
     font-size: 13px;
     color: var(--text-muted);
+    margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .footer-inner {
+  .footer-engine-chips {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .engine-chip {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 990px) {
+    .footer-main {
       grid-template-columns: 1fr;
       gap: var(--space-6);
     }
 
-    .footer-links {
+    .footer-links-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-links-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
     }
   }
 
   @media (max-width: 480px) {
-    .footer-links {
+    .footer-links-grid {
       grid-template-columns: 1fr;
       gap: var(--space-5);
     }

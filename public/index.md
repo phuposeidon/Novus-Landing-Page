@@ -24,11 +24,11 @@ then fixes what's broken with one-click AI.
 | Plan | Price | Highlights |
 | --- | --- | --- |
 | Free | $0 | Core audit, limited AI credits |
-| Pro | $29 | Scheduled audits, more AI credits |
-| Growth | $59 | AI Rank Tracker, advanced automation |
-| Agency | $149 | Multi-store agency workflows |
+| Pro | $9 | Scheduled audits, more AI credits (2-day free trial) |
+| Growth | $21 | AI Rank Tracker, advanced automation |
+| Agency | $44 | Multi-store agency workflows |
 
-Annual billing: 20% off. AI credit packs available.
+Annual billing: up to 52% off. AI credit packs available.
 
 ## Install
 

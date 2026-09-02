@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
 # Explicitly allow AI search bots (covered by * but stated clearly for audits)
 User-agent: GPTBot

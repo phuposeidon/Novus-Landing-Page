@@ -1,0 +1,223 @@
+---
+import { SHOPIFY_INSTALL_URL, siteAnchors } from "../config/site.ts";
+
+const agencyPoints = [
+  {
+    title: "Manage up to 5 client stores",
+    description: "One Agency plan covers multiple Shopify stores from a single dashboard — no per-store seat fees.",
+  },
+  {
+    title: "50 AI Rank Tracker prompts",
+    description: "Track citation share-of-voice across ChatGPT, Gemini, and Perplexity for every client you manage.",
+  },
+  {
+    title: "White-label-ready reports",
+    description: "Export audit scores, issue lists, and rank-check history your clients can act on immediately.",
+  },
+  {
+    title: "500 AI credits (unlimited usage)",
+    description: "Run deep audits and bulk fixes across client catalogs without watching the meter on every job.",
+  },
+];
+---
+
+<section class="agency section" id="agency">
+  <div class="container">
+    <div class="agency-grid">
+      <div class="agency-copy">
+        <span class="overline animate-on-scroll">For agencies</span>
+        <h2 class="display animate-on-scroll text-balance">
+          Shopify AEO Audits Your Agency Can Resell
+        </h2>
+        <p class="body-lg animate-on-scroll">
+          Merchants hire agencies to fix SEO. In 2026, they also need AI citation readiness —
+          llms.txt, schema blocks, rank tracking, and competitor gap analysis.
+          Nexis CRO packages that workflow for Shopify-only shops.
+        </p>
+        <p class="body animate-on-scroll agency-roi">
+          <strong>Agency plan: $29/mo billed annually</strong> — manage 5 stores vs. $9/mo per merchant on Pro.
+          That's up to <strong>35% less</strong> than five separate Pro subscriptions.
+        </p>
+        <div class="agency-cta animate-on-scroll">
+          <a
+            href={SHOPIFY_INSTALL_URL}
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="install_click"
+            data-analytics-location="agency"
+            data-analytics-plan="Agency"
+          >
+            Start Agency Plan
+          </a>
+          <a
+            href={siteAnchors.pricing}
+            class="btn btn-ghost"
+            data-analytics-event="nav_anchor_click"
+            data-analytics-location="agency"
+            data-analytics-section="pricing"
+          >
+            Compare plans
+          </a>
+        </div>
+      </div>
+
+      <div class="agency-right-col">
+        <!-- 3D Multi-Store Command Center Artwork -->
+        <div class="agency-visual-frame animate-on-scroll">
+          <img
+            src="/assets/agency_multi_store.jpg"
+            alt="Nexis CRO Agency Multi-Store Command Center for Shopify"
+            width="600"
+            height="338"
+            loading="lazy"
+            class="agency-3d-img"
+          />
+          <div class="agency-badge-overlay">
+            <span class="agency-dot"></span>
+            <span>Multi-Store Synchronized AI Intelligence</span>
+          </div>
+        </div>
+
+        <ul class="agency-cards stagger">
+          {agencyPoints.map((point) => (
+            <li class="agency-card card animate-on-scroll">
+              <h3 class="heading-3">{point.title}</h3>
+              <p class="body-sm">{point.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  .agency {
+    background: var(--bg-section);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .agency-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .agency-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .agency-roi {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(54, 244, 164, 0.2);
+    background: rgba(54, 244, 164, 0.04);
+    color: var(--text-secondary);
+  }
+
+  .agency-roi strong {
+    color: var(--text-primary);
+  }
+
+  .agency-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .agency-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .agency-visual-frame {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    background: #020a0c;
+  }
+
+  .agency-3d-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .agency-visual-frame:hover .agency-3d-img {
+    transform: scale(1.02);
+  }
+
+  .agency-badge-overlay {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    background: rgba(9, 14, 23, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .agency-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  .agency-cards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+
+  .agency-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+  }
+
+  .agency-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 900px) {
+    .agency-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .agency-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

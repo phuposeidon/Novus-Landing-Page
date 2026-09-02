@@ -211,13 +211,14 @@
   margin-top: var(--space-2);
   padding: 0.7em 1.35em;
   background: var(--accent);
-  color: #000;
+  color: var(--btn-accent-text);
   text-decoration: none;
   border-radius: var(--radius-md);
   font-size: 0.9375rem;
   font-weight: 600;
   transition: opacity var(--duration-fast);
 }
+
 
 .blog-prose .cta-btn:hover {
   opacity: 0.9;

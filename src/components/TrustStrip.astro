@@ -1,0 +1,167 @@
+---
+import { PRIVACY_POLICY_URL, SHOPIFY_INSTALL_URL } from "../config/site.ts";
+
+const trustItems = [
+  {
+    label: "Shopify App Store",
+    detail: "Official listing",
+    href: SHOPIFY_INSTALL_URL,
+    external: true,
+    icon: "shopify",
+  },
+  {
+    label: "4 AI engines audited",
+    detail: "ChatGPT · Perplexity · Google AI · Bing",
+    icon: "engines",
+  },
+  {
+    label: "Privacy-first",
+    detail: "GDPR-friendly · no card on free plan",
+    href: PRIVACY_POLICY_URL,
+    icon: "shield",
+  },
+  {
+    label: "Cancel anytime",
+    detail: "Shopify-managed billing",
+    icon: "billing",
+  },
+] as const;
+---
+
+<section class="trust-strip" aria-label="Trust and security signals">
+  <div class="container">
+    <ul class="trust-list">
+      {trustItems.map((item) => {
+        const Tag = item.href ? "a" : "div";
+        return (
+          <li>
+            <Tag
+              class="trust-item"
+              {...(item.href
+                ? {
+                    href: item.href,
+                    ...(item.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {}),
+                    "data-analytics-event": item.external
+                      ? "install_click"
+                      : "nav_anchor_click",
+                    "data-analytics-location": "trust_strip",
+                    "data-analytics-label": item.label,
+                  }
+                : {})}
+            >
+              <span class="trust-icon" aria-hidden="true">
+                {item.icon === "shopify" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.34 3.5c-.05 0-.1.02-.14.04-.04-.26-.28-.46-.55-.46h-1.1c-.27 0-.5.2-.55.46-.04-.02-.09-.04-.14-.04-1.1 0-2 .9-2 2v.2c0 .11.09.2.2.2h.4v11.6c0 .55.45 1 1 1h3.18c.55 0 1-.45 1-1V5.9h.4c.11 0 .2-.09.2-.2v-.2c0-1.1-.9-2-2-2zM12 4.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm-1.5 1.4h3v11.6h-3V5.9z" />
+                  </svg>
+                )}
+                {item.icon === "engines" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20" />
+                    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                  </svg>
+                )}
+                {item.icon === "shield" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                )}
+                {item.icon === "billing" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                    <line x1="2" y1="10" x2="22" y2="10" />
+                  </svg>
+                )}
+              </span>
+              <span class="trust-copy">
+                <span class="trust-label">{item.label}</span>
+                <span class="trust-detail">{item.detail}</span>
+              </span>
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trust-strip {
+    padding: var(--space-5) 0 var(--space-6);
+    border-bottom: 1px solid var(--border-subtle);
+    background: linear-gradient(180deg, transparent 0%, rgba(54, 244, 164, 0.02) 100%);
+  }
+
+  .trust-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-glass);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--duration-fast), background var(--duration-fast);
+  }
+
+  a.trust-item:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-glass-hover);
+  }
+
+  .trust-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .trust-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .trust-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .trust-detail {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .trust-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .trust-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

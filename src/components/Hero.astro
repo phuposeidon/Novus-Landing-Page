@@ -1,5 +1,5 @@
 ---
-import { SHOPIFY_INSTALL_URL, siteAnchors } from "../config/site.ts";
+import { QUIZSIGNAL, SHOPIFY_INSTALL_URL, siteAnchors } from "../config/site.ts";
 
 /** Centered in viewBox 0 0 36 36 — do not change rx without updating M18 y */
 const DONUT_PATH =
@@ -18,17 +18,21 @@ const DONUT_PATH =
           <path d="M2 17l10 5 10-5"/>
           <path d="M2 12l10 5 10-5"/>
         </svg>
-        Shopify App
+        Shopify App Suite
       </span>
     </div>
 
     <h1 class="display-xl text-balance">
-      Your store is invisible<br />to AI search engines.
+      AI Search Traffic &amp;<br />Storefront Conversion.
     </h1>
 
-    <p class="body-lg hero-sub">
-      Nexis CRO audits your Shopify store for ChatGPT, Perplexity, Google AI,
-      and Bing Copilot — then fixes what's broken in one click. No code, no guesswork.
+    <p class="body-lg hero-sub hero-sub--desktop">
+      The complete Shopify growth suite. Get cited and recommended on ChatGPT &amp; Perplexity with
+      <strong class="text-white">AI SEO &amp; AEO Audit</strong>, then turn shoppers into buyers with
+      <strong class="text-white">Quiz Signal</strong> recommendation funnels.
+    </p>
+    <p class="body-lg hero-sub hero-sub--mobile">
+      Attract AI search traffic with AI SEO Audit and convert shoppers with Quiz Signal recommendation funnels.
     </p>
 
     <div class="hero-cta">
@@ -41,32 +45,58 @@ const DONUT_PATH =
         data-analytics-event="install_click"
         data-analytics-location="hero"
       >
-        Start Free Audit
+        Install AI SEO App
       </a>
       <a
-        href={siteAnchors.demo}
+        href={siteAnchors.quizsignal}
         class="btn btn-ghost"
         id="hero-cta-secondary"
         data-analytics-event="cta_secondary_click"
         data-analytics-location="hero"
-        data-analytics-section="demo"
+        data-analytics-section="quizsignal"
       >
-        See the Product
+        Discover Quiz Signal →
       </a>
     </div>
 
-    <p class="hero-trust">Free forever plan · No credit card · 2-min Shopify install</p>
+    <p class="hero-trust">Free forever plans available · No credit card required · 2-min Shopify install</p>
+
+    <!-- App Selector Switcher -->
+    <div class="hero-switcher-bar">
+      <button type="button" class="hero-tab-btn active" id="hero-tab-aiseo" data-app="aiseo">
+        <span class="hero-tab-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <span>1. AI SEO &amp; AEO Audit</span>
+        <span class="hero-tab-badge">Traffic &amp; AEO</span>
+      </button>
+      <button type="button" class="hero-tab-btn" id="hero-tab-quiz" data-app="quiz">
+        <span class="hero-tab-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
+          </svg>
+        </span>
+        <span>2. Quiz Signal</span>
+        <span class="hero-tab-badge">Conversion &amp; CRO</span>
+      </button>
+    </div>
+
 
     <!-- Real High-Fidelity App Dashboard Mockup -->
-    <div class="hero-card animate-on-scroll" aria-hidden="true">
+    <div class="hero-card" id="hero-card">
       <div class="hero-card-header">
         <div class="hero-card-dot" style="background: #ef4444;" aria-hidden="true"></div>
         <div class="hero-card-dot" style="background: #f59e0b;" aria-hidden="true"></div>
         <div class="hero-card-dot" style="background: var(--accent);" aria-hidden="true"></div>
-        <span class="hero-card-title">Shopify Admin — Nexis: AI SEO & AEO Audit</span>
+        <span class="hero-card-title" id="hero-window-title">Shopify Admin — Nexis: AI SEO &amp; AEO Audit</span>
       </div>
 
-      <div class="hero-dashboard-inner">
+
+      <!-- VIEW 1: AI SEO DASHBOARD -->
+      <div class="hero-dashboard-inner app-view" id="view-aiseo">
         <!-- Top 4 Analytics Cards Grid -->
         <div class="metrics-grid">
           <!-- Card 1: AEO Score -->
@@ -78,7 +108,7 @@ const DONUT_PATH =
             <div class="metric-content">
               <div class="score-circle-wrapper">
                 <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
-                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2.5" />
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="var(--border)" stroke-width="2.5" />
                   <path class="circle-fill good" stroke-dasharray="76, 100" d={DONUT_PATH} fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" />
                 </svg>
                 <div class="circle-text">
@@ -105,7 +135,7 @@ const DONUT_PATH =
             <div class="metric-content">
               <div class="score-circle-wrapper">
                 <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
-                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2.5" />
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="var(--border)" stroke-width="2.5" />
                   <path class="circle-fill warning" stroke-dasharray="21, 100" d={DONUT_PATH} fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" />
                 </svg>
                 <div class="circle-text">
@@ -129,7 +159,7 @@ const DONUT_PATH =
             <div class="metric-content">
               <div class="score-circle-wrapper">
                 <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
-                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2.5" />
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="var(--border)" stroke-width="2.5" />
                   <path class="circle-fill danger" stroke-dasharray="78, 100" d={DONUT_PATH} fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" />
                 </svg>
                 <div class="circle-text">
@@ -153,15 +183,15 @@ const DONUT_PATH =
             <div class="metric-content">
               <div class="score-circle-wrapper">
                 <svg class="circle-svg" width="72" height="72" viewBox="0 0 36 36">
-                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(54,244,164,0.1)" stroke-width="2" stroke-dasharray="3 3" />
+                  <path class="circle-bg" d={DONUT_PATH} fill="none" stroke="rgba(5, 150, 105, 0.2)" stroke-width="2" stroke-dasharray="3 3" />
                 </svg>
                 <div class="circle-text circle-text--solo">
-                  <span class="score-num green-text infinity-symbol">∞</span>
+                  <span class="score-num infinity-symbol green-text">∞</span>
                 </div>
               </div>
               <div class="metric-details">
-                <span class="detail-link">View plan & billing →</span>
-                <span class="detail-desc">Pro package active</span>
+                <span class="detail-desc detail-desc-emphasis"><strong class="text-white">Full Access</strong></span>
+                <span class="detail-desc">Unlimited usage</span>
               </div>
             </div>
           </div>
@@ -170,6 +200,7 @@ const DONUT_PATH =
         <!-- Main Split Workspace Layout -->
         <div class="workspace-grid">
           <!-- Left Workspace: What to Fix First -->
+
           <div class="workspace-left">
             <div class="card-title-bar">
               <div class="flex-align">
@@ -252,16 +283,164 @@ const DONUT_PATH =
           </div>
         </div>
       </div>
+
+      <!-- VIEW 2: QUIZ SIGNAL STUDIO & LIVE PREVIEW -->
+      <div class="hero-dashboard-inner app-view is-hidden" id="view-quiz">
+        <div class="quiz-hero-preview">
+          <!-- Left: Quiz Studio Builder -->
+          <div class="dash-panel quiz-builder-panel">
+            <div class="card-title-bar">
+              <div class="flex-align">
+                <span class="quiz-status-dot" aria-hidden="true"></span>
+                <p class="workspace-heading">Quiz Studio Builder</p>
+              </div>
+              <span class="high-impact-tag quiz-live-tag">LIVE ON STOREFRONT</span>
+            </div>
+
+            <div class="quiz-builder-steps">
+              <div class="quiz-step-card active">
+                <div class="quiz-step-header">
+                  <span class="quiz-step-badge">STEP 1</span>
+                  <span class="quiz-step-q">"What is your primary skincare focus?"</span>
+                </div>
+                <div class="quiz-chips">
+                  <span class="quiz-chip selected">Barrier Repair &amp; Glow <span class="chk">✓</span></span>
+                  <span class="quiz-chip">Anti-Aging &amp; Firming</span>
+                  <span class="quiz-chip">Blemish &amp; Oil Control</span>
+                </div>
+              </div>
+
+              <div class="quiz-step-card">
+                <div class="quiz-step-header">
+                  <span class="quiz-step-badge">STEP 2</span>
+                  <span class="quiz-step-q">"What formula texture do you prefer?"</span>
+                </div>
+                <div class="quiz-chips">
+                  <span class="quiz-chip selected">Weightless Hydra-Serum <span class="chk">✓</span></span>
+                  <span class="quiz-chip">Rich Moisture Melt</span>
+                </div>
+              </div>
+
+              <div class="quiz-integration-strip">
+                <div class="quiz-integ-icon">⚡</div>
+                <div class="quiz-integ-text">
+                  <span>Zero-party profile capture: sync answers to <strong>Klaviyo</strong> &amp; <strong>Shopify Customer Segments</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Storefront Recommendation Output -->
+          <div class="dash-panel quiz-result-panel">
+            <div class="card-title-bar">
+              <p class="workspace-heading">Storefront Recommender Output</p>
+              <span class="match-score-pill">98% Match</span>
+            </div>
+
+            <div class="quiz-match-product">
+              <div class="match-badge-ribbon">Top Recommendation</div>
+              <div class="match-grid">
+                <div class="match-avatar">
+                  <div class="product-icon-art">✨</div>
+                </div>
+                <div class="match-details">
+                  <span class="match-routine-tag">Daily Core Routine</span>
+                  <h4 class="match-prod-title">Hydra-Barrier Ceramide Glow Elixir</h4>
+                  <p class="match-prod-desc">Selected specifically for barrier repair with high-potency ceramides and zero pore-clogging oils.</p>
+                  <div class="match-action-row">
+                    <div class="match-pricing">
+                      <span class="match-current-price mono">$48.00</span>
+                      <span class="match-in-stock">In Stock &middot; Ships Free</span>
+                    </div>
+                    <button type="button" class="tier-btn primary-btn match-btn">Add to Cart &middot; 1-Click</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="quiz-metrics-strip">
+              <div class="quiz-stat-card">
+                <span class="stat-number mono green-text">78.4%</span>
+                <span class="stat-label">Completion Rate</span>
+              </div>
+              <div class="quiz-stat-card">
+                <span class="stat-number mono green-text">+24.6%</span>
+                <span class="stat-label">AOV Increase</span>
+              </div>
+              <div class="quiz-stat-card">
+                <span class="stat-number mono green-text">3.8×</span>
+                <span class="stat-label">Conversion Rate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <script is:inline>
-  // Animate score counters on scroll into view
-  const heroCard = document.querySelector(".hero-card");
-  let animated = false;
+  // App Switcher in Hero Mockup (2 Apps: AI SEO & Quiz Signal)
+  const tabAiseo = document.getElementById("hero-tab-aiseo");
+  const tabQuiz = document.getElementById("hero-tab-quiz");
+  const viewAiseo = document.getElementById("view-aiseo");
+  const viewQuiz = document.getElementById("view-quiz");
+  const windowTitle = document.getElementById("hero-window-title");
 
-  const animateScores = () => {
+  function switchApp(app) {
+    tabAiseo?.classList.remove("active");
+    tabQuiz?.classList.remove("active");
+    viewAiseo?.classList.add("is-hidden");
+    viewQuiz?.classList.add("is-hidden");
+
+    if (app === "aiseo") {
+      tabAiseo?.classList.add("active");
+      viewAiseo?.classList.remove("is-hidden");
+      if (window.gsap && viewAiseo) {
+        gsap.fromTo(viewAiseo, { opacity: 0.5, y: 5 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });
+      }
+      if (windowTitle) windowTitle.textContent = "Shopify Admin — Nexis: AI SEO & AEO Audit";
+    } else if (app === "quiz") {
+      tabQuiz?.classList.add("active");
+      viewQuiz?.classList.remove("is-hidden");
+      if (window.gsap && viewQuiz) {
+        gsap.fromTo(viewQuiz, { opacity: 0.5, y: 5 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });
+      }
+      if (windowTitle) windowTitle.textContent = "Shopify Admin — Nexis: Quiz Signal Studio & Storefront Preview";
+    }
+  }
+
+  tabAiseo?.addEventListener("click", () => switchApp("aiseo"));
+  tabQuiz?.addEventListener("click", () => switchApp("quiz"));
+
+
+
+
+  // GSAP kinetic entrance on page load
+  function initHeroAnimations() {
+    if (window.gsap) {
+      gsap.from(".hero-badge", { y: 20, opacity: 0, duration: 0.7, ease: "power3.out" });
+      gsap.from(".hero h1", { y: 30, opacity: 0, duration: 0.9, delay: 0.1, ease: "power3.out" });
+      gsap.from(".hero-sub", { y: 20, opacity: 0, duration: 0.8, delay: 0.22, ease: "power3.out" });
+      gsap.from(".hero-cta", { y: 20, opacity: 0, duration: 0.8, delay: 0.32, ease: "power3.out" });
+      gsap.from(".hero-switcher-bar", { y: 20, opacity: 0, duration: 0.8, delay: 0.42, ease: "power3.out" });
+      gsap.from(".hero-card", { y: 35, opacity: 0, duration: 1.0, delay: 0.52, ease: "power3.out" });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initHeroAnimations();
+      setTimeout(animateScores, 400);
+    });
+  } else {
+    initHeroAnimations();
+    setTimeout(animateScores, 400);
+  }
+
+  // Animate score counters on load / scroll
+  let animated = false;
+  function animateScores() {
     if (animated) return;
     animated = true;
 
@@ -269,7 +448,7 @@ const DONUT_PATH =
     document.querySelectorAll(".score-num").forEach((el) => {
       const target = parseInt(el.dataset.target, 10);
       if (isNaN(target)) return;
-      const duration = 1400;
+      const duration = 1200;
       const start = performance.now();
 
       const tick = (now) => {
@@ -280,27 +459,38 @@ const DONUT_PATH =
       };
       requestAnimationFrame(tick);
     });
-  };
-
-  const obs = new IntersectionObserver(
-    (entries) => { if (entries[0].isIntersecting) animateScores(); },
-    { threshold: 0.2 }
-  );
-  if (heroCard) obs.observe(heroCard);
+  }
 </script>
 
 <style>
   .hero {
     position: relative;
-    padding: calc(var(--nav-height) + 60px) 0 100px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+    padding: calc(var(--nav-height) + 30px) 0 80px;
+    display: block;
     overflow: hidden;
-    background-image: radial-gradient(rgba(54, 244, 164, 0.035) 1px, transparent 1px);
+    background-color: var(--bg-void);
+    background-image: radial-gradient(var(--grid-dot-color) 1px, transparent 1px);
     background-size: 24px 24px;
     background-position: center;
   }
+
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-ambient-img);
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="dark"] .hero::before {
+    opacity: 0.25;
+  }
+
 
   .hero-glow {
     position: absolute;
@@ -311,8 +501,7 @@ const DONUT_PATH =
     height: 600px;
     background: radial-gradient(
       ellipse at center,
-      rgba(54, 244, 164, 0.06) 0%,
-      rgba(15, 38, 32, 0.03) 50%,
+      var(--glow-color) 0%,
       transparent 70%
     );
     pointer-events: none;
@@ -330,33 +519,48 @@ const DONUT_PATH =
   }
 
   .hero-badge {
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-3);
   }
 
   .hero h1 {
     max-width: 16ch;
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-3);
   }
 
   .hero-sub {
     max-width: 52ch;
-    margin-bottom: var(--space-7);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-sub--mobile {
+    display: none;
+  }
+
+  @media (max-width: 560px) {
+    .hero-sub--desktop {
+      display: none;
+    }
+
+    .hero-sub--mobile {
+      display: block;
+    }
   }
 
   .hero-cta {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-3);
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
   .hero-trust {
-    margin: 0 0 var(--space-10);
-    font-size: 0.875rem;
+    margin: 0 0 var(--space-4);
+    font-size: 0.82rem;
     color: var(--text-muted);
     text-align: center;
   }
+
 
   /* Expanded, High-Fidelity App Dashboard Workspace Mockup */
   .hero-card {
@@ -366,15 +570,15 @@ const DONUT_PATH =
     --dash-caption: 12px;
     --dash-heading: 15px;
     --dash-score: 18px;
-    --dash-muted: #c4c4cc;
-    --dash-subtle: #a8a8b2;
+    --dash-muted: var(--text-secondary);
+    --dash-subtle: var(--text-muted);
     width: 100%;
     max-width: 1040px;
-    background: #080808;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 30px 70px -10px rgba(0, 0, 0, 0.7);
+    box-shadow: var(--shadow-elevated);
     text-align: left;
   }
 
@@ -383,8 +587,8 @@ const DONUT_PATH =
     align-items: center;
     gap: 8px;
     padding: 12px 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    background: #0d0d0d;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-mockup-bar);
   }
 
   .hero-card-dot {
@@ -408,6 +612,102 @@ const DONUT_PATH =
     gap: var(--space-6);
   }
 
+  /* Vision 3D Cockpit View */
+  .vision-showcase-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #020a0c;
+  }
+
+  .vision-img-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+  }
+
+  .vision-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .vision-showcase-wrap:hover .vision-hero-img {
+    transform: scale(1.02);
+  }
+
+  .vision-hotspot {
+    position: absolute;
+    z-index: 5;
+    cursor: pointer;
+  }
+
+  .hotspot-aeo {
+    top: 30%;
+    right: 20%;
+  }
+
+  .hotspot-citations {
+    top: 45%;
+    left: 36%;
+  }
+
+  .hotspot-quiz {
+    bottom: 25%;
+    right: 22%;
+  }
+
+  .hotspot-ping {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #059669;
+    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+    animation: hotspotPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  [data-theme="dark"] .hotspot-ping {
+    background: #36f4a4;
+    box-shadow: 0 0 0 0 rgba(54, 244, 164, 0.7);
+  }
+
+  @keyframes hotspotPulse {
+    to {
+      box-shadow: 0 0 0 14px rgba(54, 244, 164, 0);
+    }
+  }
+
+  .hotspot-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: rgba(9, 14, 23, 0.95);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s var(--ease-out);
+  }
+
+  .vision-hotspot:hover .hotspot-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+
   /* Top 4 Metrics Cards Grid */
   .metrics-grid {
     display: grid;
@@ -416,14 +716,15 @@ const DONUT_PATH =
   }
 
   .metric-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 18px;
     display: flex;
     flex-direction: column;
     gap: 14px;
   }
+
 
   .metric-header {
     display: flex;
@@ -513,7 +814,7 @@ const DONUT_PATH =
     transform: translate(-50%, -50%);
     font-size: var(--dash-score);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-primary);
     line-height: 1;
     font-variant-numeric: tabular-nums;
     margin: 0;
@@ -571,14 +872,27 @@ const DONUT_PATH =
   }
 
   .detail-tag.warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+  }
+
+  [data-theme="dark"] .detail-tag.warning {
     background: rgba(245, 158, 11, 0.18);
     color: #fbbf24;
   }
 
   .detail-tag.critical {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+  }
+
+  [data-theme="dark"] .detail-tag.critical {
     background: rgba(239, 68, 68, 0.18);
     color: #f87171;
   }
+
 
   .detail-desc {
     font-size: var(--dash-caption);
@@ -605,19 +919,20 @@ const DONUT_PATH =
     gap: var(--space-5);
   }
 
-  .workspace-left, .workspace-right {
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+  .workspace-left, .workspace-right, .dash-panel {
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 22px;
   }
+
 
   .card-title-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--space-4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 12px;
     gap: 12px;
   }
@@ -640,8 +955,9 @@ const DONUT_PATH =
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-glass-hover);
     color: var(--dash-muted);
+    border: 1px solid var(--border);
     letter-spacing: 0.06em;
     white-space: nowrap;
   }
@@ -654,8 +970,8 @@ const DONUT_PATH =
   }
 
   .issue-item {
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
     padding: 14px 16px;
     border-radius: 8px;
     display: flex;
@@ -666,8 +982,8 @@ const DONUT_PATH =
   }
 
   .issue-item:hover {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--border-hover);
+    background: var(--bg-glass-hover);
   }
 
   .issue-info {
@@ -695,13 +1011,13 @@ const DONUT_PATH =
   }
 
   .issue-badge.critical {
-    background: rgba(239, 68, 68, 0.2);
-    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
   }
 
   .issue-badge.high {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fcd34d;
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
   }
 
   .issue-cat {
@@ -716,11 +1032,16 @@ const DONUT_PATH =
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 4px;
-    background: rgba(59, 130, 246, 0.15);
-    color: #60a5fa;
+    background: rgba(59, 130, 246, 0.12);
+    color: #2563eb;
+    border: 1px solid rgba(59, 130, 246, 0.2);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     white-space: nowrap;
+  }
+
+  [data-theme="dark"] .scan-depth-btn {
+    color: #60a5fa;
   }
 
   .depth-desc {
@@ -737,8 +1058,8 @@ const DONUT_PATH =
   }
 
   .audit-tier {
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
     padding: 16px;
     border-radius: 8px;
     display: flex;
@@ -747,9 +1068,10 @@ const DONUT_PATH =
   }
 
   .audit-tier.active-tier {
-    border-color: rgba(54, 244, 164, 0.3);
-    background: rgba(54, 244, 164, 0.03);
+    border-color: var(--accent);
+    background: var(--accent-dim);
   }
+
 
   .tier-header {
     display: flex;
@@ -811,20 +1133,360 @@ const DONUT_PATH =
 
   .tier-btn.primary-btn {
     background: var(--text-primary);
-    color: #000;
+    color: var(--btn-primary-text);
   }
 
   .tier-btn.secondary-btn {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--bg-glass-hover);
+    border: 1px solid var(--border);
     color: var(--text-primary);
   }
+
 
   .infinity-symbol {
     font-size: 26px !important;
     font-weight: 300 !important;
     line-height: 1 !important;
     margin: 0;
+  }
+
+  /* Hero App Switcher Bar */
+  .hero-switcher-bar {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px;
+    gap: 6px;
+    margin-bottom: var(--space-6);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 2;
+    position: relative;
+  }
+
+  .hero-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    user-select: none;
+  }
+
+  .hero-tab-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-glass-hover);
+  }
+
+  .hero-tab-btn.active {
+    background: var(--bg-elevated);
+    border-color: var(--border);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .hero-tab-icon {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+  }
+
+  .hero-tab-btn.active .hero-tab-icon {
+    color: var(--accent);
+  }
+
+  .hero-tab-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-glass-hover);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .hero-tab-btn.active .hero-tab-badge {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: rgba(5, 150, 105, 0.2);
+  }
+
+  [data-theme="dark"] .hero-tab-btn.active .hero-tab-badge {
+    border-color: rgba(54, 244, 164, 0.25);
+  }
+
+
+  /* Visibility toggling */
+  .app-view.is-hidden {
+    display: none !important;
+  }
+
+  /* Quiz Hero Preview Styles */
+  .quiz-hero-preview {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .quiz-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .quiz-live-tag {
+    background: var(--accent-dim) !important;
+    color: var(--accent) !important;
+    border: 1px solid rgba(5, 150, 105, 0.3) !important;
+  }
+
+  [data-theme="dark"] .quiz-live-tag {
+    border-color: rgba(54, 244, 164, 0.3) !important;
+  }
+
+  .quiz-builder-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .quiz-step-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quiz-step-card.active {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .quiz-step-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quiz-step-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--bg-glass-hover);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .quiz-step-q {
+    font-size: var(--dash-body);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .quiz-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .quiz-chip {
+    font-size: var(--dash-caption);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .quiz-chip.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--btn-accent-text);
+    font-weight: 500;
+  }
+
+  .quiz-chip .chk {
+    color: var(--btn-accent-text);
+    font-weight: bold;
+    margin-left: 2px;
+  }
+
+  .quiz-integration-strip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-glass);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: var(--dash-caption);
+    color: var(--text-secondary);
+  }
+
+  .quiz-integ-icon {
+    font-size: 16px;
+  }
+
+  .match-score-pill {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(5, 150, 105, 0.3);
+  }
+
+  [data-theme="dark"] .match-score-pill {
+    border-color: rgba(54, 244, 164, 0.3);
+  }
+
+  .quiz-match-product {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .match-badge-ribbon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--accent);
+    color: var(--btn-accent-text);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .match-grid {
+    display: flex;
+    gap: 16px;
+  }
+
+  .match-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(5, 150, 105, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  [data-theme="dark"] .match-avatar {
+    border-color: rgba(54, 244, 164, 0.2);
+  }
+
+  .match-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .match-routine-tag {
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .match-prod-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .match-prod-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin: 2px 0 8px;
+  }
+
+  .match-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .match-pricing {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .match-current-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .match-in-stock {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .match-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .quiz-metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .quiz-stat-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+
+  .stat-number {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-muted);
   }
 
   /* Responsive styling */
@@ -834,6 +1496,9 @@ const DONUT_PATH =
     }
     .metrics-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+    .quiz-hero-preview {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -853,6 +1518,18 @@ const DONUT_PATH =
 
     .hero-card {
       max-width: 100%;
+    }
+
+    .hero-switcher-bar {
+      flex-direction: column;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .hero-tab-btn {
+      width: 100%;
+      justify-content: space-between;
     }
   }
 

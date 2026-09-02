@@ -56,7 +56,7 @@ src/
 2. **Problem** — Split layout with ChatGPT/Perplexity/Google AI/Bing Copilot score cards
 3. **Demo** — Interactive audit simulation with sequential terminal-style line reveals
 4. **Features** — AI Quick Fix, Schema Blocks, llms.txt, AI Visibility, Benchmarking, Scheduled Audits
-5. **Pricing** — Free / Pro ($29) / Growth ($59, recommended) / Agency ($149)
+5. **Pricing** — Free / Pro ($9) / Growth ($21, recommended) / Agency ($44)
 6. **FAQ** — 7 product-specific questions with native `<details>` (no JS)
 7. **Contact** — Name/email/subject/message form + support info
 8. **CTA** — Final conversion band with accent glow

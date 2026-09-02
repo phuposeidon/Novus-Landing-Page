@@ -15,6 +15,23 @@ function json(data: Record<string, unknown>, status = 200) {
   });
 }
 
+/** Crawlers may probe GET; return 405 (not 404) so GSC does not treat this as a broken page. */
+export const GET: APIRoute = () => {
+  return new Response(
+    JSON.stringify({
+      ok: false,
+      error: "Method not allowed. Submit contact form via POST with JSON body.",
+    }),
+    {
+      status: 405,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Allow: "POST",
+      },
+    },
+  );
+};
+
 export const POST: APIRoute = async ({ request, locals }) => {
   const env = locals.runtime?.env;
 

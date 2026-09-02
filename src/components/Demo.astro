@@ -14,73 +14,115 @@
       </p>
     </div>
 
-    <div class="demo-card animate-on-scroll">
-      <div class="demo-terminal-bar">
-        <div class="demo-dot" style="background: #ef4444;" aria-hidden="true"></div>
-        <div class="demo-dot" style="background: #f59e0b;" aria-hidden="true"></div>
-        <div class="demo-dot" style="background: var(--accent);" aria-hidden="true"></div>
-        <span class="mono" style="font-size: 11px; color: var(--text-muted); margin-left: 12px;">nexis audit — running…</span>
+    <div class="demo-grid">
+      <!-- Left: Interactive Live Terminal Audit Scan -->
+      <div class="demo-card demo-terminal-card animate-on-scroll">
+        <div class="demo-terminal-bar">
+          <div class="demo-dot" style="background: #ef4444;" aria-hidden="true"></div>
+          <div class="demo-dot" style="background: #f59e0b;" aria-hidden="true"></div>
+          <div class="demo-dot" style="background: var(--accent);" aria-hidden="true"></div>
+          <span class="mono demo-terminal-title">nexis audit — running…</span>
+        </div>
+
+        <div class="demo-scan" id="demo-scan">
+          <div class="demo-scan-line" data-delay="0">
+            <span class="demo-check">✓</span>
+            <span class="demo-label">Checking homepage schema…</span>
+            <span class="demo-result found">Organization, WebSite — found</span>
+          </div>
+          <div class="demo-scan-line" data-delay="300">
+            <span class="demo-check">✓</span>
+            <span class="demo-label">Scanning product pages…</span>
+            <span class="demo-result found">Product, Offer — found</span>
+          </div>
+          <div class="demo-scan-line" data-delay="600">
+            <span class="demo-check warning-icon">!</span>
+            <span class="demo-label">Checking meta descriptions…</span>
+            <span class="demo-result missing">3 products missing meta</span>
+          </div>
+          <div class="demo-scan-line" data-delay="900">
+            <span class="demo-check critical-icon">✕</span>
+            <span class="demo-label">Scanning policies…</span>
+            <span class="demo-result critical">Refund policy missing</span>
+          </div>
+          <div class="demo-scan-line" data-delay="1200">
+            <span class="demo-check">✓</span>
+            <span class="demo-label">Checking llms.txt…</span>
+            <span class="demo-result found">Found — auto-update on</span>
+          </div>
+          <div class="demo-scan-line" data-delay="1500">
+            <span class="demo-check">✓</span>
+            <span class="demo-label">Evaluating image alt text…</span>
+            <span class="demo-result warning-text">12 missing alt text</span>
+          </div>
+          <div class="demo-scan-line" data-delay="1800">
+            <span class="demo-check">✓</span>
+            <span class="demo-label">Running AI visibility scan…</span>
+            <span class="demo-result found">4 platforms scored (65/100)</span>
+          </div>
+        </div>
+
+        <div class="demo-summary">
+          <div class="demo-stat">
+            <span class="demo-stat-num mono">8</span>
+            <span class="demo-stat-label">Issues found</span>
+          </div>
+          <div class="demo-stat">
+            <span class="demo-stat-num mono" style="color: #ef4444;">1</span>
+            <span class="demo-stat-label">Critical</span>
+          </div>
+          <div class="demo-stat">
+            <span class="demo-stat-num mono" style="color: #f59e0b;">4</span>
+            <span class="demo-stat-label">High</span>
+          </div>
+          <div class="demo-stat">
+            <span class="demo-stat-num mono">3</span>
+            <span class="demo-stat-label">Medium</span>
+          </div>
+        </div>
       </div>
 
-      <div class="demo-scan" id="demo-scan">
-        <div class="demo-scan-line" data-delay="0">
-          <span class="demo-check">✓</span>
-          <span class="demo-label">Checking homepage schema…</span>
-          <span class="demo-result found">Organization, WebSite, SearchAction — found</span>
+      <!-- Right: 3D Fix & Schema Showcase -->
+      <div class="demo-showcase-card animate-on-scroll">
+        <div class="showcase-header-bar">
+          <div class="showcase-badge-pill">
+            <span class="live-dot-pulse"></span>
+            <span>Automated AI Resolution</span>
+          </div>
+          <span class="showcase-highlight">Before: 24% → After: 98%</span>
         </div>
-        <div class="demo-scan-line" data-delay="300">
-          <span class="demo-check">✓</span>
-          <span class="demo-label">Scanning product pages…</span>
-          <span class="demo-result found">Product, Offer, AggregateRating — found</span>
-        </div>
-        <div class="demo-scan-line" data-delay="600">
-          <span class="demo-check warning-icon">!</span>
-          <span class="demo-label">Checking meta descriptions…</span>
-          <span class="demo-result missing">3 products missing meta description</span>
-        </div>
-        <div class="demo-scan-line" data-delay="900">
-          <span class="demo-check critical-icon">✕</span>
-          <span class="demo-label">Scanning policies…</span>
-          <span class="demo-result critical">Refund policy not found — critical for trust</span>
-        </div>
-        <div class="demo-scan-line" data-delay="1200">
-          <span class="demo-check">✓</span>
-          <span class="demo-label">Checking llms.txt…</span>
-          <span class="demo-result found">Found — 906 words, auto-update enabled</span>
-        </div>
-        <div class="demo-scan-line" data-delay="1500">
-          <span class="demo-check">✓</span>
-          <span class="demo-label">Evaluating image alt text…</span>
-          <span class="demo-result warning-text">12 of 47 images missing alt text</span>
-        </div>
-        <div class="demo-scan-line" data-delay="1800">
-          <span class="demo-check">✓</span>
-          <span class="demo-label">Running AI visibility scan…</span>
-          <span class="demo-result found">4 platforms scored — avg 65/100</span>
-        </div>
-      </div>
 
-      <div class="demo-summary">
-        <div class="demo-stat">
-          <span class="demo-stat-num mono">8</span>
-          <span class="demo-stat-label">Issues found</span>
+        <div class="demo-visual-frame">
+          <img
+            src="/assets/demo_aeo_fixes.jpg"
+            alt="1-Click AI SEO Fixes and Schema Generation for Shopify"
+            width="600"
+            height="338"
+            loading="lazy"
+            class="demo-3d-img"
+          />
         </div>
-        <div class="demo-stat">
-          <span class="demo-stat-num mono" style="color: #ef4444;">1</span>
-          <span class="demo-stat-label">Critical</span>
-        </div>
-        <div class="demo-stat">
-          <span class="demo-stat-num mono" style="color: #f59e0b;">4</span>
-          <span class="demo-stat-label">High</span>
-        </div>
-        <div class="demo-stat">
-          <span class="demo-stat-num mono">3</span>
-          <span class="demo-stat-label">Medium</span>
+
+        <div class="showcase-features-list">
+          <div class="showcase-feat-item">
+            <span class="feat-check">✓</span>
+            <span>Auto-injects Google &amp; Gemini JSON-LD schema</span>
+          </div>
+          <div class="showcase-feat-item">
+            <span class="feat-check">✓</span>
+            <span>Optimizes meta titles and LLM-friendly descriptions</span>
+          </div>
+          <div class="showcase-feat-item">
+            <span class="feat-check">✓</span>
+            <span>1-Click bulk deployment across active catalog</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
 
 <script is:inline>
   // Animate scan lines sequentially on scroll
@@ -112,21 +154,30 @@
     margin-bottom: var(--space-8);
   }
 
-  .demo-card {
-    max-width: 720px;
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    max-width: 1100px;
     margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .demo-card {
     background: var(--bg-deep);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-elevated);
+    display: flex;
+    flex-direction: column;
   }
 
   .demo-terminal-bar {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 16px;
+    padding: 12px 18px;
     background: var(--bg-section);
     border-bottom: 1px solid var(--border);
   }
@@ -137,13 +188,20 @@
     border-radius: 50%;
   }
 
+  .demo-terminal-title {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: 12px;
+  }
+
   .demo-scan {
     padding: 20px 24px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12.5px;
+    flex: 1;
   }
 
   .demo-scan-line {
@@ -153,7 +211,7 @@
     opacity: 0;
     transform: translateY(6px);
     transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
-    padding: 4px 0;
+    padding: 3px 0;
   }
 
   .demo-scan-line.revealed {
@@ -210,7 +268,7 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    padding: 16px 12px;
+    padding: 14px 10px;
   }
 
   .demo-stat:not(:last-child) {
@@ -218,16 +276,126 @@
   }
 
   .demo-stat-num {
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: 600;
     color: var(--text-primary);
   }
 
   .demo-stat-label {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  /* Right Showcase Card */
+  .demo-showcase-card {
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-elevated);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    justify-content: space-between;
+  }
+
+  .showcase-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .showcase-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(5, 150, 105, 0.25);
+  }
+
+  .live-dot-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  .showcase-highlight {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .demo-visual-frame {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #020a0c;
+  }
+
+  .demo-3d-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .demo-visual-frame:hover .demo-3d-img {
+    transform: scale(1.02);
+  }
+
+  .showcase-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px 0;
+  }
+
+  .showcase-feat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .feat-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .demo-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
   }
 
   @media (max-width: 640px) {
@@ -241,7 +409,8 @@
     }
 
     .demo-stat-num {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
+
 </style>

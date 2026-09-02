@@ -1,5 +1,5 @@
 ---
-import { SHOPIFY_INSTALL_URL } from "../config/site.ts";
+import { QUIZSIGNAL, SHOPIFY_INSTALL_URL, SUPPORT_EMAIL } from "../config/site.ts";
 
 const plans = [
   {
@@ -19,13 +19,14 @@ const plans = [
     cta: "Install Free",
     ctaClass: "btn btn-ghost",
     featured: false,
+    installUrl: SHOPIFY_INSTALL_URL,
   },
   {
     name: "Pro",
-    monthly: 29,
-    annually: 23,
-    annualTotal: 278,
-    savings: "Save $70/yr",
+    monthly: 9,
+    annually: 8,
+    annualTotal: 99,
+    savings: "Save 8%",
     description: "Full audit suite for growing stores",
     features: [
       "100 AI credits / month",
@@ -39,13 +40,15 @@ const plans = [
     cta: "Choose Pro",
     ctaClass: "btn btn-primary",
     featured: false,
+    trial: "2-day free trial",
+    installUrl: SHOPIFY_INSTALL_URL,
   },
   {
     name: "Growth",
-    monthly: 59,
-    annually: 47,
-    annualTotal: 566,
-    savings: "Save $142/yr",
+    monthly: 21,
+    annually: 10,
+    annualTotal: 121,
+    savings: "Save 52%",
     description: "Everything in Pro, plus competitive edge",
     features: [
       "300 AI credits / month",
@@ -59,13 +62,15 @@ const plans = [
     ctaClass: "btn btn-accent",
     featured: true,
     badge: "Best value",
+    trial: "2-day free trial",
+    installUrl: SHOPIFY_INSTALL_URL,
   },
   {
     name: "Agency",
-    monthly: 149,
-    annually: 119,
-    annualTotal: 1430,
-    savings: "Save $358/yr",
+    monthly: 44,
+    annually: 29,
+    annualTotal: 344,
+    savings: "Save 35%",
     description: "Multi-store management for agencies",
     features: [
       "500 AI credits (unlimited usage)",
@@ -77,6 +82,53 @@ const plans = [
     cta: "Choose Agency",
     ctaClass: "btn btn-primary",
     featured: false,
+    trial: "2-day free trial",
+    installUrl: SHOPIFY_INSTALL_URL,
+  },
+];
+
+const quizPlans = [
+  {
+    name: "Free",
+    monthly: 0,
+    annually: 0,
+    description: "Build your first storefront recommendation quiz",
+    features: [
+      "2 active quizzes",
+      "100 quiz completions / month",
+      "20 AI credits (monthly allotment)",
+      "Quiz Studio visual builder",
+      "Shopify OS 2.0 Theme Block",
+      "Product recommendation mapping",
+      "Standard CSV import & export",
+    ],
+    cta: "Install Free on Shopify",
+    ctaClass: "btn btn-ghost",
+    featured: false,
+    installUrl: QUIZSIGNAL.installUrl,
+  },
+  {
+    name: "Growth",
+    monthly: 9,
+    annually: 7,
+    annualTotal: 84,
+    savings: "Save 22%",
+    description: "Unlimited quiz funnels & hosted AI quiz maker",
+    features: [
+      "Unlimited active quizzes",
+      "Unlimited quiz completions",
+      "100 AI credits / month",
+      "AI Quiz Maker & Assistant",
+      "Klaviyo & customer segment sync",
+      "Custom results & layout styling",
+      "Multi-product routine & bundle matching",
+    ],
+    cta: "Start 14-Day Free Trial",
+    ctaClass: "btn btn-accent",
+    featured: true,
+    badge: "Most popular",
+    trial: "14-day free trial",
+    installUrl: QUIZSIGNAL.installUrl,
   },
 ];
 
@@ -105,14 +157,39 @@ const comparisonRows = [
 <section class="pricing section" id="pricing" data-od-id="pricing-section">
   <div class="container">
     <div class="pricing-header text-center">
-      <span class="overline animate-on-scroll">Pricing</span>
+      <span class="overline animate-on-scroll">Transparent Pricing</span>
       <h2 class="display animate-on-scroll text-balance">
-        Simple Pricing — Free Plan Available
+        Simple Pricing — Free Forever Plans Available
       </h2>
-      <p class="body-lg animate-on-scroll" style="max-width: 44ch; margin: 0 auto;">
-        Start free, upgrade when you're ready.
-        Annual billing saves up to 20%.
+      <p class="body-lg animate-on-scroll" style="max-width: 48ch; margin: 0 auto;">
+        Choose the app that fits your current goals. Start free on Shopify and scale as your traffic grows.
       </p>
+
+      <!-- App Switcher Tabs -->
+      <div class="pricing-app-toggle animate-on-scroll" role="tablist">
+        <button
+          type="button"
+          class="pricing-app-tab active"
+          id="pricing-tab-aiseo"
+          data-target="pricing-view-aiseo"
+          role="tab"
+          aria-selected="true"
+        >
+          <span class="pricing-app-name">AI SEO &amp; AEO Audit</span>
+          <span class="pricing-app-pill">AI Search</span>
+        </button>
+        <button
+          type="button"
+          class="pricing-app-tab"
+          id="pricing-tab-quiz"
+          data-target="pricing-view-quiz"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="pricing-app-name">Quiz Signal</span>
+          <span class="pricing-app-pill">Product Quizzes</span>
+        </button>
+      </div>
 
       <!-- Monthly / Annual toggle -->
       <div class="billing-toggle animate-on-scroll" role="group" aria-label="Billing period">
@@ -129,143 +206,262 @@ const comparisonRows = [
           data-od-id="billing-toggle-annual"
         >
           Annual
-          <span class="toggle-badge">Save 20%</span>
+          <span class="toggle-badge">Save up to 52%</span>
         </button>
       </div>
     </div>
 
-    <!-- Plan cards -->
-    <div class="pricing-grid stagger">
-      {plans.map((plan) => (
-        <div class="pricing-card-wrap" style="position: relative; display: flex; flex-direction: column;">
-          {plan.badge && (
-            <span class="pricing-badge badge" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 8px; z-index: 2; white-space: nowrap;">{plan.badge}</span>
-          )}
-          <div
-            class={`pricing-card card animate-on-scroll ${plan.featured ? "pricing-featured" : ""}`}
-            data-od-id={`pricing-card-${plan.name.toLowerCase()}`}
-          >
-            <div class="pricing-tier-name">{plan.name}</div>
-            <div class="pricing-price">
-              <span
-                class="pricing-amount mono tabular-nums"
-                data-monthly={plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
-                data-annual={plan.annually === 0 ? "Free" : `$${plan.annually}`}
-              >
-                {plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
-              </span>
-              {plan.monthly > 0 && <span class="pricing-period">/mo</span>}
-            </div>
-            {plan.annualTotal && (
-              <div class="pricing-annual tabular-nums">
-                <span class="pricing-annual-total" data-monthly={`$${plan.annualTotal + (plan.monthly - plan.annually) * 12}/yr`} data-annual={`$${plan.annualTotal}/yr billed annually`}>
-                  <span class="pricing-savings">{plan.savings}</span>
-                </span>
-              </div>
+    <!-- VIEW 1: AI SEO PRICING -->
+    <div class="pricing-view" id="pricing-view-aiseo">
+      <div class="pricing-grid stagger">
+        {plans.map((plan) => (
+          <div class="pricing-card-wrap" style="position: relative; display: flex; flex-direction: column;">
+            {plan.badge && (
+              <span class="pricing-badge badge" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 8px; z-index: 2; white-space: nowrap;">{plan.badge}</span>
             )}
-            <p class="pricing-desc body-sm">{plan.description}</p>
-            <ul class="pricing-features">
-              {plan.features.map((f) => (
-                <li>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={SHOPIFY_INSTALL_URL}
-              class={plan.ctaClass}
-              style="width: 100%; margin-top: auto;"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-analytics-event="install_click"
-              data-analytics-location="pricing"
-              data-analytics-plan={plan.name}
+            <div
+              class={`pricing-card card ${plan.featured ? "pricing-featured" : ""}`}
+              data-od-id={`pricing-card-${plan.name.toLowerCase()}`}
             >
-              {plan.cta}
-            </a>
+              <div class="pricing-tier-name">{plan.name}</div>
+              <div class="pricing-price">
+                <span
+                  class="pricing-amount mono tabular-nums"
+                  data-monthly={plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
+                  data-annual={plan.annually === 0 ? "Free" : `$${plan.annually}`}
+                >
+                  {plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
+                </span>
+                {plan.monthly > 0 && <span class="pricing-period">/mo</span>}
+              </div>
+              {plan.annualTotal && (
+                <div class="pricing-annual tabular-nums">
+                  or ${plan.annualTotal}/year · <span class="pricing-savings">{plan.savings}</span>
+                </div>
+              )}
+              <p class="pricing-desc body-sm">{plan.description}</p>
+              <ul class="pricing-features">
+                {plan.features.map((f) => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={plan.installUrl}
+                class={plan.ctaClass}
+                style="width: 100%; margin-top: auto;"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-analytics-event="install_click"
+                data-analytics-location="pricing_aiseo"
+                data-analytics-plan={plan.name}
+              >
+                {plan.cta}
+              </a>
+              {plan.trial && (
+                <p class="pricing-trial body-sm">{plan.trial}</p>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
 
-    <!-- Feature comparison table -->
-    <div class="comparison-wrap animate-on-scroll" data-od-id="pricing-comparison">
-      <button class="comparison-toggle" id="comparison-toggle" aria-expanded="false">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-        Compare all features
-      </button>
+      <!-- Feature comparison table -->
+      <div class="comparison-wrap animate-on-scroll" data-od-id="pricing-comparison">
+        <button class="comparison-toggle" id="comparison-toggle" aria-expanded="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+          Compare all AI SEO &amp; AEO features
+        </button>
 
-      <div class="comparison-table-wrap" id="comparison-table" hidden>
-        <table class="comparison-table" role="table">
-          <caption class="sr-only">Feature comparison across all Nexis CRO plans</caption>
-          <thead>
-            <tr>
-              <th scope="col" class="col-feature">Feature</th>
-              <th scope="col" class="col-plan">Free</th>
-              <th scope="col" class="col-plan">Pro</th>
-              <th scope="col" class="col-plan col-featured">Growth</th>
-              <th scope="col" class="col-plan">Agency</th>
-            </tr>
-          </thead>
-          <tbody>
-            {comparisonRows.map((row) => (
+        <div class="comparison-table-wrap" id="comparison-table" hidden>
+          <table class="comparison-table" role="table">
+            <caption class="sr-only">Feature comparison across all Nexis CRO plans</caption>
+            <thead>
               <tr>
-                <td class="row-label">{row.label}</td>
-                <td class={row.free === "—" ? "cell-empty" : "cell-val"}>{row.free}</td>
-                <td class={row.pro === "—" ? "cell-empty" : "cell-val"}>{row.pro}</td>
-                <td class={`col-featured ${row.growth === "—" ? "cell-empty" : "cell-val"}`}>{row.growth}</td>
-                <td class={row.agency === "—" ? "cell-empty" : "cell-val"}>{row.agency}</td>
+                <th scope="col" class="col-feature">Feature</th>
+                <th scope="col" class="col-plan">Free</th>
+                <th scope="col" class="col-plan">Pro</th>
+                <th scope="col" class="col-plan col-featured">Growth</th>
+                <th scope="col" class="col-plan">Agency</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr>
+                  <td class="row-label">{row.label}</td>
+                  <td class={row.free === "—" ? "cell-empty" : "cell-val"}>{row.free}</td>
+                  <td class={row.pro === "—" ? "cell-empty" : "cell-val"}>{row.pro}</td>
+                  <td class={`col-featured ${row.growth === "—" ? "cell-empty" : "cell-val"}`}>{row.growth}</td>
+                  <td class={row.agency === "—" ? "cell-empty" : "cell-val"}>{row.agency}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+
+    <!-- VIEW 2: QUIZ SIGNAL PRICING -->
+    <div class="pricing-view is-hidden" id="pricing-view-quiz">
+      <div class="pricing-grid pricing-grid--quiz stagger">
+        {quizPlans.map((plan) => (
+          <div class="pricing-card-wrap" style="position: relative; display: flex; flex-direction: column;">
+            {plan.badge && (
+              <span class="pricing-badge badge" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 8px; z-index: 2; white-space: nowrap;">{plan.badge}</span>
+            )}
+            <div
+              class={`pricing-card card ${plan.featured ? "pricing-featured" : ""}`}
+              data-od-id={`pricing-card-quiz-${plan.name.toLowerCase()}`}
+            >
+              <div class="pricing-tier-name">{plan.name}</div>
+              <div class="pricing-price">
+                <span
+                  class="pricing-amount mono tabular-nums"
+                  data-monthly={plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
+                  data-annual={plan.annually === 0 ? "Free" : `$${plan.annually}`}
+                >
+                  {plan.monthly === 0 ? "Free" : `$${plan.monthly}`}
+                </span>
+                {plan.monthly > 0 && <span class="pricing-period">/mo</span>}
+              </div>
+              {plan.annualTotal && (
+                <div class="pricing-annual tabular-nums">
+                  or ${plan.annualTotal}/year · <span class="pricing-savings">{plan.savings}</span>
+                </div>
+              )}
+              <p class="pricing-desc body-sm">{plan.description}</p>
+              <ul class="pricing-features">
+                {plan.features.map((f) => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={plan.installUrl}
+                class={plan.ctaClass}
+                style="width: 100%; margin-top: auto;"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-analytics-event="install_click"
+                data-analytics-location="pricing_quiz"
+                data-analytics-plan={`QuizSignal_${plan.name}`}
+              >
+                {plan.cta}
+              </a>
+              {plan.trial && (
+                <p class="pricing-trial body-sm">{plan.trial}</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="quiz-pricing-footer text-center animate-on-scroll">
+        <p class="body-sm text-secondary">
+          Need custom enterprise volume or agency accounts? <a href={`mailto:${SUPPORT_EMAIL}`} class="text-accent">Contact our team</a>.
+          Explore <a href={QUIZSIGNAL.pricing} class="text-accent">Quiz Signal dedicated pricing &amp; FAQ</a>.
+        </p>
+      </div>
+    </div>
+
+    <p class="pricing-trust body-sm text-center animate-on-scroll">
+      Cancel anytime &middot; Shopify App Store billing &middot; 0 lock-in
+    </p>
   </div>
 </section>
 
 <script is:inline>
-  // --- Billing toggle ---
-  const monthlyBtn = document.getElementById("toggle-monthly");
-  const annualBtn = document.getElementById("toggle-annual");
-  const amounts = document.querySelectorAll(".pricing-amount[data-monthly]");
+  (function initPricing() {
+    function setup() {
+      // --- Pricing App toggle ---
+      const tabAiseo = document.getElementById("pricing-tab-aiseo");
+      const tabQuiz = document.getElementById("pricing-tab-quiz");
+      const viewAiseo = document.getElementById("pricing-view-aiseo");
+      const viewQuiz = document.getElementById("pricing-view-quiz");
 
-  function setBilling(mode) {
-    const isAnnual = mode === "annual";
-    monthlyBtn.classList.toggle("active", !isAnnual);
-    annualBtn.classList.toggle("active", isAnnual);
-    monthlyBtn.setAttribute("aria-pressed", String(!isAnnual));
-    annualBtn.setAttribute("aria-pressed", String(isAnnual));
-    amounts.forEach((el) => {
-      el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
-    });
-    if (window.nexisTrack) {
-      window.nexisTrack("billing_toggle", { billing_period: mode });
+      function switchPricingApp(app) {
+        if (app === "aiseo") {
+          tabAiseo?.classList.add("active");
+          tabQuiz?.classList.remove("active");
+          tabAiseo?.setAttribute("aria-selected", "true");
+          tabQuiz?.setAttribute("aria-selected", "false");
+          viewQuiz?.classList.add("is-hidden");
+          viewAiseo?.classList.remove("is-hidden");
+          if (window.gsap && viewAiseo) {
+            gsap.fromTo(viewAiseo, { opacity: 0.6, y: 6 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });
+          }
+        } else {
+          tabQuiz?.classList.add("active");
+          tabAiseo?.classList.remove("active");
+          tabQuiz?.setAttribute("aria-selected", "true");
+          tabAiseo?.setAttribute("aria-selected", "false");
+          viewAiseo?.classList.add("is-hidden");
+          viewQuiz?.classList.remove("is-hidden");
+          if (window.gsap && viewQuiz) {
+            gsap.fromTo(viewQuiz, { opacity: 0.6, y: 6 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" });
+          }
+        }
+      }
+
+      tabAiseo?.addEventListener("click", () => switchPricingApp("aiseo"));
+      tabQuiz?.addEventListener("click", () => switchPricingApp("quiz"));
+
+      // --- Billing toggle ---
+      const monthlyBtn = document.getElementById("toggle-monthly");
+      const annualBtn = document.getElementById("toggle-annual");
+      const amounts = document.querySelectorAll(".pricing-amount[data-monthly]");
+
+      function setBilling(mode) {
+        const isAnnual = mode === "annual";
+        monthlyBtn?.classList.toggle("active", !isAnnual);
+        annualBtn?.classList.toggle("active", isAnnual);
+        monthlyBtn?.setAttribute("aria-pressed", String(!isAnnual));
+        annualBtn?.setAttribute("aria-pressed", String(isAnnual));
+        amounts.forEach((el) => {
+          el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+        });
+        if (window.nexisTrack) {
+          window.nexisTrack("billing_toggle", { billing_period: mode });
+        }
+      }
+
+      monthlyBtn?.addEventListener("click", () => setBilling("monthly"));
+      annualBtn?.addEventListener("click", () => setBilling("annual"));
+      setBilling("annual");
+
+      // --- Comparison table toggle ---
+      const compToggle = document.getElementById("comparison-toggle");
+      const compTable = document.getElementById("comparison-table");
+
+      compToggle?.addEventListener("click", () => {
+        const expanded = compToggle.getAttribute("aria-expanded") === "true";
+        compToggle.setAttribute("aria-expanded", String(!expanded));
+        if (compTable) compTable.hidden = expanded;
+        if (window.nexisTrack) {
+          window.nexisTrack("comparison_toggle", { expanded: !expanded });
+        }
+      });
     }
-  }
 
-  monthlyBtn.addEventListener("click", () => setBilling("monthly"));
-  annualBtn.addEventListener("click", () => setBilling("annual"));
-  setBilling("annual");
-
-  // --- Comparison table toggle ---
-  const compToggle = document.getElementById("comparison-toggle");
-  const compTable = document.getElementById("comparison-table");
-
-  compToggle.addEventListener("click", () => {
-    const expanded = compToggle.getAttribute("aria-expanded") === "true";
-    compToggle.setAttribute("aria-expanded", String(!expanded));
-    compTable.hidden = expanded;
-    if (window.nexisTrack) {
-      window.nexisTrack("comparison_toggle", { expanded: !expanded });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setup);
+    } else {
+      setup();
     }
-  });
+  })();
 </script>
+
+
 
 <style>
   .pricing-header {
@@ -275,17 +471,108 @@ const comparisonRows = [
     margin-bottom: var(--space-8);
   }
 
+  /* Pricing App Selector Tabs */
+  .pricing-app-toggle {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 6px;
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px;
+    margin: var(--space-2) auto 0;
+    box-shadow: var(--shadow-card);
+  }
+
+  .pricing-app-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    user-select: none;
+  }
+
+  .pricing-app-tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-glass-hover);
+  }
+
+  .pricing-app-tab.active {
+    background: var(--bg-elevated);
+    border-color: var(--border);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .pricing-app-pill {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-glass-hover);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .pricing-app-tab.active .pricing-app-pill {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: rgba(5, 150, 105, 0.2);
+  }
+
+  [data-theme="dark"] .pricing-app-tab.active .pricing-app-pill {
+    border-color: rgba(54, 244, 164, 0.25);
+  }
+
+  /* View visibility */
+  .pricing-view.is-hidden {
+    display: none !important;
+  }
+
+  .pricing-grid--quiz {
+    grid-template-columns: repeat(2, minmax(0, 380px)) !important;
+    justify-content: center !important;
+  }
+
+  .quiz-pricing-footer {
+    margin-top: var(--space-7);
+    padding: var(--space-4);
+    background: var(--bg-glass);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quiz-pricing-footer a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   /* Billing toggle */
   .billing-toggle {
     display: inline-flex;
     align-items: center;
-    align-self: center;       /* center inside flex column */
+    align-self: center;
     gap: 4px;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
     padding: 5px;
-    margin: var(--space-3) auto 0;
+    margin: var(--space-2) auto 0;
   }
 
   .toggle-btn {
@@ -309,10 +596,10 @@ const comparisonRows = [
   }
 
   .toggle-btn.active {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-glass-hover);
     color: var(--text-primary);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12),
-      0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 1px var(--border-hover),
+      0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .toggle-badge {
@@ -333,7 +620,7 @@ const comparisonRows = [
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     align-items: stretch;
-    padding-top: 20px; /* room for badge */
+    padding-top: 20px;
   }
 
   /* Wrapper holds both the floating badge and the card */
@@ -347,28 +634,76 @@ const comparisonRows = [
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    padding: var(--space-5);
+    padding: var(--space-6);
     flex: 1;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
   }
 
   .pricing-featured {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent), 0 0 32px -8px rgba(54, 244, 164, 0.12);
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 30px -4px var(--accent-dim) !important;
+  }
+
+  .pricing-card .btn {
+    width: 100%;
+    margin-top: auto;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  .pricing-card .btn-ghost {
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  .pricing-card .btn-ghost:hover {
+    background: var(--bg-glass-hover);
+    border-color: var(--border-hover);
+  }
+
+  .pricing-card .btn-primary {
+    background: var(--text-primary);
+    color: var(--btn-primary-text);
+  }
+
+  .pricing-card .btn-accent {
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 4px 14px var(--accent-dim);
   }
 
   .pricing-badge {
     position: absolute;
-    top: -14px;           /* sits above the card, inside the wrap */
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 5px 14px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     white-space: nowrap;
+    background: var(--accent);
+    color: #ffffff;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 8px var(--accent-dim);
   }
+
 
   .pricing-tier-name {
     font-size: 14px;
@@ -408,6 +743,12 @@ const comparisonRows = [
     font-weight: 500;
   }
 
+  .pricing-trial {
+    margin: var(--space-2) 0 0;
+    text-align: center;
+    color: var(--text-muted);
+  }
+
   .pricing-desc {
     padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--border);
@@ -437,6 +778,11 @@ const comparisonRows = [
   }
 
   /* Comparison table */
+  .pricing-trust {
+    margin-top: var(--space-6);
+    color: var(--text-muted);
+  }
+
   .comparison-wrap {
     margin-top: var(--space-8);
     background: var(--bg-deep);

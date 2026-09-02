@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nexis CRO — App review screencast</title>
+    <title>Nexis CRO — App review screencasts</title>
     <meta
       name="description"
-      content="Shopify App Store review screencast for Nexis CRO: AI SEO & AEO Audit on novus-dev-store."
+      content="Shopify App Store review screencasts for Nexis CRO: AI SEO & AEO Audit on novus-dev-store."
     />
     <link rel="canonical" href="https://app.nexiscro.com/app-review/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -43,10 +43,27 @@
         line-height: 1.15;
       }
       .lead {
-        margin: 0 0 1.75rem;
-        max-width: 52ch;
+        margin: 0 0 2.5rem;
+        max-width: 58ch;
         color: #c8c8d0;
         line-height: 1.6;
+      }
+      .video-section {
+        margin-bottom: 3rem;
+      }
+      .video-section:last-of-type {
+        margin-bottom: 0;
+      }
+      .video-section h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      .video-section p {
+        margin: 0 0 1rem;
+        color: #c8c8d0;
+        line-height: 1.55;
+        max-width: 58ch;
       }
       video {
         width: 100%;
@@ -55,9 +72,13 @@
         background: #000;
         box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
       }
+      .download {
+        margin: 0.75rem 0 0;
+        font-size: 0.85rem;
+      }
       .meta,
       .back {
-        margin: 1.25rem 0 0;
+        margin: 2.5rem 0 0;
         font-size: 0.9rem;
         color: #c8c8d0;
         line-height: 1.5;
@@ -73,15 +94,52 @@
       <p class="eyebrow">Shopify App Review</p>
       <h1>Nexis CRO: AI SEO &amp; AEO Audit</h1>
       <p class="lead">
-        Screencast recorded on <strong>novus-dev-store</strong> — install, dashboard audit,
-        issues, AI rewrites, plan &amp; billing, and AI Rank Tracker.
+        Screencasts recorded on <strong>novus-dev-store</strong> for Shopify App Store review —
+        full app walkthrough, credit pack purchase in-app, and Partner Dashboard billing logs.
       </p>
-      <video controls playsinline preload="metadata" poster="/og-image.svg">
-        <source src="/videos/nexis-cro-app-review.mp4" type="video/mp4" />
+
+      <section class="video-section" aria-labelledby="app-review-heading">
+        <h2 id="app-review-heading">1. App walkthrough</h2>
         <p>
-          <a href="/videos/nexis-cro-app-review.mp4">Download the screencast (MP4)</a>
+          Install, dashboard audit, issues, AI rewrites, plan &amp; billing, and AI Rank Tracker.
         </p>
-      </video>
+        <video controls playsinline preload="metadata" poster="/og-image.svg">
+          <source src="/videos/nexis-cro-app-review.mp4" type="video/mp4" />
+        </video>
+        <p class="download">
+          <a href="/videos/nexis-cro-app-review.mp4">Download app walkthrough (MP4)</a>
+        </p>
+      </section>
+
+      <section class="video-section" aria-labelledby="credit-heading">
+        <h2 id="credit-heading">2. Credit packs — in-app purchase</h2>
+        <p>
+          One-time AI credit pack purchase ($9.99 / $29.99) in the embedded app on
+          <strong>novus-dev-store</strong>.
+        </p>
+        <video controls playsinline preload="metadata" poster="/og-image.svg">
+          <source src="/videos/nexis-cro-credit.mp4" type="video/mp4" />
+        </video>
+        <p class="download">
+          <a href="/videos/nexis-cro-credit.mp4">Download credit pack screencast (MP4)</a>
+        </p>
+      </section>
+
+      <section class="video-section" aria-labelledby="app-logs-heading">
+        <h2 id="app-logs-heading">3. Partner Dashboard — Shopify billing logs</h2>
+        <p>
+          Dev Dashboard App Event log after credit pack purchase — events
+          <code>credit_pack_50</code> / <code>credit_pack_200</code> accepted (status OK) via
+          Shopify Managed Pricing. Not off-platform billing.
+        </p>
+        <video controls playsinline preload="metadata" poster="/og-image.svg">
+          <source src="/videos/nexis-cro-app-logs.mp4" type="video/mp4" />
+        </video>
+        <p class="download">
+          <a href="/videos/nexis-cro-app-logs.mp4">Download Partner Dashboard logs (MP4)</a>
+        </p>
+      </section>
+
       <p class="meta">
         App Store screencast URL:
         <a href="https://app.nexiscro.com/app-review/">https://app.nexiscro.com/app-review/</a>

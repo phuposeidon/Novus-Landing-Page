@@ -26,7 +26,7 @@ LLMs, and AI-powered content fixes.
 
 ## Plans
 
-Free, Pro ($29/mo), Growth ($59/mo), Agency ($149/mo). No trials. Optional AI credit packs.
+Free, Pro ($9/mo), Growth ($21/mo), Agency ($44/mo). Pro includes a 2-day free trial. Optional AI credit packs.
 
 ## Content policy
 

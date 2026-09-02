@@ -11,12 +11,12 @@ interface Props {
 
 import Analytics from "../components/Analytics.astro";
 import WebMcp from "../components/WebMcp.astro";
-import { SHOPIFY_INSTALL_URL, SUPPORT_EMAIL } from "../config/site.ts";
+import { QUIZSIGNAL, SHOPIFY_INSTALL_URL, SUPPORT_EMAIL } from "../config/site.ts";
 import "../styles/global.css";
 
 const {
-  title = "Nexis CRO — AI SEO & AEO Audit for Shopify",
-  description = "Audit your Shopify store for ChatGPT, Perplexity, Google AI, and Bing Copilot. Fix what's broken with one-click AI. Schema blocks, llms.txt, and more.",
+  title = "Nexis CRO — AI Search & Conversion Suite for Shopify",
+  description = "Audit and rank in ChatGPT, Perplexity & Google AI with AI SEO & AEO Audit, and boost storefront conversions with Quiz Signal product recommendation funnels.",
   ogType = "website",
   ogImagePath = "/og-image.png",
   includeAppSchema = true,
@@ -35,8 +35,8 @@ const organizationSchema = {
   url: siteUrl,
   logo: new URL("/brand-mark.png", Astro.site).href,
   description:
-    "AI SEO and AEO audit app for Shopify merchants. Schema, llms.txt, AI Rank Tracker, and ChatGPT visibility.",
-  sameAs: [SHOPIFY_INSTALL_URL],
+    "AI SEO, AEO audit, and storefront conversion apps for Shopify merchants. Schema blocks, llms.txt, AI Rank Tracker, and Quiz Signal recommendation funnels.",
+  sameAs: [SHOPIFY_INSTALL_URL, QUIZSIGNAL.installUrl],
   contactPoint: {
     "@type": "ContactPoint",
     email: SUPPORT_EMAIL,
@@ -63,22 +63,35 @@ const extraBlocks = extraJsonLd
 const jsonLdBlocks = [...baseJsonLd, ...extraBlocks];
 
 const interFontUrl =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap";
 const monoFontUrl =
-  "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap";
+  "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap";
+
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Theme Initialization (Zero-FOUC) — Default: Light Mode -->
+    <script is:inline>
+      (function() {
+        try {
+          var saved = localStorage.getItem("theme");
+          var theme = saved || "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
     {rssAlternate && (
       <link
         rel="alternate"
@@ -161,10 +174,11 @@ const monoFontUrl =
       ]
     })} />
     )}
-    {jsonLdBlocks.map((block) => (
-      <script type="application/ld+json" set:html={JSON.stringify(block)} />
-    ))}
+    <!-- GSAP for Smooth Kinetic Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
   </head>
+
 
   <body>
     <div class="site-frame">

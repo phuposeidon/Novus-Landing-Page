@@ -59,9 +59,9 @@ Nexis CRO AI Rank Tracker limits by plan (publisher disclosure: this is our own 
 | Plan | Tracked prompts | Rank checks / 30 days | AI models | Automated schedule |
 | --- | --- | --- | --- | --- |
 | **Free** | 1 | 5 | 1 | Manual only |
-| **Pro** ($29/mo) | 5 | 150 | 1 | Weekly |
-| **Growth** ($59/mo) | 20 | 1,200 | 3 | Daily |
-| **Agency** ($149/mo) | 50 | 5,000 | All configured | Daily |
+| **Pro** ($9/mo) | 5 | 150 | 1 | Weekly |
+| **Growth** ($21/mo) | 20 | 1,200 | 3 | Daily |
+| **Agency** ($44/mo) | 50 | 5,000 | All configured | Daily |
 
 **Citation Gap Insights** (competitor cited, you are not) unlock on **Growth and Agency**. Competitor benchmarking covers up to **3 rivals on Growth** and **5 on Agency**.
 
