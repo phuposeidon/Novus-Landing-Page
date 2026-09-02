@@ -19,7 +19,7 @@ const staticRoutes = [
   { loc: `${site}/blog/`, lastmod: today },
   { loc: `${site}/about/`, lastmod: today },
   { loc: `${site}/compare/`, lastmod: today },
-  { loc: `${site}/privacy` },
+  { loc: `${site}/privacy/` },
   { loc: `${site}/quizsignal/`, lastmod: today },
   { loc: `${site}/quizsignal/pricing/`, lastmod: today },
   { loc: `${site}/quizsignal/privacy/`, lastmod: today },
