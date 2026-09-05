@@ -19,6 +19,7 @@ faq:
     answer: "Traditional CRO tunes the funnel after a shopper lands on your site. AI search optimization determines whether an AI assistant cites your store at all, before any session begins."
   - question: "How often should Shopify Plus merchants audit AI search readiness?"
     answer: "Run a full crawler, schema, and citation check quarterly, and re-check immediately after any CDN, firewall, or theme change, since enterprise setups change bot rules more often than smaller stores."
+category: "ai-seo"
 draft: false
 ---
 

@@ -19,6 +19,7 @@ faq:
     answer: "Send the first message immediately, tied to the specific quiz result, while intent is highest. Space follow-up messages over the following days and weeks rather than sending everything at once."
   - question: "Is open rate still a reliable metric for these flows?"
     answer: "Less than it used to be. Apple Mail Privacy Protection affects roughly 64% of B2C subscribers, inflating open rates artificially, so click rate and placed-order rate are more trustworthy signals for a quiz-triggered flow."
+category: "quiz-signal"
 draft: false
 ---
 

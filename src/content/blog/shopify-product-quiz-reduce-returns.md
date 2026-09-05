@@ -19,6 +19,7 @@ faq:
     answer: "Bracketing is buying multiple sizes or colors of the same item with the intent to return what does not fit. It has become common practice among online apparel shoppers and inflates return rates directly."
   - question: "Can a product quiz reduce returns?"
     answer: "A pre-purchase quiz that asks about fit, sizing, or use case routes shoppers to the right product before checkout, which addresses the leading cause of returns instead of handling it after the sale."
+category: "quiz-signal"
 draft: false
 ---
 

@@ -20,6 +20,7 @@ faq:
     answer: "Price and stock mismatches between your storefront and cached AI answers. Fast price changes and flash sales are the most common cause of AI agents citing wrong information."
   - question: "Can AI shopping agents actually complete a BFCM purchase?"
     answer: "Increasingly yes. The Universal Commerce Protocol lets participating agents discover, evaluate, and in some cases complete checkout, so incorrect or missing data can cost a sale directly."
+category: "ai-seo"
 draft: false
 ---
 

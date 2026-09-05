@@ -19,6 +19,7 @@ faq:
     answer: "Recommend 2 to 3 products, not one. A single recommendation feels like a guess if it is wrong. A short ranked list feels like guidance."
   - question: "What should I do with quiz answer data?"
     answer: "Tag each shopper's answers to their profile and use them for segmented email or SMS flows. Zero-party data from a quiz is more reliable than inferred browsing behavior."
+category: "quiz-signal"
 draft: false
 ---
 

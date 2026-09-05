@@ -23,6 +23,8 @@ faq:
     answer: "Shopify reported in Q1 2026 that AI chatbot referral sessions on merchant storefronts grew more than 8x year over year, while AI-referred orders grew nearly 13x. Organic search still drives more total sessions, but AI referrals convert at meaningfully higher rates on product pages."
   - question: "Which schema types matter most for Shopify AEO?"
     answer: "Prioritize Product, Offer, Organization, WebSite, BreadcrumbList, and FAQPage JSON-LD on product, collection, and policy pages. Complete structured data gives AI parsers price, availability, and brand entity signals without guessing from unstructured HTML."
+category: "ai-seo"
+featured: true
 draft: false
 ---
 

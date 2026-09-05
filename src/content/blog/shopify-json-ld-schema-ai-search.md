@@ -20,6 +20,7 @@ faq:
     answer: "Yes. Two conflicting Product blocks on the same page confuse validators and retrievers. Audit with Rich Results Test and disable the less-complete block."
   - question: "What schema types matter most for AI citations?"
     answer: "Product, Offer, Brand, aggregateRating, hasMerchantReturnPolicy, shippingDetails, FAQPage, Organization, WebSite, and BreadcrumbList."
+category: "ai-seo"
 draft: false
 ---
 

@@ -8,12 +8,30 @@ const posts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+function calculateReadingTime(body?: string): number {
+  if (!body) return 5;
+  const words = body.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 225));
+}
+
+// Attach reading time to all posts
+const postsWithMeta = posts.map((post) => ({
+  ...post,
+  readingTime: calculateReadingTime(post.body),
+}));
+
+const featuredAiSeo = postsWithMeta.find((p) => p.id === "shopify-aeo-guide-2026") ?? postsWithMeta.find((p) => p.data.category === "ai-seo" && p.data.featured) ?? postsWithMeta[0];
+const featuredQuiz = postsWithMeta.find((p) => p.id === "best-shopify-quiz-apps-2026") ?? postsWithMeta.find((p) => p.data.category === "quiz-signal" && p.data.featured) ?? postsWithMeta.find((p) => p.data.category === "quiz-signal");
+
+const aiSeoCount = postsWithMeta.filter((p) => p.data.category === "ai-seo").length;
+const quizCount = postsWithMeta.filter((p) => p.data.category === "quiz-signal").length;
+
 const collectionSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "AI search guides for Shopify",
+  name: "Shopify AI Search & Storefront Conversion Guides",
   description:
-    "Practical AEO and GEO playbooks: llms.txt, schema markup, crawler policy, and citation tracking for Shopify merchants.",
+    "Actionable Answer Engine Optimization (AEO), llms.txt, AI search citation tracking, and product recommendation quiz playbooks for Shopify merchants.",
   url: new URL("/blog/", Astro.site).href,
   isPartOf: {
     "@type": "WebSite",
@@ -24,8 +42,8 @@ const collectionSchema = {
 ---
 
 <Layout
-  title="Blog — AI SEO & AEO for Shopify | Nexis CRO"
-  description="Practical guides on AEO, llms.txt, schema markup, and AI search optimization for Shopify merchants. Free resources from Nexis CRO."
+  title="Blog — AI SEO, AEO & Storefront CRO for Shopify | Nexis CRO"
+  description="Practical playbooks on Answer Engine Optimization (AEO), llms.txt, schema markup, and Shopify product quizzes from the Nexis CRO editorial team."
   includeAppSchema={false}
   extraJsonLd={collectionSchema}
   rssAlternate={true}
@@ -34,26 +52,243 @@ const collectionSchema = {
 
   <main class="blog-index">
     <div class="container">
+      <!-- Header -->
       <header class="blog-index-header">
-        <span class="overline">Resources</span>
-        <h1 class="display">AI search guides for Shopify</h1>
+        <span class="overline">Knowledge Base & Guides</span>
+        <h1 class="display">Shopify AI Search &amp; CRO Guides</h1>
         <p class="body-lg blog-index-lead">
-          Practical AEO and GEO playbooks for Shopify merchants: llms.txt setup, JSON-LD schema for AI search,
-          ChatGPT citation tracking, robots.txt for GPTBot and PerplexityBot, and competitor citation gap analysis.
+          Field-tested playbooks for high-growth merchants: master Answer Engine Optimization (AEO) to win citations in ChatGPT and Perplexity, and deploy zero-code recommendation quizzes that lift conversion rates.
         </p>
+
+        <!-- Category Filter Tabs -->
+        <div class="category-tabs-container" role="tablist" aria-label="Blog Categories">
+          <button
+            type="button"
+            class="category-tab active"
+            role="tab"
+            aria-selected="true"
+            data-filter="all"
+            id="tab-all"
+          >
+            <span class="tab-label">All Guides</span>
+            <span class="tab-count">{postsWithMeta.length}</span>
+          </button>
+          <button
+            type="button"
+            class="category-tab category-tab--aiseo"
+            role="tab"
+            aria-selected="false"
+            data-filter="ai-seo"
+            id="tab-aiseo"
+          >
+            <span class="tab-dot dot-aiseo"></span>
+            <span class="tab-label">AI Search &amp; AEO</span>
+            <span class="tab-count">{aiSeoCount}</span>
+          </button>
+          <button
+            type="button"
+            class="category-tab category-tab--quiz"
+            role="tab"
+            aria-selected="false"
+            data-filter="quiz-signal"
+            id="tab-quiz"
+          >
+            <span class="tab-dot dot-quiz"></span>
+            <span class="tab-label">Quiz Signal &amp; CRO</span>
+            <span class="tab-count">{quizCount}</span>
+          </button>
+        </div>
       </header>
 
-      <ul class="post-grid">
-        {posts.map((post) => (
-          <li class="post-grid-item">
+      <!-- Featured Guides Hero Section -->
+      <section class="featured-guides-section" aria-label="Featured Guides">
+        <!-- AI SEO Featured Hero Card -->
+        {featuredAiSeo && (
+          <article
+            class="featured-hero-card featured-hero--aiseo"
+            id="featured-aiseo"
+            data-category="ai-seo"
+          >
+            <div class="featured-hero-content">
+              <div class="featured-hero-badge-row">
+                <span class="featured-flag-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                  Flagship AEO Guide
+                </span>
+                <span class="category-pill category-pill--aiseo">AI Search &amp; AEO</span>
+                <span class="reading-time-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  {featuredAiSeo.readingTime} min read
+                </span>
+              </div>
+
+              <h2 class="featured-hero-title">
+                <a
+                  href={`/blog/${featuredAiSeo.id}/`}
+                  data-analytics-event="blog_card_click"
+                  data-analytics-location="blog_featured_hero"
+                  data-analytics-label={featuredAiSeo.data.title}
+                >
+                  {featuredAiSeo.data.title}
+                </a>
+              </h2>
+
+              <p class="featured-hero-desc">{featuredAiSeo.data.description}</p>
+
+              <div class="featured-hero-footer">
+                <div class="featured-hero-meta">
+                  <span class="featured-author">{featuredAiSeo.data.author}</span>
+                  <span class="meta-separator" aria-hidden="true">&middot;</span>
+                  <time datetime={featuredAiSeo.data.pubDate.toISOString()}>
+                    {featuredAiSeo.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+                <a
+                  href={`/blog/${featuredAiSeo.id}/`}
+                  class="btn btn-primary btn-sm featured-cta-btn"
+                >
+                  Read Flagship Guide &rarr;
+                </a>
+              </div>
+            </div>
+
+            {featuredAiSeo.data.heroImage && (
+              <div class="featured-hero-media">
+                <a href={`/blog/${featuredAiSeo.id}/`} tabindex="-1" aria-hidden="true">
+                  <img
+                    src={featuredAiSeo.data.heroImage}
+                    alt={featuredAiSeo.data.heroImageAlt ?? featuredAiSeo.data.title}
+                    width="640"
+                    height="360"
+                    loading="eager"
+                    class="featured-hero-img"
+                  />
+                </a>
+              </div>
+            )}
+          </article>
+        )}
+
+        <!-- Quiz Signal Featured Hero Card -->
+        {featuredQuiz && (
+          <article
+            class="featured-hero-card featured-hero--quiz"
+            id="featured-quiz"
+            data-category="quiz-signal"
+            style="display: none;"
+          >
+            <div class="featured-hero-content">
+              <div class="featured-hero-badge-row">
+                <span class="featured-flag-badge flag-quiz">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                  Flagship CRO Benchmark
+                </span>
+                <span class="category-pill category-pill--quiz">Quiz Signal &amp; CRO</span>
+                <span class="reading-time-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  {featuredQuiz.readingTime} min read
+                </span>
+              </div>
+
+              <h2 class="featured-hero-title">
+                <a
+                  href={`/blog/${featuredQuiz.id}/`}
+                  data-analytics-event="blog_card_click"
+                  data-analytics-location="blog_featured_hero_quiz"
+                  data-analytics-label={featuredQuiz.data.title}
+                >
+                  {featuredQuiz.data.title}
+                </a>
+              </h2>
+
+              <p class="featured-hero-desc">{featuredQuiz.data.description}</p>
+
+              <div class="featured-hero-footer">
+                <div class="featured-hero-meta">
+                  <span class="featured-author">{featuredQuiz.data.author}</span>
+                  <span class="meta-separator" aria-hidden="true">&middot;</span>
+                  <time datetime={featuredQuiz.data.pubDate.toISOString()}>
+                    {featuredQuiz.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+                <a
+                  href={`/blog/${featuredQuiz.id}/`}
+                  class="btn btn-primary btn-sm featured-cta-btn featured-cta-btn--quiz"
+                >
+                  Read Comparison Guide &rarr;
+                </a>
+              </div>
+            </div>
+
+            {featuredQuiz.data.heroImage && (
+              <div class="featured-hero-media">
+                <a href={`/blog/${featuredQuiz.id}/`} tabindex="-1" aria-hidden="true">
+                  <img
+                    src={featuredQuiz.data.heroImage}
+                    alt={featuredQuiz.data.heroImageAlt ?? featuredQuiz.data.title}
+                    width="640"
+                    height="360"
+                    loading="lazy"
+                    class="featured-hero-img"
+                  />
+                </a>
+              </div>
+            )}
+          </article>
+        )}
+      </section>
+
+      <!-- Section Title & Grid -->
+      <div class="post-grid-header">
+        <h2 class="heading-3 post-grid-title" id="grid-heading">All Guides ({postsWithMeta.length})</h2>
+        <span class="post-grid-hint">Showing practical playbooks for Shopify growth</span>
+      </div>
+
+      <ul class="post-grid" id="post-grid">
+        {postsWithMeta.map((post) => (
+          <li class="post-grid-item" data-category={post.data.category}>
             <article class="post-card card">
-              <time datetime={post.data.pubDate.toISOString()} class="post-date">
-                {post.data.pubDate.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
+              <div class="post-card-meta-top">
+                <span class={`category-pill category-pill--${post.data.category}`}>
+                  {post.data.category === "ai-seo" ? "AI Search & AEO" : "Quiz Signal & CRO"}
+                </span>
+                <span class="post-meta-right">
+                  <span class="reading-time-text">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {post.readingTime} min
+                  </span>
+                  <span class="meta-dot" aria-hidden="true">&middot;</span>
+                  <time datetime={post.data.pubDate.toISOString()} class="post-date">
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                </span>
+              </div>
+
               <h2 class="heading-3 post-title">
                 <a
                   href={`/blog/${post.id}/`}
@@ -62,7 +297,9 @@ const collectionSchema = {
                   data-analytics-label={post.data.title}
                 >{post.data.title}</a>
               </h2>
+
               <p class="body-sm post-excerpt">{post.data.description}</p>
+
               {post.data.tags.length > 0 && (
                 <ul class="post-tags">
                   {post.data.tags.map((tag) => (
@@ -70,7 +307,12 @@ const collectionSchema = {
                   ))}
                 </ul>
               )}
-              <span class="post-read" aria-hidden="true">Read guide →</span>
+
+              <div class="post-card-bottom">
+                <a href={`/blog/${post.id}/`} class="post-read">
+                  Read guide &rarr;
+                </a>
+              </div>
             </article>
           </li>
         ))}
@@ -85,6 +327,60 @@ const collectionSchema = {
       if (typeof window.nexisTrack === "function") {
         window.nexisTrack("blog_index_view", { location: "blog_index" });
       }
+
+      const tabs = document.querySelectorAll(".category-tab");
+      const gridItems = document.querySelectorAll(".post-grid-item");
+      const featuredAiSeo = document.getElementById("featured-aiseo");
+      const featuredQuiz = document.getElementById("featured-quiz");
+      const gridHeading = document.getElementById("grid-heading");
+
+      const categoryLabels = {
+        all: "All Guides",
+        "ai-seo": "AI Search & AEO Guides",
+        "quiz-signal": "Quiz Signal & CRO Guides",
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", function () {
+          const filter = this.getAttribute("data-filter");
+
+          // Update tabs state
+          tabs.forEach((t) => {
+            t.classList.remove("active");
+            t.setAttribute("aria-selected", "false");
+          });
+          this.classList.add("active");
+          this.setAttribute("aria-selected", "true");
+
+          // Update Featured Hero Card
+          if (filter === "quiz-signal") {
+            if (featuredAiSeo) featuredAiSeo.style.display = "none";
+            if (featuredQuiz) featuredQuiz.style.display = "flex";
+          } else {
+            // "all" or "ai-seo" shows the primary flagship AEO post
+            if (featuredAiSeo) featuredAiSeo.style.display = "flex";
+            if (featuredQuiz) featuredQuiz.style.display = "none";
+          }
+
+          // Filter grid items
+          let visibleCount = 0;
+          gridItems.forEach((item) => {
+            const itemCat = item.getAttribute("data-category");
+            if (filter === "all" || itemCat === filter) {
+              item.style.display = "block";
+              visibleCount++;
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          // Update heading
+          if (gridHeading) {
+            const label = categoryLabels[filter] || "Guides";
+            gridHeading.textContent = `${label} (${visibleCount})`;
+          }
+        });
+      });
     });
   </script>
 </Layout>
@@ -93,25 +389,333 @@ const collectionSchema = {
   .blog-index {
     flex: 1;
     padding-top: calc(var(--nav-height, 72px) + var(--space-8));
-    padding-bottom: var(--space-9);
-  }
-
-  .blog-index-lead {
-    max-width: 62ch;
-    color: var(--text-secondary);
+    padding-bottom: var(--space-10);
   }
 
   .blog-index-header {
-    max-width: 62ch;
+    max-width: 68ch;
     margin-inline: auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .blog-index-lead {
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* Filter Tabs */
+  .category-tabs-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px;
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    gap: 4px;
+    margin-top: var(--space-3);
+    box-shadow: var(--shadow-border);
+  }
+
+  .category-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    user-select: none;
+  }
+
+  .category-tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-glass-hover);
+  }
+
+  .category-tab.active {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--border);
+    font-weight: 600;
+  }
+
+  .tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .category-tab.active .tab-count {
+    background: var(--bg-section);
+    color: var(--text-secondary);
+  }
+
+  .tab-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-aiseo {
+    background: #059669;
+  }
+
+  [data-theme="dark"] .dot-aiseo {
+    background: #36f4a4;
+    box-shadow: 0 0 8px rgba(54, 244, 164, 0.6);
+  }
+
+  .dot-quiz {
+    background: #7c3aed;
+  }
+
+  [data-theme="dark"] .dot-quiz {
+    background: #a855f7;
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+  }
+
+  /* Category Pills */
+  .category-pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .category-pill--ai-seo,
+  .category-pill--aiseo {
+    background: rgba(5, 150, 105, 0.12);
+    color: #059669;
+    border: 1px solid rgba(5, 150, 105, 0.28);
+  }
+
+  [data-theme="dark"] .category-pill--ai-seo,
+  [data-theme="dark"] .category-pill--aiseo {
+    background: rgba(54, 244, 164, 0.12);
+    color: #36f4a4;
+    border-color: rgba(54, 244, 164, 0.3);
+  }
+
+  .category-pill--quiz-signal,
+  .category-pill--quiz {
+    background: rgba(124, 58, 237, 0.12);
+    color: #7c3aed;
+    border: 1px solid rgba(124, 58, 237, 0.28);
+  }
+
+  [data-theme="dark"] .category-pill--quiz-signal,
+  [data-theme="dark"] .category-pill--quiz {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    border-color: rgba(168, 85, 247, 0.35);
+  }
+
+  /* Reading Time Badge */
+  .reading-time-badge,
+  .reading-time-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Featured Guides Section */
+  .featured-guides-section {
     margin-bottom: var(--space-9);
   }
 
+  .featured-hero-card {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-elevated);
+    transition: transform var(--duration-normal) var(--ease-out),
+      border-color var(--duration-normal) var(--ease-out);
+  }
+
+  .featured-hero-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+  }
+
+  .featured-hero--aiseo {
+    background: radial-gradient(circle at top left, var(--accent-dim) 0%, var(--bg-elevated) 65%);
+  }
+
+  .featured-hero--quiz {
+    background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.12) 0%, var(--bg-elevated) 65%);
+  }
+
+  .featured-hero-content {
+    padding: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .featured-hero-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .featured-flag-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #059669;
+    background: var(--bg-glass);
+    border: 1px solid rgba(5, 150, 105, 0.3);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  [data-theme="dark"] .featured-flag-badge {
+    color: #36f4a4;
+    border-color: rgba(54, 244, 164, 0.3);
+  }
+
+  .featured-flag-badge.flag-quiz {
+    color: #7c3aed;
+    border-color: rgba(124, 58, 237, 0.3);
+  }
+
+  [data-theme="dark"] .featured-flag-badge.flag-quiz {
+    color: #c084fc;
+    border-color: rgba(168, 85, 247, 0.35);
+  }
+
+  .featured-hero-title {
+    font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .featured-hero-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+  }
+
+  .featured-hero-title a:hover {
+    color: var(--accent);
+  }
+
+  .featured-hero-desc {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .featured-hero-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .featured-hero-meta {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .meta-separator {
+    color: var(--text-faint);
+  }
+
+  .featured-cta-btn--quiz {
+    background: #7c3aed;
+    color: #ffffff;
+  }
+
+  [data-theme="dark"] .featured-cta-btn--quiz {
+    background: #9333ea;
+  }
+
+  .featured-hero-media {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-section);
+    min-height: 280px;
+  }
+
+  .featured-hero-media a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .featured-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  .featured-hero-card:hover .featured-hero-img {
+    transform: scale(1.03);
+  }
+
+  /* Grid Header */
+  .post-grid-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .post-grid-title {
+    margin: 0;
+    font-size: 1.35rem;
+  }
+
+  .post-grid-hint {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  /* Post Grid */
   .post-grid {
     list-style: none;
     padding: 0;
@@ -133,26 +737,48 @@ const collectionSchema = {
     gap: var(--space-3);
     padding: var(--space-6);
     position: relative;
+    border-radius: var(--radius-lg);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    transition: transform var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
   }
 
   .post-card:hover {
-    border-color: rgba(54, 244, 164, 0.22);
-    box-shadow: 0 0 0 1px rgba(54, 244, 164, 0.06);
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-card);
   }
 
-  .post-card:hover .post-read {
-    color: var(--accent);
+  .post-card-meta-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .post-meta-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .meta-dot {
+    color: var(--text-faint);
   }
 
   .post-date {
     font-size: 0.8125rem;
     color: var(--text-muted);
-    letter-spacing: 0.02em;
   }
 
   .post-title {
     margin: 0;
     line-height: 1.35;
+    font-size: 1.2rem;
   }
 
   .post-title a {
@@ -173,6 +799,7 @@ const collectionSchema = {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 1.6;
   }
 
   .post-tags {
@@ -186,24 +813,59 @@ const collectionSchema = {
 
   .tag {
     font-size: 0.6875rem;
-    padding: 3px 10px;
+    padding: 2px 9px;
     border-radius: var(--radius-full);
     background: var(--bg-glass);
     border: 1px solid var(--border-subtle);
     color: var(--text-muted);
   }
 
-  .post-read {
+  .post-card-bottom {
     margin-top: var(--space-2);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    transition: color var(--duration-fast);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-subtle);
   }
 
-  @media (max-width: 900px) {
+  .post-read {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--duration-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .post-card:hover .post-read {
+    color: var(--accent);
+  }
+
+  @media (max-width: 960px) {
+    .featured-hero-card {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-hero-media {
+      min-height: 220px;
+      order: -1;
+    }
+
     .post-grid {
       grid-template-columns: 1fr;
+    }
+
+    .category-tabs-container {
+      width: 100%;
+      overflow-x: auto;
+      justify-content: flex-start;
+      border-radius: var(--radius-lg);
+    }
+
+    .post-grid-header {
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
     }
   }
 </style>

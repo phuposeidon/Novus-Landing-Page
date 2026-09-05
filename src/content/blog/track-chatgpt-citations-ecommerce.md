@@ -20,6 +20,7 @@ faq:
     answer: "Run a core prompt panel weekly for strategic categories. Review GA4 AI referral segments monthly. Re-baseline competitor SOV quarterly."
   - question: "What is the difference between a mention and a citation?"
     answer: "A mention names your brand in an AI answer. A citation includes a linked source URL. Citations drive measurable traffic; mentions build awareness without clicks."
+category: "ai-seo"
 draft: false
 ---
 

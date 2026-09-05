@@ -19,6 +19,7 @@ faq:
     answer: "A gift finder quiz optimizes for a second person, the recipient, not the shopper answering the questions. Questions center on who the gift is for and the occasion, not the shopper's own preferences."
   - question: "Should a gift finder quiz use AI?"
     answer: "AI can help generate question variations and gift copy, but the recommendation logic should stay rule-based and transparent, since shoppers trust a quiz result more when they can see why a gift was suggested."
+category: "quiz-signal"
 draft: false
 ---
 

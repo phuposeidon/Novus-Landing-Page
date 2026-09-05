@@ -5,16 +5,41 @@ import "../../styles/blog-prose.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  return posts
-    .filter((p) => !p.data.draft)
-    .map((post) => ({
-      params: { slug: post.id },
-      props: { post },
-    }));
+  const published = posts.filter((p) => !p.data.draft);
+  return published.map((post) => ({
+    params: { slug: post.id },
+    props: { post, allPosts: published },
+  }));
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { post, allPosts } = Astro.props;
+const { Content, headings } = await render(post);
+
+function calculateReadingTime(body?: string): number {
+  if (!body) return 5;
+  const words = body.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 225));
+}
+
+const wordCount = post.body ? post.body.trim().split(/\s+/).filter(Boolean).length : 1200;
+const readingTime = calculateReadingTime(post.body);
+
+// Find related posts (prioritize same category, then other posts, max 3)
+const sameCategoryPosts = allPosts.filter(
+  (p) => p.id !== post.id && p.data.category === post.data.category
+);
+const otherCategoryPosts = allPosts.filter(
+  (p) => p.id !== post.id && p.data.category !== post.data.category
+);
+
+const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 3).map((p) => ({
+  id: p.id,
+  title: p.data.title,
+  description: p.data.description,
+  pubDate: p.data.pubDate,
+  category: p.data.category,
+  readingTime: calculateReadingTime(p.body),
+}));
 ---
 
 <BlogLayout
@@ -28,6 +53,11 @@ const { Content } = await render(post);
   heroImageAlt={post.data.heroImageAlt}
   faqSchema={post.data.faq}
   slug={post.id}
+  category={post.data.category}
+  readingTime={readingTime}
+  wordCount={wordCount}
+  headings={headings}
+  relatedPosts={relatedPosts}
 >
   <Content />
 </BlogLayout>

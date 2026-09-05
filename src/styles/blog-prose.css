@@ -3,11 +3,66 @@
 .blog-prose {
   color: var(--text-secondary);
   font-size: 1.0625rem;
-  line-height: 1.7;
+  line-height: 1.75;
+  max-width: 1040px;
+  margin-inline: auto;
 }
 
 .blog-prose > * + * {
   margin-top: 1.25em;
+}
+
+/* Default reading measure (65–80ch) for continuous reading comfort */
+.blog-prose > p,
+.blog-prose > h2,
+.blog-prose > h3,
+.blog-prose > h4,
+.blog-prose > ul,
+.blog-prose > ol,
+.blog-prose > blockquote,
+.blog-prose > hr,
+.blog-prose > .toc,
+.blog-prose > .faq,
+.blog-prose > .cta-box {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Key Takeaways summary card: slightly wider */
+.blog-prose > .key-takeaways {
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mid-article high-intent conversion card */
+.blog-prose > .blog-mid-card {
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Code blocks: wide enough for long commands & code lines */
+.blog-prose > pre {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Breakout Wide: Comparison tables */
+.blog-prose > table,
+.blog-prose table {
+  width: 100%;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Inline images in prose: support breakout if wrapped in p */
+.blog-prose > p:has(> img) {
+  max-width: 1040px;
+  text-align: center;
 }
 
 .blog-prose h2 {
@@ -76,7 +131,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
-  margin: 1.5em 0;
+  margin: 2em auto;
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -85,7 +140,7 @@
 .blog-prose th,
 .blog-prose td {
   border: 1px solid var(--border-subtle);
-  padding: 0.65em 0.85em;
+  padding: 0.75em 1em;
   text-align: left;
 }
 
@@ -93,6 +148,12 @@
   background: var(--bg-section);
   color: var(--text-primary);
   font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .blog-prose th {
+    white-space: nowrap;
+  }
 }
 
 .blog-prose code {
@@ -107,7 +168,7 @@
   background: var(--bg-deep);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1em 1.25em;
+  padding: 1.25em 1.5em;
   overflow-x: auto;
   font-size: 0.875rem;
 }

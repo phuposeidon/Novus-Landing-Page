@@ -19,6 +19,7 @@ faq:
     answer: "Most checks, including robots.txt review, llms.txt presence, and JSON-LD validation, need no code. Fixes to product templates may need a developer or a theme editor."
   - question: "Does an AEO audit replace my SEO audit?"
     answer: "No. Run both. Traditional SEO audits check rankings and technical health. An AEO audit checks whether AI systems can find, parse, and cite your catalog."
+category: "ai-seo"
 draft: false
 ---
 

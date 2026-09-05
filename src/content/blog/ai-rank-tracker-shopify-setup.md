@@ -23,6 +23,7 @@ faq:
     answer: "The rank score (0 to 100) reflects how prominently your brand appears in a single AI answer for one prompt. Share of AI Voice is the percentage of answers across your full prompt panel where you win versus competitors."
   - question: "Do I need AI Rank Tracker if I already use GA4?"
     answer: "Yes, for different reasons. GA4 only sees clicks with identifiable referrers. AI Rank Tracker measures off-site recommendations where ChatGPT names competitors and never sends traffic to your store."
+category: "ai-seo"
 draft: false
 ---
 

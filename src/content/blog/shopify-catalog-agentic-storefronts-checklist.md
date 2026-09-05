@@ -20,6 +20,7 @@ faq:
     answer: "UCP is an open standard, co-developed by Shopify and Google, that lets AI agents discover, evaluate, and complete purchases across participating storefronts using a shared data format."
   - question: "Is UCP exclusive to Shopify stores?"
     answer: "No. UCP is an open protocol backed by Amazon, Meta, Microsoft, Salesforce, Stripe, Etsy, Target, and Wayfair, though Shopify Catalog is Shopify's implementation of the merchant-side data layer."
+category: "ai-seo"
 draft: false
 ---
 

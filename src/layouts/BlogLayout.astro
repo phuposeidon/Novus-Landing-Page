@@ -2,7 +2,22 @@
 import Layout from "./Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import { EDITORIAL_AUTHOR } from "../config/site.ts";
+import { EDITORIAL_AUTHOR, SHOPIFY_INSTALL_URL, QUIZSIGNAL } from "../config/site.ts";
+
+interface HeadingItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface RelatedPostItem {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  readingTime: number;
+}
 
 interface Props {
   title: string;
@@ -15,6 +30,11 @@ interface Props {
   heroImageAlt?: string;
   faqSchema?: { question: string; answer: string }[];
   slug: string;
+  category?: "ai-seo" | "quiz-signal" | "general";
+  readingTime?: number;
+  wordCount?: number;
+  headings?: HeadingItem[];
+  relatedPosts?: RelatedPostItem[];
 }
 
 const {
@@ -28,10 +48,18 @@ const {
   heroImageAlt,
   faqSchema = [],
   slug,
+  category = "ai-seo",
+  readingTime = 5,
+  wordCount = 1200,
+  headings = [],
+  relatedPosts = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const postUrl = new URL(`/blog/${slug}/`, Astro.site);
+
+const categoryName =
+  category === "quiz-signal" ? "Quiz Signal & CRO" : "AI Search & AEO";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -52,17 +80,44 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
+      name: categoryName,
+      item: new URL("/blog/", Astro.site).href,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
       name: title,
       item: postUrl.href,
     },
   ],
 };
 
+const aboutEntities =
+  category === "quiz-signal"
+    ? [
+        { "@type": "Thing", name: "Shopify Product Quizzes" },
+        { "@type": "Thing", name: "Conversion Rate Optimization" },
+        { "@type": "Thing", name: "Zero-Party Data Collection" },
+      ]
+    : [
+        { "@type": "Thing", name: "Answer Engine Optimization" },
+        { "@type": "Thing", name: "Shopify AI Search" },
+        { "@type": "Thing", name: "llms.txt Specification" },
+      ];
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: title,
   description,
+  wordCount,
+  timeRequired: `PT${readingTime}M`,
+  articleSection: categoryName,
+  about: aboutEntities,
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: [".key-takeaways", ".blog-dek"],
+  },
   author: {
     "@type": "Organization",
     name: author,
@@ -96,6 +151,13 @@ const faqPageSchema =
 const extraJsonLd = faqPageSchema
   ? [articleSchema, breadcrumbSchema, faqPageSchema]
   : [articleSchema, breadcrumbSchema];
+
+// Filter headings for TOC (h2 and h3)
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+  title
+)}&url=${encodeURIComponent(postUrl.href)}`;
 ---
 
 <Layout
@@ -117,27 +179,82 @@ const extraJsonLd = faqPageSchema
   <main class="blog-main">
     <article class="blog-article container">
       <header class="blog-header">
-        <nav class="blog-breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
-          <span aria-hidden="true">/</span>
-          <a href="/blog">Blog</a>
-          <span aria-hidden="true">/</span>
-          <span class="blog-breadcrumb-current">{title}</span>
-        </nav>
-        <p class="overline">Nexis CRO Blog</p>
-        <h1 class="display text-balance">{title}</h1>
-        <p class="body-lg blog-dek">{description}</p>
-        <div class="blog-meta">
-          <time datetime={pubDate.toISOString()}>
-            {pubDate.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
-          <span aria-hidden="true">·</span>
-          <a href={EDITORIAL_AUTHOR.path} class="blog-author">{author}</a>
+        <div class="blog-header-inner">
+          <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span aria-hidden="true">/</span>
+            <a href="/blog">Blog</a>
+            <span aria-hidden="true">/</span>
+            <span class="blog-breadcrumb-cat">{categoryName}</span>
+            <span aria-hidden="true">/</span>
+            <span class="blog-breadcrumb-current">{title}</span>
+          </nav>
+
+          <div class="blog-header-pills">
+            <span class={`category-pill category-pill--${category}`}>
+              {categoryName}
+            </span>
+            <span class="reading-time-pill">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              {readingTime} min read
+            </span>
+          </div>
+
+          <h1 class="display text-balance blog-title">{title}</h1>
+          <p class="body-lg blog-dek">{description}</p>
+
+          <div class="blog-meta-bar">
+            <div class="blog-meta-left">
+              <div class="blog-author-badge">
+                <span class="author-avatar" aria-hidden="true">NC</span>
+                <div class="author-info">
+                  <a href={EDITORIAL_AUTHOR.path} class="blog-author">{author}</a>
+                  <time datetime={pubDate.toISOString()} class="blog-pubdate">
+                    {pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+              </div>
+            </div>
+
+            <!-- Share Actions -->
+            <div class="blog-share-actions">
+              <span class="share-label">Share:</span>
+              <a
+                href={xShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="share-btn share-btn--x"
+                aria-label="Share on X"
+                title="Share on X"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <button
+                type="button"
+                class="share-btn share-btn--copy"
+                id="copy-link-btn"
+                aria-label="Copy article link"
+                title="Copy link"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="copy-toast" id="copy-toast">Copied!</span>
+              </button>
+            </div>
+          </div>
         </div>
+
         {heroImage && (
           <figure class="blog-hero">
             <img
@@ -150,11 +267,140 @@ const extraJsonLd = faqPageSchema
             />
           </figure>
         )}
+
+        <!-- Table of Contents (Inline Collapsible) -->
+        {tocHeadings.length >= 2 && (
+          <details class="blog-toc" open>
+            <summary class="blog-toc-summary">
+              <span class="toc-summary-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                Table of Contents
+              </span>
+              <span class="toc-chevron" aria-hidden="true">&rsaquo;</span>
+            </summary>
+            <nav class="blog-toc-nav" aria-label="Table of contents">
+              <ol class="toc-list">
+                {tocHeadings.map((h) => (
+                  <li class={`toc-item toc-depth-${h.depth}`}>
+                    <a href={`#${h.slug}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </details>
+        )}
       </header>
 
+      <!-- Main Prose Content -->
       <div class="blog-prose">
         <slot />
       </div>
+
+      <!-- Author Bio Box -->
+      <section class="blog-author-box" aria-label="About the author">
+        <div class="author-box-avatar" aria-hidden="true">NC</div>
+        <div class="author-box-body">
+          <div class="author-box-top">
+            <h3 class="author-box-name">{EDITORIAL_AUTHOR.name}</h3>
+            <span class="author-box-role">{EDITORIAL_AUTHOR.jobTitle}</span>
+          </div>
+          <p class="author-box-bio">{EDITORIAL_AUTHOR.bio}</p>
+          <a href={EDITORIAL_AUTHOR.path} class="author-box-link">
+            Meet the editorial team &amp; review our methodology &rarr;
+          </a>
+        </div>
+      </section>
+
+      <!-- Category-Aware Bottom Conversion CTA Card -->
+      <section class="blog-end-cta" aria-label="Next steps">
+        {category === "quiz-signal" ? (
+          <div class="end-cta-card end-cta--quiz">
+            <div class="end-cta-pill">
+              <span class="dot-quiz"></span>
+              Nexis CRO: Quiz Signal
+            </div>
+            <h3 class="end-cta-title">Stop Losing Shoppers to Choice Overload</h3>
+            <p class="end-cta-desc">
+              Turn catalog complexity into guided recommendations. Quiz Signal installs in seconds via native Shopify OS 2.0 theme app blocks and auto-syncs zero-party preferences to Klaviyo.
+            </p>
+            <div class="end-cta-actions">
+              <a
+                href={QUIZSIGNAL.installUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary end-cta-btn end-cta-btn--quiz"
+              >
+                Install Quiz Signal Free &nearr;
+              </a>
+              <a href={QUIZSIGNAL.hub} class="btn btn-ghost end-cta-btn-ghost">
+                Explore Quiz Features
+              </a>
+            </div>
+            <span class="end-cta-footnote">Free plan included &middot; Zero coding required &middot; Shopify App Store verified</span>
+          </div>
+        ) : (
+          <div class="end-cta-card end-cta--aiseo">
+            <div class="end-cta-pill">
+              <span class="dot-aiseo"></span>
+              Nexis CRO: AI SEO &amp; AEO Audit
+            </div>
+            <h3 class="end-cta-title">Is Your Shopify Store Visible in AI Search?</h3>
+            <p class="end-cta-desc">
+              Audit your store's readiness for ChatGPT, Perplexity, and Google AI Overviews. Detect schema gaps, deploy automated llms.txt, and track citations in real time.
+            </p>
+            <div class="end-cta-actions">
+              <a
+                href={SHOPIFY_INSTALL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary end-cta-btn end-cta-btn--aiseo"
+              >
+                Scan Your Store Free &nearr;
+              </a>
+              <a href="/#features" class="btn btn-ghost end-cta-btn-ghost">
+                See Audit Features
+              </a>
+            </div>
+            <span class="end-cta-footnote">Free tier available &middot; 2-minute setup &middot; Shopify App Store verified</span>
+          </div>
+        )}
+      </section>
+
+      <!-- Related Posts Section -->
+      {relatedPosts.length > 0 && (
+        <section class="blog-related-section" aria-label="Related guides">
+          <div class="related-header">
+            <h2 class="heading-3 related-title">Related Playbooks &amp; Guides</h2>
+            <a href="/blog/" class="related-all-link">Browse all guides &rarr;</a>
+          </div>
+          <div class="related-grid">
+            {relatedPosts.map((rel) => (
+              <article class="related-card card">
+                <div class="related-card-meta">
+                  <span class={`category-pill category-pill--${rel.category}`}>
+                    {rel.category === "ai-seo" ? "AI Search & AEO" : "Quiz Signal & CRO"}
+                  </span>
+                  <span class="related-read-time">{rel.readingTime} min</span>
+                </div>
+                <h3 class="related-card-title">
+                  <a href={`/blog/${rel.id}/`}>{rel.title}</a>
+                </h3>
+                <p class="related-card-desc">{rel.description}</p>
+                <a href={`/blog/${rel.id}/`} class="related-card-read">
+                  Read guide &rarr;
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </article>
   </main>
 
@@ -169,6 +415,7 @@ const extraJsonLd = faqPageSchema
         });
       }
 
+      // Progress bar
       const bar = document.getElementById("reading-progress-bar");
       if (bar) {
         function updateProgress() {
@@ -184,6 +431,20 @@ const extraJsonLd = faqPageSchema
         window.addEventListener("scroll", updateProgress, { passive: true });
         window.addEventListener("resize", updateProgress, { passive: true });
         updateProgress();
+      }
+
+      // Copy link button
+      const copyBtn = document.getElementById("copy-link-btn");
+      const toast = document.getElementById("copy-toast");
+      if (copyBtn && toast) {
+        copyBtn.addEventListener("click", function () {
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            toast.classList.add("show");
+            setTimeout(() => {
+              toast.classList.remove("show");
+            }, 2000);
+          }).catch(() => {});
+        });
       }
     });
   </script>
@@ -211,13 +472,19 @@ const extraJsonLd = faqPageSchema
   .blog-main {
     flex: 1;
     padding-top: calc(var(--nav-height, 72px) + var(--space-8));
-    padding-bottom: var(--space-9);
+    padding-bottom: var(--space-10);
   }
 
   .blog-article {
-    max-width: 740px;
+    max-width: 1080px;
   }
 
+  .blog-header-inner {
+    max-width: 760px;
+    margin-inline: auto;
+  }
+
+  /* Breadcrumb */
   .blog-breadcrumb {
     display: flex;
     flex-wrap: wrap;
@@ -237,55 +504,605 @@ const extraJsonLd = faqPageSchema
     color: var(--accent);
   }
 
+  .blog-breadcrumb-cat {
+    color: var(--text-muted);
+  }
+
   .blog-breadcrumb-current {
     color: var(--text-secondary);
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    max-width: 28ch;
+    max-width: 24ch;
+  }
+
+  /* Header Pills */
+  .blog-header-pills {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .reading-time-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Category Pills */
+  .category-pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .category-pill--ai-seo {
+    background: rgba(5, 150, 105, 0.12);
+    color: #059669;
+    border: 1px solid rgba(5, 150, 105, 0.28);
+  }
+
+  [data-theme="dark"] .category-pill--ai-seo {
+    background: rgba(54, 244, 164, 0.12);
+    color: #36f4a4;
+    border-color: rgba(54, 244, 164, 0.3);
+  }
+
+  .category-pill--quiz-signal {
+    background: rgba(124, 58, 237, 0.12);
+    color: #7c3aed;
+    border: 1px solid rgba(124, 58, 237, 0.28);
+  }
+
+  [data-theme="dark"] .category-pill--quiz-signal {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    border-color: rgba(168, 85, 247, 0.35);
   }
 
   .blog-header {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-4);
     margin-bottom: var(--space-8);
+  }
+
+  .blog-title {
+    margin: 0;
+    line-height: 1.25;
   }
 
   .blog-dek {
     color: var(--text-secondary);
     margin: 0;
+    line-height: 1.65;
   }
 
-  .blog-meta {
+  /* Meta Bar */
+  .blog-meta-bar {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: var(--space-2);
-    font-size: 0.875rem;
-    color: var(--text-muted);
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .blog-author-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8125rem;
   }
 
   .blog-author {
-    color: var(--text-muted);
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--duration-fast);
   }
 
   .blog-author:hover {
     color: var(--accent);
   }
 
+  .blog-pubdate {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  /* Share Actions */
+  .blog-share-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    position: relative;
+  }
+
+  .share-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .share-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--duration-fast);
+    position: relative;
+  }
+
+  .share-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+    background: var(--bg-glass-hover);
+  }
+
+  .copy-toast {
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.6875rem;
+    padding: 3px 8px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--duration-fast);
+    white-space: nowrap;
+    box-shadow: var(--shadow-card);
+  }
+
+  .copy-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Hero Image */
   .blog-hero {
-    margin: var(--space-6) 0 0;
-    border-radius: var(--radius-lg);
+    max-width: 1040px;
+    margin: var(--space-6) auto 0;
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border);
+    background: var(--bg-section);
   }
 
   .blog-hero img {
     width: 100%;
     height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
     display: block;
+  }
+
+  /* Table of Contents */
+  .blog-toc {
+    max-width: 760px;
+    margin: var(--space-6) auto 0;
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-5);
+    transition: border-color var(--duration-fast);
+  }
+
+  .blog-toc:hover {
+    border-color: var(--border-hover);
+  }
+
+  .blog-toc-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+
+  .blog-toc-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toc-chevron {
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--text-muted);
+    transition: transform var(--duration-fast);
+  }
+
+  .blog-toc[open] .toc-chevron {
+    transform: rotate(90deg);
+  }
+
+  .blog-toc-nav {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .toc-item a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    transition: color var(--duration-fast);
+    display: block;
+  }
+
+  .toc-item a:hover {
+    color: var(--accent);
+  }
+
+  .toc-depth-3 {
+    padding-left: var(--space-4);
+    font-size: 0.8125rem;
+    opacity: 0.9;
+  }
+
+  /* Author Box (End of Article) */
+  .blog-author-box {
+    max-width: 760px;
+    margin: var(--space-10) auto 0;
+    padding: var(--space-6);
+    background: var(--bg-section);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+
+  .author-box-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .author-box-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .author-box-top {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .author-box-name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .author-box-role {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  .author-box-bio {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .author-box-link {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: var(--space-1);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .author-box-link:hover {
+    text-decoration: underline;
+  }
+
+  /* End of Article Conversion CTA */
+  .blog-end-cta {
+    max-width: 1040px;
+    margin: var(--space-10) auto 0;
+  }
+
+  .end-cta-card {
+    max-width: 1000px;
+    margin-inline: auto;
+    padding: var(--space-8) var(--space-10);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .end-cta--aiseo {
+    background: radial-gradient(circle at top, var(--accent-dim) 0%, var(--bg-elevated) 70%);
+    border-color: rgba(5, 150, 105, 0.28);
+  }
+
+  [data-theme="dark"] .end-cta--aiseo {
+    border-color: rgba(54, 244, 164, 0.3);
+  }
+
+  .end-cta--quiz {
+    background: radial-gradient(circle at top, rgba(168, 85, 247, 0.14) 0%, var(--bg-elevated) 70%);
+    border-color: rgba(124, 58, 237, 0.3);
+  }
+
+  [data-theme="dark"] .end-cta--quiz {
+    border-color: rgba(168, 85, 247, 0.35);
+  }
+
+  .end-cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+  }
+
+  .dot-aiseo {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #059669;
+  }
+
+  [data-theme="dark"] .dot-aiseo {
+    background: #36f4a4;
+  }
+
+  .dot-quiz {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7c3aed;
+  }
+
+  [data-theme="dark"] .dot-quiz {
+    background: #a855f7;
+  }
+
+  .end-cta-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .end-cta-desc {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 60ch;
+    line-height: 1.65;
+  }
+
+  .end-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+    justify-content: center;
+  }
+
+  .end-cta-btn--quiz {
+    background: #7c3aed;
+    color: #ffffff;
+  }
+
+  [data-theme="dark"] .end-cta-btn--quiz {
+    background: #9333ea;
+  }
+
+  .end-cta-footnote {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+  }
+
+  /* Related Posts */
+  .blog-related-section {
+    max-width: 1040px;
+    margin: var(--space-12) auto 0;
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border);
+  }
+
+  .related-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-5);
+  }
+
+  .related-title {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .related-all-link {
+    font-size: 0.8125rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .related-all-link:hover {
+    text-decoration: underline;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .related-card {
+    padding: var(--space-5);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    transition: transform var(--duration-fast), border-color var(--duration-fast);
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+  }
+
+  .related-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .related-read-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .related-card-title {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  .related-card-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .related-card-title a:hover {
+    color: var(--accent);
+  }
+
+  .related-card-desc {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .related-card-read {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  @media (max-width: 860px) {
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-meta-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .blog-author-box {
+      flex-direction: column;
+    }
   }
 </style>

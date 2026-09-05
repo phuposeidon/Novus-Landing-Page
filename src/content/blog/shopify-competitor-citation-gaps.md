@@ -9,7 +9,7 @@ tags:
   - Competitors
   - AI Rank Tracker
   - Shopify
-heroImage: "https://images.unsplash.com/photo-1551836022-d5d88e9c9638?w=1200&h=630&fit=crop&q=80"
+heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&q=80"
 heroImageAlt: "Business team comparing competitor metrics on a dashboard"
 faq:
   - question: "What is a citation gap in AI search?"
@@ -20,6 +20,7 @@ faq:
     answer: "Thin product copy, missing FAQ schema, no llms.txt, blocked AI crawlers, weak third-party reviews, and competitors with stronger buying guides or structured data."
   - question: "How many competitors should I track?"
     answer: "Start with three to five direct competitors in your core category. Tracking more than five dilutes actionability unless you use automated rank tracking."
+category: "ai-seo"
 draft: false
 ---
 

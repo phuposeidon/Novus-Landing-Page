@@ -13,6 +13,8 @@ const blog = defineCollection({
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
     draft: z.boolean().default(false),
+    category: z.enum(["ai-seo", "quiz-signal", "general"]).default("general"),
+    featured: z.boolean().default(false),
     faq: z
       .array(
         z.object({

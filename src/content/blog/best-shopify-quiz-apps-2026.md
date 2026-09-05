@@ -20,6 +20,8 @@ faq:
     answer: "Legacy quiz apps that inject raw JavaScript tags into theme.liquid can degrade Core Web Vitals. Modern apps built strictly on Shopify Online Store 2.0 Theme App Extensions load asynchronously and have negligible impact on page speed."
   - question: "Can Shopify quizzes collect zero-party data for Klaviyo?"
     answer: "Yes. Leading quiz apps collect direct shopper preferences (skin type, sizing, budget, routines) and sync them automatically to Klaviyo customer profiles as custom properties."
+category: "quiz-signal"
+featured: true
 draft: false
 ---
 

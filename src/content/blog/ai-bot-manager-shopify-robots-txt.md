@@ -20,6 +20,7 @@ faq:
     answer: "Most ecommerce stores should allow retrieval bots in 2026 to stay visible in ChatGPT Shopping and Perplexity citations. Block training-focused bots only if you have a specific legal or brand policy reason."
   - question: "Can Cloudflare block AI bots even when robots.txt allows them?"
     answer: "Yes. CDN bot management and WAF rules can return 403 responses while robots.txt says Allow. Audit server logs and CDN settings, not just robots.txt.liquid."
+category: "ai-seo"
 draft: false
 ---
 

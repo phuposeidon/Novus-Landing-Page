@@ -20,6 +20,7 @@ faq:
     answer: "llms.txt is a hand-curated table of contents with links. llms-full.txt optionally bundles full markdown text of critical pages in one stream so models can read policies without fetching dozens of URLs."
   - question: "Will a 301 redirect to llms.txt work for AI crawlers?"
     answer: "GPTBot and ClaudeBot generally follow redirects to llms.txt. Perplexity sometimes behaves inconsistently on redirects. App Proxy or edge Workers that return HTTP 200 at /llms.txt are the most reliable options."
+category: "ai-seo"
 draft: false
 ---
 
