@@ -35,15 +35,17 @@ const DONUT_PATH =
       <div class="hero-cta">
         <a
           href={SHOPIFY_INSTALL_URL}
-          class="btn btn-primary btn-hero-install"
+          class="btn btn-primary"
           id="hero-cta-primary"
           target="_blank"
           rel="noopener noreferrer"
           data-analytics-event="install_click"
           data-analytics-location="hero"
         >
-          <span class="btn-main-label">Install Free on Shopify</span>
-          <span class="btn-sub-label">Free plan available · 2-min setup</span>
+          Install Free on Shopify
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
         </a>
         <a
           href={siteAnchors.quizsignal}
@@ -590,26 +592,6 @@ const DONUT_PATH =
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
-
-  .btn-hero-install {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 11px 24px;
-    line-height: 1.25;
-  }
-
-  .btn-main-label {
-    font-size: 15px;
-    font-weight: 700;
-  }
-
-  .btn-sub-label {
-    font-size: 11px;
-    font-weight: 500;
-    opacity: 0.85;
   }
 
   .hero-guarantees {
