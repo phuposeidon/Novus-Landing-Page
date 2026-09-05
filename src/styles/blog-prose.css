@@ -77,6 +77,9 @@
   border-collapse: collapse;
   font-size: 0.9375rem;
   margin: 1.5em 0;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-prose th,

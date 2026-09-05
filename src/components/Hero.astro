@@ -12,13 +12,9 @@ const DONUT_PATH =
 
   <div class="container hero-content">
     <div class="hero-badge">
-      <span class="badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-        Shopify App Suite
+      <span class="badge hero-pill-badge">
+        <span class="hero-stars" aria-label="5 stars">★★★★★</span>
+        <span class="badge-text">Rated 5.0 on Shopify App Store · Built for Shopify</span>
       </span>
     </div>
 
@@ -35,31 +31,47 @@ const DONUT_PATH =
       Attract AI search traffic with AI SEO Audit and convert shoppers with Quiz Signal recommendation funnels.
     </p>
 
-    <div class="hero-cta">
-      <a
-        href={SHOPIFY_INSTALL_URL}
-        class="btn btn-primary"
-        id="hero-cta-primary"
-        target="_blank"
-        rel="noopener noreferrer"
-        data-analytics-event="install_click"
-        data-analytics-location="hero"
-      >
-        Install AI SEO App
-      </a>
-      <a
-        href={siteAnchors.quizsignal}
-        class="btn btn-ghost"
-        id="hero-cta-secondary"
-        data-analytics-event="cta_secondary_click"
-        data-analytics-location="hero"
-        data-analytics-section="quizsignal"
-      >
-        Discover Quiz Signal →
-      </a>
-    </div>
+    <div class="hero-cta-group">
+      <div class="hero-cta">
+        <a
+          href={SHOPIFY_INSTALL_URL}
+          class="btn btn-primary btn-hero-install"
+          id="hero-cta-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-analytics-event="install_click"
+          data-analytics-location="hero"
+        >
+          <span class="btn-main-label">Install Free on Shopify</span>
+          <span class="btn-sub-label">Free plan available · 2-min setup</span>
+        </a>
+        <a
+          href={siteAnchors.quizsignal}
+          class="btn btn-ghost"
+          id="hero-cta-secondary"
+          data-analytics-event="cta_secondary_click"
+          data-analytics-location="hero"
+          data-analytics-section="quizsignal"
+        >
+          Explore Quiz Funnels →
+        </a>
+      </div>
 
-    <p class="hero-trust">Free forever plans available · No credit card required · 2-min Shopify install</p>
+      <div class="hero-guarantees">
+        <span class="hero-guarantee-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          No theme code modified
+        </span>
+        <span class="hero-guarantee-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Zero risk · Cancel anytime
+        </span>
+        <span class="hero-guarantee-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Instant ChatGPT audit
+        </span>
+      </div>
+    </div>
 
     <!-- App Selector Switcher -->
     <div class="hero-switcher-bar">
@@ -70,8 +82,8 @@ const DONUT_PATH =
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </span>
-        <span>1. AI SEO &amp; AEO Audit</span>
-        <span class="hero-tab-badge">Traffic &amp; AEO</span>
+        <span>1. AI SEO &amp; AEO Engine</span>
+        <span class="hero-tab-badge">Traffic &amp; Citations</span>
       </button>
       <button type="button" class="hero-tab-btn" id="hero-tab-quiz" data-app="quiz">
         <span class="hero-tab-icon">
@@ -79,8 +91,8 @@ const DONUT_PATH =
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
           </svg>
         </span>
-        <span>2. Quiz Signal</span>
-        <span class="hero-tab-badge">Conversion &amp; CRO</span>
+        <span>2. Quiz Signal Funnels</span>
+        <span class="hero-tab-badge">Storefront CRO</span>
       </button>
     </div>
 
@@ -522,6 +534,24 @@ const DONUT_PATH =
     margin-bottom: var(--space-3);
   }
 
+  .hero-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-card-inner);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .hero-stars {
+    color: #f59e0b;
+    letter-spacing: 1px;
+    font-size: 13px;
+  }
+
   .hero h1 {
     max-width: 16ch;
     margin-bottom: var(--space-3);
@@ -546,19 +576,60 @@ const DONUT_PATH =
     }
   }
 
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
   .hero-cta {
     display: flex;
     gap: var(--space-3);
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: var(--space-2);
+    align-items: center;
   }
 
-  .hero-trust {
-    margin: 0 0 var(--space-4);
-    font-size: 0.82rem;
+  .btn-hero-install {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 24px;
+    line-height: 1.25;
+  }
+
+  .btn-main-label {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .btn-sub-label {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  .hero-guarantees {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero-guarantee-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
     color: var(--text-muted);
-    text-align: center;
+    background: var(--bg-glass);
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
   }
 
 

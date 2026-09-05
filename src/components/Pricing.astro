@@ -137,11 +137,11 @@ const comparisonRows = [
   { label: "Audits / month", free: "1", pro: "Unlimited", growth: "Unlimited", agency: "Unlimited" },
   { label: "AEO score", free: "Basic", pro: "Full", growth: "Full", agency: "Full" },
   { label: "AI Rank Tracker", free: "1 prompt (5 checks)", pro: "5 prompts (150 checks)", growth: "20 prompts (1200 checks)", agency: "50 prompts (5000 checks)" },
+  { label: "Citation Gap Insights", free: "—", pro: "—", growth: "✓", agency: "✓" },
   { label: "AEO Description Optimizer", free: "—", pro: "✓", growth: "✓", agency: "✓" },
   { label: "AI FAQ Generator", free: "3 products", pro: "50 products", growth: "Unlimited", agency: "Unlimited" },
   { label: "AI Buying Guide Generator", free: "—", pro: "—", growth: "✓", agency: "✓" },
   { label: "AI Bot Manager (robots.txt)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
-  { label: "Citation Gap Insights", free: "—", pro: "—", growth: "✓", agency: "✓" },
   { label: "Bulk Fix (batch AI)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
   { label: "Schema Blocks (JSON-LD)", free: "—", pro: "✓", growth: "✓", agency: "✓" },
   { label: "llms.txt deploy", free: "—", pro: "✓", growth: "✓ auto-update", agency: "✓ auto-update" },
@@ -152,6 +152,9 @@ const comparisonRows = [
   { label: "Issue history", free: "—", pro: "✓", growth: "✓", agency: "✓" },
   { label: "Child stores managed", free: "—", pro: "—", growth: "—", agency: "Up to 5" },
 ];
+
+const topComparisonRows = comparisonRows.slice(0, 5);
+const extendedComparisonRows = comparisonRows.slice(5);
 ---
 
 <section class="pricing section" id="pricing" data-od-id="pricing-section">
@@ -213,9 +216,27 @@ const comparisonRows = [
 
     <!-- VIEW 1: AI SEO PRICING -->
     <div class="pricing-view" id="pricing-view-aiseo">
-      <div class="pricing-grid stagger">
+      <!-- Mobile Quick Plan Switcher Pills (< 768px) -->
+      <div class="pricing-mobile-pills" role="tablist" aria-label="Quick jump to plan">
+        {plans.map((p) => (
+          <button
+            type="button"
+            class={`pricing-mobile-pill ${p.featured ? "active" : ""}`}
+            data-plan-target={`pricing-card-wrap-${p.name.toLowerCase()}`}
+          >
+            {p.name} {p.featured && "★"}
+          </button>
+        ))}
+      </div>
+
+      <div class="pricing-grid stagger" id="pricing-grid-aiseo">
         {plans.map((plan) => (
-          <div class="pricing-card-wrap" style="position: relative; display: flex; flex-direction: column;">
+          <div
+            class="pricing-card-wrap"
+            id={`pricing-card-wrap-${plan.name.toLowerCase()}`}
+            data-plan={plan.name.toLowerCase()}
+            style="position: relative; display: flex; flex-direction: column;"
+          >
             {plan.badge && (
               <span class="pricing-badge badge" style="position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 8px; z-index: 2; white-space: nowrap;">{plan.badge}</span>
             )}
@@ -270,16 +291,14 @@ const comparisonRows = [
         ))}
       </div>
 
-      <!-- Feature comparison table -->
+      <!-- Feature comparison table with top 5 visible by default -->
       <div class="comparison-wrap animate-on-scroll" data-od-id="pricing-comparison">
-        <button class="comparison-toggle" id="comparison-toggle" aria-expanded="false">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-          Compare all AI SEO &amp; AEO features
-        </button>
+        <div class="comparison-header-strip">
+          <div class="comparison-header-badge">Core Specs Matrix</div>
+          <span class="comparison-header-hint">Essential limits shown by default · Expand for all 18+ technical specs</span>
+        </div>
 
-        <div class="comparison-table-wrap" id="comparison-table" hidden>
+        <div class="comparison-table-wrap">
           <table class="comparison-table" role="table">
             <caption class="sr-only">Feature comparison across all Nexis CRO plans</caption>
             <thead>
@@ -291,8 +310,24 @@ const comparisonRows = [
                 <th scope="col" class="col-plan">Agency</th>
               </tr>
             </thead>
-            <tbody>
-              {comparisonRows.map((row) => (
+            <!-- Top 5 Core Features (Always Visible) -->
+            <tbody class="comparison-core-tbody">
+              {topComparisonRows.map((row) => (
+                <tr class="row-highlight">
+                  <td class="row-label">
+                    <span class="core-dot" aria-hidden="true"></span>
+                    {row.label}
+                  </td>
+                  <td class={row.free === "—" ? "cell-empty" : "cell-val"}>{row.free}</td>
+                  <td class={row.pro === "—" ? "cell-empty" : "cell-val"}>{row.pro}</td>
+                  <td class={`col-featured ${row.growth === "—" ? "cell-empty" : "cell-val"}`}>{row.growth}</td>
+                  <td class={row.agency === "—" ? "cell-empty" : "cell-val"}>{row.agency}</td>
+                </tr>
+              ))}
+            </tbody>
+            <!-- Extended 13 Technical Rows (Expandable) -->
+            <tbody id="comparison-extended-tbody" class="comparison-extended-tbody is-hidden">
+              {extendedComparisonRows.map((row) => (
                 <tr>
                   <td class="row-label">{row.label}</td>
                   <td class={row.free === "—" ? "cell-empty" : "cell-val"}>{row.free}</td>
@@ -304,6 +339,13 @@ const comparisonRows = [
             </tbody>
           </table>
         </div>
+
+        <button class="comparison-toggle" id="comparison-toggle" aria-expanded="false">
+          <span id="comparison-toggle-label">Compare all 18+ technical features</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -374,9 +416,23 @@ const comparisonRows = [
       </div>
     </div>
 
-    <p class="pricing-trust body-sm text-center animate-on-scroll">
-      Cancel anytime &middot; Shopify App Store billing &middot; 0 lock-in
-    </p>
+    <!-- Trust Guarantee Strip -->
+    <div class="pricing-trust-bar animate-on-scroll">
+      <div class="trust-bar-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Shopify App Store Billing</span>
+      </div>
+      <span class="trust-bar-sep" aria-hidden="true">·</span>
+      <div class="trust-bar-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>14-Day Risk-Free Guarantee</span>
+      </div>
+      <span class="trust-bar-sep" aria-hidden="true">·</span>
+      <div class="trust-bar-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>1-Click Cancel Anytime</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -439,16 +495,38 @@ const comparisonRows = [
       annualBtn?.addEventListener("click", () => setBilling("annual"));
       setBilling("annual");
 
-      // --- Comparison table toggle ---
+      // --- Mobile Plan Pill Switcher ---
+      const pills = document.querySelectorAll(".pricing-mobile-pill");
+      pills.forEach((pill) => {
+        pill.addEventListener("click", () => {
+          const targetId = pill.getAttribute("data-plan-target");
+          const targetCard = document.getElementById(targetId);
+          if (targetCard) {
+            pills.forEach((p) => p.classList.remove("active"));
+            pill.classList.add("active");
+            targetCard.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+          }
+        });
+      });
+
+      // --- Comparison table toggle (Top 5 visible by default, 13 expandable) ---
       const compToggle = document.getElementById("comparison-toggle");
-      const compTable = document.getElementById("comparison-table");
+      const compExtTbody = document.getElementById("comparison-extended-tbody");
+      const compToggleLabel = document.getElementById("comparison-toggle-label");
 
       compToggle?.addEventListener("click", () => {
-        const expanded = compToggle.getAttribute("aria-expanded") === "true";
-        compToggle.setAttribute("aria-expanded", String(!expanded));
-        if (compTable) compTable.hidden = expanded;
+        const isExpanded = compToggle.getAttribute("aria-expanded") === "true";
+        compToggle.setAttribute("aria-expanded", String(!isExpanded));
+        if (compExtTbody) {
+          compExtTbody.classList.toggle("is-hidden", isExpanded);
+        }
+        if (compToggleLabel) {
+          compToggleLabel.textContent = isExpanded
+            ? "Compare all 18+ technical features"
+            : "Show fewer features";
+        }
         if (window.nexisTrack) {
-          window.nexisTrack("comparison_toggle", { expanded: !expanded });
+          window.nexisTrack("comparison_toggle", { expanded: !isExpanded });
         }
       });
     }
@@ -777,9 +855,103 @@ const comparisonRows = [
     color: var(--accent);
   }
 
-  /* Comparison table */
-  .pricing-trust {
-    margin-top: var(--space-6);
+  /* Mobile Plan Quick Switcher Pills */
+  .pricing-mobile-pills {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: var(--space-4) 0 var(--space-2);
+    padding: 0 8px;
+  }
+
+  .pricing-mobile-pill {
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--bg-card-inner);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--duration-fast);
+  }
+
+  .pricing-mobile-pill.active {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px var(--accent-dim);
+  }
+
+  /* Comparison table header & core features */
+  .comparison-header-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison-header-badge {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .comparison-header-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .core-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .row-highlight {
+    background: rgba(54, 244, 164, 0.02);
+  }
+
+  .comparison-extended-tbody.is-hidden {
+    display: none;
+  }
+
+  /* Trust Guarantee Strip */
+  .pricing-trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: var(--space-7);
+    padding: var(--space-3) var(--space-5);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .trust-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .trust-bar-sep {
     color: var(--text-muted);
   }
 
@@ -803,23 +975,17 @@ const comparisonRows = [
     color: var(--text-secondary);
     background: transparent;
     border: none;
-    border-bottom: 1px solid transparent;  /* revealed when open */
-    padding: 18px 24px;
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
     cursor: pointer;
     transition: color var(--duration-fast) var(--ease-out),
-      background var(--duration-fast) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out);
+      background var(--duration-fast) var(--ease-out);
     letter-spacing: 0.01em;
   }
 
   .comparison-toggle:hover {
     color: var(--text-primary);
     background: var(--bg-glass);
-  }
-
-  .comparison-toggle[aria-expanded="true"] {
-    border-bottom-color: var(--border);
-    color: var(--text-primary);
   }
 
   .comparison-toggle svg {
@@ -908,11 +1074,35 @@ const comparisonRows = [
     }
   }
 
-  @media (max-width: 640px) {
-    .pricing-grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 768px) {
+    .pricing-mobile-pills {
+      display: flex;
     }
 
+    .pricing-grid {
+      display: flex !important;
+      overflow-x: auto !important;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 16px;
+      padding: 12px 16px 24px !important;
+      margin: 0 -16px;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+    }
+
+    .pricing-card-wrap {
+      flex: 0 0 82% !important;
+      min-width: 270px;
+      max-width: 320px;
+      scroll-snap-align: center;
+    }
+
+    .comparison-header-hint {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
     .pricing-amount {
       font-size: 32px;
     }
@@ -925,10 +1115,15 @@ const comparisonRows = [
     }
   }
 
-  @media (max-width: 375px) {
-    .billing-toggle {
-      width: 100%;
-      justify-content: center;
+  @media (max-width: 480px) {
+    .pricing-trust-bar {
+      border-radius: var(--radius-lg);
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .trust-bar-sep {
+      display: none;
     }
   }
 </style>
