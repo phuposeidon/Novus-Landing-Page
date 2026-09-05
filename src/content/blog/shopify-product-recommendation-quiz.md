@@ -35,9 +35,9 @@ draft: false
 
 ## What Is a Product Recommendation Quiz?
 
-A product recommendation quiz is a short, guided flow that asks a shopper a handful of questions, then recommends specific products from your catalog based on the answers. It replaces a category page full of options with a short conversation that ends in a shortlist.
+A product recommendation quiz is a short, guided flow that asks a shopper a handful of questions, then recommends specific products from your catalog based on the answers. It replaces a category page full of options with a short conversation that ends in a shortlist. With dedicated Shopify apps like [Nexis CRO: Quiz Signal](/quizsignal/), merchants can embed recommendation blocks directly into Online Store 2.0 themes without touching Liquid code.
 
-The format works because shopping decisions are often about narrowing, not browsing. A shopper who does not know which of your 40 moisturizers fits dry, sensitive skin is more likely to answer 5 questions than to read 40 product pages.
+The format works because shopping decisions are often about narrowing, not browsing. A shopper who does not know which of your 40 moisturizers fits dry, sensitive skin is more likely to answer 5 questions than to read 40 product pages. Check out our [Quiz Signal setup guides](/quizsignal/guides/) to see example questions.
 
 ## Why Quizzes Convert Better Than Static Category Pages
 
@@ -83,8 +83,9 @@ Quizzes fail most often when they collect data the recommendation logic never us
 
 <div class="cta-box">
 <p class="cta-title">Build a converting quiz without writing recommendation logic by hand</p>
-<p class="cta-desc">Nexis CRO Quiz Signal (our own Shopify app) includes Quiz Studio for building branching product quizzes and AI-assisted question and recommendation generation.</p>
+<p class="cta-desc">Nexis CRO Quiz Signal includes Quiz Studio for building branching product quizzes, automated recommendation rules, and optional Klaviyo email capture.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<p class="cta-secondary">Explore the <a href="/quizsignal/">Quiz Signal Product Hub</a> or view <a href="/quizsignal/pricing/">transparent pricing</a> ($0 Free Plan / $9 Growth).</p>
 </div>
 
 ## FAQ

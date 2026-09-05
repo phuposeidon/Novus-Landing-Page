@@ -37,7 +37,7 @@ draft: false
 
 Zero-party data is information a shopper hands you directly, on purpose, in response to a question you asked. A quiz answer about skin type, gift budget, or fit preference is zero-party data. A page view or an abandoned cart is inferred behavior, a guess about intent built from what the shopper did, not what they said.
 
-The distinction matters for personalization quality. Inferred data can be wrong, since a shopper might browse a product for a friend, not themselves. Quiz answers carry stated intent, which makes them a stronger input for the emails and texts that follow.
+The distinction matters for personalization quality. Inferred data can be wrong, since a shopper might browse a product for a friend, not themselves. Quiz answers carry stated intent, which makes them a stronger input for the emails and texts that follow. With tools like [Nexis CRO: Quiz Signal](/quizsignal/), every answer syncs to Shopify customer metafields and Klaviyo custom properties in real time.
 
 ## Why Flows Outperform One-Off Campaigns
 
@@ -77,8 +77,9 @@ For quiz-triggered flows specifically, track placed-order rate segmented by quiz
 
 <div class="cta-box">
 <p class="cta-title">Capture quiz answers as data you can actually use</p>
-<p class="cta-desc">Nexis CRO Quiz Signal (our own Shopify app) tags every quiz answer to the shopper's profile automatically, ready to segment into email and SMS flows.</p>
+<p class="cta-desc">Nexis CRO Quiz Signal tags every quiz answer to the shopper's profile automatically, ready to segment into Klaviyo and Omnisend email flows.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<p class="cta-secondary">See how it works on the <a href="/quizsignal/">Quiz Signal Product Hub</a> or view <a href="/quizsignal/pricing/">pricing details</a>.</p>
 </div>
 
 ## FAQ

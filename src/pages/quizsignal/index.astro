@@ -6,26 +6,92 @@ import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import { QUIZSIGNAL, SUPPORT_EMAIL, siteAnchors } from "../../config/site";
 
-const title = `${QUIZSIGNAL.name} — Product recommendation quizzes for Shopify`;
+const title = "Shopify Product Recommendation Quiz App — Nexis CRO: Quiz Signal";
 const description =
-  "Build storefront quizzes that recommend catalog products from shopper answers. Theme block, admin builder, and optional Klaviyo sync.";
+  "Build high-converting storefront recommendation quizzes on Shopify OS 2.0 without coding. Boost conversions 2.75x, reduce returns by 28%, and sync zero-party data to Klaviyo.";
 
-const links = [
-  { label: "Pricing", href: QUIZSIGNAL.pricing },
-  { label: "Privacy Policy", href: QUIZSIGNAL.privacy },
-  { label: "FAQ", href: QUIZSIGNAL.faq },
-  { label: "Guides", href: QUIZSIGNAL.guides },
-] as const;
+const quizFaqs = [
+  {
+    question: "How does Quiz Signal integrate with Shopify Online Store 2.0?",
+    answer:
+      "Quiz Signal uses native Shopify App Blocks (Theme App Extensions). You can add, reposition, or style the quiz block directly inside the Shopify Theme Editor without touching Liquid theme code or risking theme pollution.",
+  },
+  {
+    question: "Can Quiz Signal sync zero-party data and emails to Klaviyo?",
+    answer:
+      "Yes. Quiz Signal integrates with Klaviyo via API. Shopper quiz answers are automatically tagged to customer profiles as custom properties, empowering you to trigger personalized, high-converting post-quiz email and SMS flows.",
+  },
+  {
+    question: "How does a product recommendation quiz reduce return rates?",
+    answer:
+      "By asking 4 to 6 qualifying questions regarding fit, skin type, routine preference, or budget, quizzes guide shoppers to the exact right product before purchase, reducing returns by up to 28% compared to unguided category browsing.",
+  },
+  {
+    question: "What is included in the Quiz Signal Free Forever plan?",
+    answer:
+      "The Free plan includes 2 active storefront quizzes, 100 completions per month, Quiz Studio visual builder, catalog recommendation mapping, and monthly AI credits with zero credit card required.",
+  },
+  {
+    question: "Does Quiz Signal slow down my Shopify storefront?",
+    answer:
+      "No. Quiz Signal is built on lightweight Shopify OS 2.0 app architecture that loads asynchronously only where deployed, protecting your Core Web Vitals, speed index, and mobile conversion rates.",
+  },
+  {
+    question: "How does Quiz Signal compare to apps like Octane AI or Prehook?",
+    answer:
+      "Quiz Signal delivers essential branching logic, product matching, and Klaviyo sync at transparent, merchant-friendly pricing ($0 Free / $9 Growth vs $50–$200+/month for enterprise tools), with no hidden completion tax.",
+  },
+];
+
+const guides = [
+  {
+    title: "Product Recommendation Quiz Implementation Guide",
+    summary:
+      "Step-by-step guide to building storefront quizzes that map catalog products, boost conversion, and capture zero-party data.",
+    href: "/blog/shopify-product-recommendation-quiz/",
+    readTime: "6 min read",
+  },
+  {
+    title: "Capture Emails & Sync Quiz Data to Klaviyo",
+    summary:
+      "Turn on email capture in quiz results, sync customer preferences to Klaviyo, and trigger high-converting personalized flows.",
+    href: "/blog/shopify-quiz-email-personalization/",
+    readTime: "5 min read",
+  },
+  {
+    title: "How Recommendation Quizzes Cut Returns by 28%",
+    summary:
+      "Help shoppers find their exact right-fit product before ordering, eliminating return friction and buyer remorse.",
+    href: "/blog/shopify-product-quiz-reduce-returns/",
+    readTime: "5 min read",
+  },
+  {
+    title: "Build a High-Converting Shopify Gift Finder Quiz",
+    summary:
+      "Guide holiday and seasonal shoppers through interactive question paths to find the perfect gifts from your catalog.",
+    href: "/blog/shopify-gift-finder-quiz/",
+    readTime: "6 min read",
+  },
+];
 
 const quizSignalAppSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: QUIZSIGNAL.name,
+  alternateName: "Quiz Signal",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Shopify",
   url: Astro.site ? new URL(QUIZSIGNAL.hub, Astro.site).href : "https://nexiscro.com/quizsignal/",
   installUrl: QUIZSIGNAL.installUrl,
   description,
+  featureList: [
+    "Shopify OS 2.0 Theme App Block",
+    "Branching Product Recommendation Logic",
+    "Zero-Party Data Collection",
+    "Klaviyo Profile & Event Sync",
+    "Multi-Product Bundle & Routine Recommendations",
+    "AI Quiz Studio Builder",
+  ],
   offers: [
     {
       "@type": "Offer",
@@ -43,93 +109,758 @@ const quizSignalAppSchema = {
     },
   ],
 };
+
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: quizFaqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://nexiscro.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Quiz Signal",
+      item: "https://nexiscro.com/quizsignal/",
+    },
+  ],
+};
 ---
 
 <Layout
   title={title}
   description={description}
   includeAppSchema={false}
-  extraJsonLd={quizSignalAppSchema}
+  extraJsonLd={[quizSignalAppSchema, faqPageSchema, breadcrumbSchema]}
 >
   <Nav />
-  <main class="qs-hub">
-    <div class="container qs-shell">
-      <p class="overline">Shopify app</p>
-      <h1 class="display text-balance">{QUIZSIGNAL.name}</h1>
-      <p class="body-lg qs-lead">
-        Create storefront product quizzes that recommend catalog matches from shopper answers.
-        Publish a theme block, map answers to products, and sync preferences for follow-up.
-      </p>
 
-      <div class="qs-actions">
-        <a class="btn btn-primary" href={QUIZSIGNAL.installUrl} target="_blank" rel="noopener noreferrer">
-          Install on Shopify
-        </a>
-        <a class="btn btn-ghost" href={siteAnchors.contact}>Contact</a>
+  <main class="qs-hub-main">
+    <!-- Hero Section -->
+    <section class="qs-hero section">
+      <div class="container qs-hero-container">
+        <div class="qs-badge-wrap">
+          <span class="badge qs-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
+            </svg>
+            Shopify Storefront CRO App
+          </span>
+        </div>
+
+        <h1 class="display-xl qs-title text-balance">
+          Shopify Product Recommendation Quizzes That Turn Browsers into Buyers.
+        </h1>
+
+        <p class="body-lg qs-dek text-balance">
+          Replace decision paralysis with guided selling. Ask 4 to 6 smart questions, recommend exact catalog matches, capture high-intent zero-party data, and sync directly to Klaviyo — with zero custom code.
+        </p>
+
+        <div class="qs-hero-actions">
+          <a
+            href={QUIZSIGNAL.installUrl}
+            class="btn btn-primary btn-hero"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics-event="install_click"
+            data-analytics-location="quizsignal_hero"
+          >
+            Install Free on Shopify
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+          <a href={QUIZSIGNAL.pricing} class="btn btn-ghost">
+            View Pricing ($0 Free Plan)
+          </a>
+        </div>
+
+        <div class="qs-guarantees">
+          <span class="qs-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Shopify OS 2.0 Theme Block
+          </span>
+          <span class="qs-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Zero Theme Code Injected
+          </span>
+          <span class="qs-chip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            14-Day Free Trial on Growth
+          </span>
+        </div>
       </div>
+    </section>
 
-      <section class="qs-cards" aria-labelledby="qs-resources-heading">
-        <h2 id="qs-resources-heading" class="heading-2">Resources</h2>
-        <ul>
+    <!-- Benchmark Proof Metrics -->
+    <section class="qs-metrics-section">
+      <div class="container">
+        <div class="qs-metrics-grid">
+          <div class="qs-metric-card">
+            <div class="qs-metric-num mono text-accent">2.75x</div>
+            <div class="qs-metric-label">Higher Order Rate</div>
+            <p class="body-sm text-secondary">Quiz takers convert at nearly 3x baseline store conversion across 20,000+ benchmarked stores.</p>
+          </div>
+          <div class="qs-metric-card">
+            <div class="qs-metric-num mono text-accent">+22%</div>
+            <div class="qs-metric-label">Average Order Value Lift</div>
+            <p class="body-sm text-secondary">Routine, bundle, and regimen recommendations increase basket size on checkout.</p>
+          </div>
+          <div class="qs-metric-card">
+            <div class="qs-metric-num mono text-accent">-28%</div>
+            <div class="qs-metric-label">Fewer Product Returns</div>
+            <p class="body-sm text-secondary">Direct sizing and formula qualification prevents buyer remorse and expensive restocking fees.</p>
+          </div>
+          <div class="qs-metric-card">
+            <div class="qs-metric-num mono text-accent">41%</div>
+            <div class="qs-metric-label">Email Revenue Share</div>
+            <p class="body-sm text-secondary">Automated post-quiz flows driven by zero-party answers outperform broadcast blasts by 13x.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="qs-workflow section">
+      <div class="container">
+        <div class="text-center qs-section-header">
+          <span class="overline">Frictionless Setup</span>
+          <h2 class="display text-balance">Built for Shopify Online Store 2.0</h2>
+          <p class="body-lg text-secondary" style="max-width: 48ch; margin: 0 auto;">
+            Launch your first recommendation funnel in three simple steps without hiring a developer.
+          </p>
+        </div>
+
+        <div class="qs-steps-grid">
+          <div class="qs-step-card card">
+            <div class="qs-step-number mono">01</div>
+            <h3 class="heading-2">Embed Theme App Block</h3>
+            <p class="body-md text-secondary">
+              Add the Quiz Signal block anywhere in your theme editor — homepage, dedicated <code>/pages/quiz</code>, or collection headers. No manual Liquid editing, completely safe for your theme code.
+            </p>
+          </div>
+          <div class="qs-step-card card">
+            <div class="qs-step-number mono">02</div>
+            <h3 class="heading-2">Build in Quiz Studio</h3>
+            <p class="body-md text-secondary">
+              Use visual branching logic or let AI draft question sequences. Map answers to catalog tags, collections, or individual SKUs with weighted scoring logic for precision recommendations.
+            </p>
+          </div>
+          <div class="qs-step-card card">
+            <div class="qs-step-number mono">03</div>
+            <h3 class="heading-2">Capture &amp; Sync to Klaviyo</h3>
+            <p class="body-md text-secondary">
+              Prompt for email or SMS right before showing results. All answers sync instantly to customer profiles as zero-party data, ready to trigger high-converting personalized flows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Pillar Features Grid -->
+    <section class="qs-features section">
+      <div class="container">
+        <div class="text-center qs-section-header">
+          <span class="overline">Core Capabilities</span>
+          <h2 class="display text-balance">Everything You Need to Convert Guided Shoppers</h2>
+        </div>
+
+        <div class="qs-feature-grid">
+          <div class="qs-feature-box card">
+            <div class="qs-feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="heading-2">Visual Quiz Studio &amp; AI Builder</h3>
+            <p class="body-md text-secondary">
+              Create beautiful skincare routines, shade finders, gift selectors, or sizing calculators. Customize colors, fonts, progress bars, and button styles to match your store branding seamlessly.
+            </p>
+          </div>
+
+          <div class="qs-feature-box card">
+            <div class="qs-feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
+            <h3 class="heading-2">Multi-Product Routine &amp; Bundle Matches</h3>
+            <p class="body-md text-secondary">
+              Recommend 2 to 3 ranked matches or full 3-step routines. Include a 1-click "Add Bundle to Cart" button so shoppers can purchase the complete recommendation without leaving the page.
+            </p>
+          </div>
+
+          <div class="qs-feature-box card">
+            <div class="qs-feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <h3 class="heading-2">Zero-Party Data &amp; Klaviyo Sync</h3>
+            <p class="body-md text-secondary">
+              Stop guessing shopper intent from generic clicks. Collect exact skin concerns, sizing dimensions, and budget constraints, automatically synced to Klaviyo for hyper-personalized marketing.
+            </p>
+          </div>
+
+          <div class="qs-feature-box card">
+            <div class="qs-feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="heading-2">Zero Theme Code Pollution &amp; High Speed</h3>
+            <p class="body-md text-secondary">
+              Unlike legacy apps that inject unremovable scripts into <code>theme.liquid</code>, Quiz Signal is built 100% on Shopify OS 2.0 App Blocks. Lightning fast and completely clean if ever uninstalled.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Direct Pricing Snapshot -->
+    <section class="qs-pricing-snapshot section">
+      <div class="container">
+        <div class="text-center qs-section-header">
+          <span class="overline">Fair &amp; Transparent</span>
+          <h2 class="display text-balance">Simple Pricing Without Completion Traps</h2>
+          <p class="body-lg text-secondary" style="max-width: 46ch; margin: 0 auto;">
+            Other quiz apps charge $50–$200/month plus fees for every quiz taker. Quiz Signal offers a Free Forever plan and flat $9 Growth tier.
+          </p>
+        </div>
+
+        <div class="qs-pricing-cards-grid">
+          <!-- Free Plan -->
+          <div class="qs-price-card card">
+            <div class="qs-price-tier">Free Plan</div>
+            <div class="qs-price-amount mono">$0<span class="qs-price-period">/mo forever</span></div>
+            <p class="body-sm text-secondary">Ideal for stores testing their first recommendation funnel.</p>
+            <ul class="qs-price-features">
+              <li>✓ 2 active storefront quizzes</li>
+              <li>✓ 100 quiz completions / month</li>
+              <li>✓ Full Quiz Studio visual builder</li>
+              <li>✓ Product recommendation rules</li>
+              <li>✓ Shopify OS 2.0 Theme Block</li>
+              <li>✓ 10 AI credits / month</li>
+            </ul>
+            <a href={QUIZSIGNAL.installUrl} class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+              Install Free on Shopify
+            </a>
+          </div>
+
+          <!-- Growth Plan -->
+          <div class="qs-price-card card qs-price-featured">
+            <div class="qs-price-badge">Most Popular</div>
+            <div class="qs-price-tier">Growth Plan</div>
+            <div class="qs-price-amount mono">$9<span class="qs-price-period">/mo</span></div>
+            <p class="body-sm text-secondary">or $86.40/yr (Save 20%) · 14-day free trial</p>
+            <ul class="qs-price-features">
+              <li>✓ <strong>Unlimited</strong> active quizzes</li>
+              <li>✓ <strong>Unlimited</strong> completions (no overage fees)</li>
+              <li>✓ 200 AI credits / month</li>
+              <li>✓ Klaviyo &amp; customer segment sync</li>
+              <li>✓ A/B testing &amp; advanced analytics</li>
+              <li>✓ Custom result templates &amp; styling</li>
+              <li>✓ Remove app branding</li>
+            </ul>
+            <a href={QUIZSIGNAL.installUrl} class="btn btn-accent" target="_blank" rel="noopener noreferrer">
+              Start 14-Day Free Trial
+            </a>
+          </div>
+        </div>
+
+        <div class="text-center" style="margin-top: var(--space-6);">
+          <a href={QUIZSIGNAL.pricing} class="text-accent" style="text-decoration: underline; font-size: 14px;">
+            View full pricing breakdown and credit pack specifications →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz CRO Guides -->
+    <section class="qs-guides-section section">
+      <div class="container">
+        <div class="text-center qs-section-header">
+          <span class="overline">Expert Knowledge</span>
+          <h2 class="display text-balance">Shopify Quiz Strategy &amp; CRO Playbooks</h2>
+          <p class="body-lg text-secondary" style="max-width: 48ch; margin: 0 auto;">
+            Read tactical guides from the Nexis CRO editorial team on question architecture, Klaviyo flows, and return reduction.
+          </p>
+        </div>
+
+        <div class="qs-guides-grid">
           {
-            links.map((link) => (
-              <li>
-                <a href={link.href}>{link.label}</a>
-              </li>
+            guides.map((guide) => (
+              <a href={guide.href} class="qs-guide-card card">
+                <div class="qs-guide-meta">
+                  <span class="badge">CRO Guide</span>
+                  <span class="qs-guide-time">{guide.readTime}</span>
+                </div>
+                <h3 class="heading-2 qs-guide-title">{guide.title}</h3>
+                <p class="body-sm text-secondary">{guide.summary}</p>
+                <span class="qs-guide-link">Read guide →</span>
+              </a>
             ))
           }
-        </ul>
-        <p class="body-md qs-note">
-          App host (merchants):{" "}
-          <a href={QUIZSIGNAL.appUrl}>{QUIZSIGNAL.appUrl.replace("https://", "")}</a>
-          · Support: <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
-        </p>
-      </section>
-    </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section with Accordion -->
+    <section class="qs-faq-section section">
+      <div class="container qs-faq-container">
+        <div class="text-center qs-section-header">
+          <span class="overline">Answers</span>
+          <h2 class="display text-balance">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list">
+          {
+            quizFaqs.map((faq) => (
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span>{faq.question}</span>
+                  <svg
+                    class="faq-chevron"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </summary>
+                <div class="faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Final High-Intent CTA -->
+    <section class="qs-cta-bottom section">
+      <div class="container">
+        <div class="qs-cta-box card text-center">
+          <h2 class="display text-balance">Ready to Turn Browsers into Confident Buyers?</h2>
+          <p class="body-lg text-secondary" style="max-width: 44ch; margin: 0 auto var(--space-6);">
+            Install Nexis CRO: Quiz Signal in under 2 minutes. Free forever plan available with zero credit card required.
+          </p>
+          <div class="qs-hero-actions" style="justify-content: center;">
+            <a
+              href={QUIZSIGNAL.installUrl}
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-analytics-event="install_click"
+              data-analytics-location="quizsignal_bottom"
+            >
+              Install Free on Shopify →
+            </a>
+            <a href={siteAnchors.contact} class="btn btn-ghost">Contact Support</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
   <Footer />
 </Layout>
 
 <style>
-  .qs-hub {
-    padding: calc(var(--space-8) + 72px) 0 var(--space-9);
+  .qs-hub-main {
+    padding-top: calc(var(--nav-height, 72px) + var(--space-4));
   }
 
-  .qs-shell {
-    max-width: 720px;
+  .qs-hero-container {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
   }
 
-  .qs-lead {
-    margin: var(--space-4) 0 var(--space-6);
+  .qs-badge-wrap {
+    margin-bottom: var(--space-2);
+  }
+
+  .qs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .qs-title {
+    max-width: 18ch;
+    margin: 0;
+  }
+
+  .qs-dek {
     color: var(--text-secondary);
+    max-width: 58ch;
+    margin: 0;
   }
 
-  .qs-actions {
+  .qs-hero-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .qs-guarantees {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: var(--space-4);
+  }
+
+  .qs-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg-glass);
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* Metrics section */
+  .qs-metrics-section {
+    padding: var(--space-7) 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-deep);
+  }
+
+  .qs-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+  }
+
+  .qs-metric-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .qs-metric-num {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .qs-metric-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Steps / How It Works */
+  .qs-section-header {
     margin-bottom: var(--space-8);
   }
 
-  .qs-cards h2 {
-    margin: 0 0 var(--space-4);
+  .qs-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
   }
 
-  .qs-cards ul {
-    list-style: none;
-    margin: 0 0 var(--space-5);
-    padding: 0;
+  .qs-step-card {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .qs-step-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.9;
+  }
+
+  /* Features Grid */
+  .qs-feature-grid {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .qs-feature-box {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .qs-feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--accent-dim);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Pricing Snapshot */
+  .qs-pricing-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 420px));
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .qs-price-card {
+    padding: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+  }
+
+  .qs-price-featured {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent), 0 10px 30px -4px var(--accent-dim) !important;
+  }
+
+  .qs-price-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .qs-price-tier {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+
+  .qs-price-amount {
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .qs-price-period {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    margin-left: 4px;
+  }
+
+  .qs-price-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .qs-price-card .btn {
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* Guides Grid */
+  .qs-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .qs-guide-card {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    text-decoration: none;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: transform var(--duration-fast), border-color var(--duration-fast);
+  }
+
+  .qs-guide-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+  }
+
+  .qs-guide-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .qs-guide-time {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .qs-guide-title {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .qs-guide-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: auto;
+  }
+
+  /* FAQ Accordion */
+  .qs-faq-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-3);
   }
 
-  .qs-cards a {
-    color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
+  .faq-item {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
   }
 
-  .qs-note {
-    color: var(--text-muted);
+  .faq-question {
+    padding: var(--space-5);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-out);
+    color: var(--accent);
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-5) var(--space-5);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .faq-answer p {
+    margin: 0;
+  }
+
+  /* Bottom CTA */
+  .qs-cta-box {
+    padding: var(--space-8) var(--space-6);
+    background: radial-gradient(circle at top, rgba(54, 244, 164, 0.12), transparent 70%), var(--bg-elevated);
+    border: 1px solid rgba(54, 244, 164, 0.3);
+    border-radius: var(--radius-xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .qs-metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .qs-steps-grid,
+    .qs-feature-grid,
+    .qs-pricing-cards-grid,
+    .qs-guides-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .qs-hero-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .qs-hero-actions .btn {
+      width: 100%;
+    }
   }
 </style>
