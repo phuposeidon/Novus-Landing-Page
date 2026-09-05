@@ -59,9 +59,41 @@ const creditPacks = [
   { name: "Plus", price: "$7" },
   { name: "Pro", price: "$20" },
 ] as const;
+
+const quizSignalAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: QUIZSIGNAL.name,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Shopify",
+  url: Astro.site ? new URL(QUIZSIGNAL.pricing, Astro.site).href : "https://nexiscro.com/quizsignal/pricing/",
+  installUrl: QUIZSIGNAL.installUrl,
+  description,
+  offers: [
+    {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      name: "Free",
+      description: "2 storefront quizzes, 100 completions/month, Quiz Studio builder.",
+    },
+    {
+      "@type": "Offer",
+      price: "9",
+      priceCurrency: "USD",
+      name: "Growth",
+      description: "Unlimited quizzes & completions, 200 AI credits/month, Klaviyo sync, A/B testing.",
+    },
+  ],
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  includeAppSchema={false}
+  extraJsonLd={quizSignalAppSchema}
+>
   <Nav />
   <main class="qs-pricing-page">
     <div class="container qs-pricing-shell">

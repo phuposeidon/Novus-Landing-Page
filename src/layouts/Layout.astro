@@ -60,7 +60,7 @@ const extraBlocks = extraJsonLd
     ? extraJsonLd
     : [extraJsonLd]
   : [];
-const jsonLdBlocks = [...baseJsonLd, ...extraBlocks];
+const jsonLdBlocks = [...baseJsonLd, ...extraBlocks].filter(Boolean);
 
 const interFontUrl =
   "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap";
@@ -174,6 +174,10 @@ const monoFontUrl =
       ]
     })} />
     )}
+
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
     <!-- GSAP for Smooth Kinetic Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>

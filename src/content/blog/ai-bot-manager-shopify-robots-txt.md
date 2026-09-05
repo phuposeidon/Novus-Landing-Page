@@ -152,6 +152,57 @@ Also check:
 
 Blocking bots while publishing llms.txt sends mixed signals. Allow retrieval bots, ship llms.txt, and fix [schema gaps](/blog/shopify-json-ld-schema-ai-search/) together.
 
+## Production-Ready Shopify robots.txt for AI Crawlers (Copy & Paste)
+
+If you need to edit your Shopify store's `robots.txt.liquid` manually to ensure search & retrieval AI crawlers can index your catalog while keeping aggressive scrapers away, use this tested production snippet.
+
+In your Shopify Admin, navigate to **Online Store > Themes > Edit code**, locate or create `templates/robots.txt.liquid`, and apply this pattern:
+
+```liquid
+{% comment %}
+  Verified robots.txt for Shopify AI Search Engine Optimization (AEO)
+{% endcomment %}
+{% for group in robots.default_groups %}
+  {{ group.user_agent }}
+
+  {% for rule in group.rules %}
+    {{ rule }}
+  {% endfor %}
+
+  {% if group.sitemap != blank %}
+    {{ group.sitemap }}
+  {% endif %}
+{% endfor %}
+
+# Explicit directives for leading AI search engines
+User-agent: GPTBot
+Allow: /products/
+Allow: /collections/
+Allow: /pages/
+Allow: /llms.txt
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+
+User-agent: PerplexityBot
+Allow: /products/
+Allow: /collections/
+Allow: /pages/
+Allow: /llms.txt
+Disallow: /cart
+Disallow: /checkout
+
+User-agent: ClaudeBot
+Allow: /products/
+Allow: /collections/
+Allow: /pages/
+Allow: /llms.txt
+Disallow: /cart
+Disallow: /checkout
+```
+
+> **Warning:** Never delete `{{ group.user_agent }}` or `{{ rule }}` from `robots.txt.liquid`. Shopify relies on those template tags to maintain core checkout security and localized routing rules.
+
 ## When to Re-Audit
 
 - After every theme migration or agency handoff
@@ -159,12 +210,13 @@ Blocking bots while publishing llms.txt sends mixed signals. Allow retrieval bot
 - When [citation tracking](/blog/track-chatgpt-citations-ecommerce/) shows competitors replacing you on core prompts
 - After enabling Cloudflare bot protection
 
-[Nexis CRO AI Bot Manager](https://nexiscro.com/#features) applies per-bot allow/block rules from the Shopify admin without hand-editing Liquid on every launch.
+With the [Nexis CRO AI SEO & AEO suite](/) and its built-in AI Bot Manager, you can configure per-bot allow/block rules directly from the Shopify admin without risky manual code edits.
 
 <div class="cta-box">
 <p class="cta-title">Manage AI crawlers without editing theme code</p>
 <p class="cta-desc">Nexis CRO lets you allow or block GPTBot, ClaudeBot, PerplexityBot, and more from one dashboard, with robots.txt rules synced to your policy.</p>
-<a class="cta-btn" href="https://apps.shopify.com/partners/nexis-cro" target="_blank" rel="noopener noreferrer">Try AI Bot Manager Free</a>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_bottom&utm_campaign=ai-bot-manager-shopify-robots-txt" target="_blank" rel="noopener noreferrer">Try AI Bot Manager Free</a>
+<p class="cta-secondary">Free plan available · 1-Click Bot Policy Sync · No code required</p>
 </div>
 
 ## FAQ

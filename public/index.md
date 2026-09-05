@@ -32,7 +32,7 @@ Annual billing: up to 52% off. AI credit packs available.
 
 ## Install
 
-[Install Free on Shopify](https://apps.shopify.com/partners/nexis-cro)
+[Install Free on Shopify](https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit)
 
 ## Sections
 

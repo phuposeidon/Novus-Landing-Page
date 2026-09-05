@@ -1,3 +1,10 @@
+# Global security headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
 # RFC 8288 — agent discovery on homepage
 /
   Link: </.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="describedby"; type="application/json", </auth.md>; rel="service-doc"; type="text/markdown", </index.md>; rel="alternate"; type="text/markdown"

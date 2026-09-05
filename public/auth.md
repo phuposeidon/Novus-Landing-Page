@@ -62,7 +62,7 @@ Issuer: `https://nexiscro.com`
 The Nexis CRO **Shopify app** uses Shopify OAuth for merchants. Agents must not impersonate merchants
 from this marketing domain. Direct users to:
 
-- Install: https://apps.shopify.com/partners/nexis-cro
+- Install: https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit
 - Support: support@nexiscro.com
 
 ## Commerce & payments

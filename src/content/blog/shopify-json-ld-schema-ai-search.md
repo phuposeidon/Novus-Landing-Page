@@ -125,12 +125,13 @@ Run after every theme or app change:
 
 ## Schema + llms.txt + Citation Tracking
 
-Schema answers "what are the typed facts on this URL?" [llms.txt](/blog/llms-txt-shopify-stores/) answers "which URLs matter most?" [Citation tracking](/blog/track-chatgpt-citations-ecommerce/) answers "did any model recommend us this week?" Together they form the technical half of [Shopify AEO](/blog/shopify-aeo-guide-2026/).
+Schema answers "what are the typed facts on this URL?" [llms.txt](/blog/llms-txt-shopify-stores/) answers "which URLs matter most?" [Citation tracking](/blog/track-chatgpt-citations-ecommerce/) answers "did any model recommend us this week?" Together they form the technical foundation of the [Nexis CRO AI SEO & AEO suite](/) and comprehensive [Shopify AEO](/blog/shopify-aeo-guide-2026/).
 
 <div class="cta-box">
 <p class="cta-title">Audit schema gaps across your Shopify catalog</p>
 <p class="cta-desc">Nexis CRO checks Product, FAQ, and Organization schema on every page type and suggests one-click fixes.</p>
-<a class="cta-btn" href="https://apps.shopify.com/partners/nexis-cro" target="_blank" rel="noopener noreferrer">Run Free Schema Audit</a>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_bottom&utm_campaign=shopify-json-ld-schema-ai-search" target="_blank" rel="noopener noreferrer">Run Free Schema Audit</a>
+<p class="cta-secondary">Free plan available · Instant schema health score · No code required</p>
 </div>
 
 ## FAQ

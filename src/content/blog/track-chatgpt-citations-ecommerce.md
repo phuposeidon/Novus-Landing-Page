@@ -66,6 +66,16 @@ Compare **conversion rate**, **AOV**, and **landing page** against organic searc
 
 Referrer-based tracking undercounts total AI influence. Use it as a **downstream confirmation** layer, not your only KPI.
 
+<div class="blog-mid-card">
+  <div class="blog-mid-card-badge">Instant AI Store Audit</div>
+  <p class="blog-mid-card-title">Is ChatGPT Recommending Your Shopify Store or Your Competitors?</p>
+  <p class="blog-mid-card-desc">Scan your entire product catalog in 60 seconds. Nexis CRO reveals missing product schema, AI crawler blocks, and citation gaps across ChatGPT, Perplexity, and Gemini.</p>
+  <div class="blog-mid-card-actions">
+    <a class="blog-mid-card-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_mid&utm_campaign=track-chatgpt-citations-ecommerce" target="_blank" rel="noopener noreferrer">Run Free Store Audit on Shopify &rarr;</a>
+    <span class="blog-mid-card-meta">No code required · Free plan available · Takes 60s</span>
+  </div>
+</div>
+
 ## Layer 2: Prompt-Based Citation Monitoring
 
 AI visibility tools work by **prompt sampling**: they run structured buyer questions across engines on a cadence and log outputs ([Ecommerce Fastlane methodology](https://ecommercefastlane.com/ai-visibility-tools-ecommerce-track-chatgpt-brand-mentions/)).
@@ -133,7 +143,27 @@ When competitors replace you on a prompt you used to win:
 
 [Alhena's 2026 ecommerce visibility roundup](https://alhena.ai/blog/best-ai-visibility-tools-ecommerce/) notes ChatGPT drives a large share of AI referral traffic while Google AI Overviews appear on a substantial portion of Google searches. Monitor at least ChatGPT, Perplexity, and Google AI surfaces for US ecommerce.
 
-For Shopify merchants already running audits, [Nexis CRO AI Rank Tracker](https://nexiscro.com/#features) tracks visibility on ChatGPT, Gemini, and Perplexity over time with competitor share-of-voice and citation gap reports. See the [step-by-step setup guide](/blog/ai-rank-tracker-shopify-setup/) for prompts, aliases, and plan limits.
+For Shopify merchants already running audits, the [Nexis CRO AI SEO & AEO suite](/) tracks visibility on ChatGPT, Gemini, and Perplexity over time with competitor share-of-voice and citation gap reports. See the [step-by-step setup guide](/blog/ai-rank-tracker-shopify-setup/) for prompts, aliases, and plan limits.
+
+## How to Get Your Products Cited in ChatGPT Shopping Results
+
+When shoppers prompt ChatGPT with queries like *"What are the best wireless noise-canceling headphones under $200?"* or *"Compare top ergonomic office chairs for lower back pain"*, ChatGPT Shopping results pull directly from authoritative product graphs and crawled structured pages. To secure your store's placement:
+
+1. **Complete `Product` and `Offer` Schema:** Ensure every PDP implements valid JSON-LD including `name`, `image`, `description`, `sku`, `gtin13`, `price`, `priceCurrency`, and `availability` (`InStock`).
+2. **Include Shipping & Return Policies:** AI engines prioritize trustworthy merchant signals. Explicit `shippingDetails` and `hasMerchantReturnPolicy` schema validate your store as purchase-ready.
+3. **High-Information-Density Product Copy:** Avoid vague marketing prose. Provide clear specifications, dimensions, materials, and concrete use cases. LLMs parse structured facts with much higher citation frequency than abstract marketing adjectives.
+4. **Clean Machine-Readable Sitemap & llms.txt:** Keep your product sitemap updated and indexable. Complement this with a curated [llms.txt file](/blog/llms-txt-shopify-stores/) summarizing your brand catalog and top collections for AI crawlers.
+
+Using [Nexis CRO](/), Shopify merchants can audit their entire catalog for AI citation readiness and resolve missing attributes in minutes.
+
+## How Ecommerce Managers Measure & Scale ChatGPT Traffic in GA4
+
+Many ecommerce managers notice unexpected referral traffic in GA4 and wonder how to properly attribute, segment, and scale it. Here is the operational blueprint:
+
+1. **Create an AI Referral Channel Grouping:** In GA4 (Admin > Data Settings > Channel Groups), define a custom channel called **AI Search / Assistants** capturing `sessionSource` containing `chatgpt.com`, `android-app://com.openai.chatgpt`, `perplexity.ai`, `claude.ai`, or `gemini.google.com`.
+2. **Distinguish ChatGPT Chat vs Search Mode:** Standard ChatGPT conversational chats often mask referrers or appear as Direct traffic unless users click an explicit citation link. When ChatGPT conducts real-time web browsing to answer a shopping query, it passes standard HTTP referrer headers (`chatgpt.com`), which GA4 records as referral sessions.
+3. **Monitor Landing Page Conversion Rates:** Traffic originating from AI recommendations typically exhibits significantly higher buyer intent (often 40–60% higher engagement rate than generic cold social) because the consumer has already received an AI-curated endorsement of your product.
+4. **Close the Citation Loop:** For product queries that drive AI traffic, cross-reference your [competitor citation gaps](/blog/shopify-competitor-citation-gaps/) to see if rival brands are winning secondary prompts in that same category.
 
 ## 30-Day Citation Tracking Sprint
 
@@ -175,7 +205,8 @@ For Shopify merchants already running audits, [Nexis CRO AI Rank Tracker](https:
 <div class="cta-box">
 <p class="cta-title">Track ChatGPT, Perplexity, and Gemini citations from Shopify</p>
 <p class="cta-desc">Nexis CRO AI Rank Tracker monitors brand mentions, competitor SOV, and citation gaps with scheduled checks and email alerts.</p>
-<a class="cta-btn" href="https://apps.shopify.com/partners/nexis-cro" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_bottom&utm_campaign=track-chatgpt-citations-ecommerce" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<p class="cta-secondary">Free plan available · No code required · Instant AI visibility audit</p>
 </div>
 
 ## FAQ

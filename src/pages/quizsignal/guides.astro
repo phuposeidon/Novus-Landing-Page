@@ -10,40 +10,76 @@ const title = `Guides — ${QUIZSIGNAL.name}`;
 const description =
   "Setup and CRO guides for Nexis CRO: Quiz Signal — theme blocks, recommendation rules, and quiz funnels on Shopify.";
 
-/** Planned guides — replace href with /blog/... when posts ship. */
 const guides = [
   {
-    title: "Add the Quiz Signal theme block",
+    title: "Product Recommendation Quiz Implementation Guide",
     summary:
-      "Install the app, open the theme editor, and place the quiz funnel block on a page or product template.",
-    status: "Coming soon",
-    href: null as string | null,
+      "Step-by-step guide to building storefront recommendation quizzes that map catalog products, boost conversion, and capture zero-party data.",
+    status: "Live Guide",
+    href: "/blog/shopify-product-recommendation-quiz/",
   },
   {
-    title: "Map quiz answers to product recommendations",
+    title: "Capture Emails & Sync Quiz Data to Klaviyo",
     summary:
-      "Use product rules so each answer path returns catalog matches shoppers can buy.",
-    status: "Coming soon",
-    href: null,
+      "Turn on email capture in quiz results, sync customer preferences to Klaviyo, and trigger high-converting personalized post-quiz email flows.",
+    status: "Live Guide",
+    href: "/blog/shopify-quiz-email-personalization/",
   },
   {
-    title: "Capture emails and sync to Klaviyo",
+    title: "How Recommendation Quizzes Cut Returns by 28%",
     summary:
-      "Turn on email capture in results, connect your Klaviyo key, and send outcomes into flows.",
-    status: "Coming soon",
-    href: null,
+      "Help shoppers find their exact right-fit product before ordering, eliminating return friction and buyer remorse.",
+    status: "Live Guide",
+    href: "/blog/shopify-product-quiz-reduce-returns/",
   },
   {
-    title: "Nexis CRO blog (AEO & Shopify)",
+    title: "Build a High-Converting Shopify Gift Finder Quiz",
     summary:
-      "AI search and storefront guides from the Nexis CRO editorial team — useful alongside quiz CRO work.",
-    status: "Live",
+      "Guide holiday and seasonal shoppers through interactive question paths to find the perfect gifts from your catalog.",
+    status: "Live Guide",
+    href: "/blog/shopify-gift-finder-quiz/",
+  },
+  {
+    title: "Nexis CRO Blog (AEO & Shopify)",
+    summary:
+      "Answer Engine Optimization, AI search citations, and storefront conversion playbooks from the Nexis CRO editorial team.",
+    status: "All Articles",
     href: BLOG_URL,
   },
 ] as const;
+
+const breadcrumbsSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: Astro.site?.href ?? "https://nexiscro.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Quiz Signal",
+      item: Astro.site ? new URL(QUIZSIGNAL.hub, Astro.site).href : "https://nexiscro.com/quizsignal/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Guides",
+      item: Astro.site ? new URL(QUIZSIGNAL.guides, Astro.site).href : "https://nexiscro.com/quizsignal/guides/",
+    },
+  ],
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  includeAppSchema={false}
+  extraJsonLd={breadcrumbsSchema}
+>
   <Nav />
   <main class="qs-guides-page">
     <div class="container qs-guides-shell">

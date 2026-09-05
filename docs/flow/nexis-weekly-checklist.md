@@ -9,7 +9,7 @@ Use this checklist each week until GSC impressions stabilize (typically 2–4 we
 - **Product:** Nexis CRO — AI SEO & AEO Audit for Shopify
 - **Domain:** https://nexiscro.com
 - **Pillar:** `/blog/shopify-aeo-guide-2026/`
-- **Install CTA:** https://apps.shopify.com/partners/nexis-cro
+- **Install CTA:** https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit
 
 ---
 

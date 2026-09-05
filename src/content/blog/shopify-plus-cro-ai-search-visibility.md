@@ -56,6 +56,16 @@ A channel converting above your site average and growing 8x a year is not a roun
 
 Both layers matter. Neither replaces the other. A fast, well-tested checkout does not help if an AI assistant never surfaces your product in the first place.
 
+<div class="blog-mid-card">
+  <div class="blog-mid-card-badge">Shopify Plus CRO & AEO</div>
+  <p class="blog-mid-card-title">Audit Your Store's Enterprise AI Search Visibility</p>
+  <p class="blog-mid-card-desc">Designed for enterprise scale and multi-template themes. Scan your entire 1,000+ SKU catalog for crawler blocks, missing schema, and competitor citation gaps.</p>
+  <div class="blog-mid-card-actions">
+    <a class="blog-mid-card-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_mid&utm_campaign=shopify-plus-cro-ai-search-visibility" target="_blank" rel="noopener noreferrer">Run Free Store Audit on Shopify &rarr;</a>
+    <span class="blog-mid-card-meta">Enterprise ready · 60-second scan · Direct Shopify app</span>
+  </div>
+</div>
+
 ## Where Shopify Plus Stores Lose the Most AI-Referred Revenue
 
 Enterprise setups create their own blind spots. Custom CDN and firewall rules layered on top of a Shopify Plus store often block AI crawlers by default, since bot-management defaults were written before GPTBot, ClaudeBot, and PerplexityBot existed as meaningful traffic sources. Publishers block AI crawlers roughly five times more often than the open web, and nearly 4 in 10 robots.txt bans on GPTBot are not actually enforced when tested live ([HasData](https://hasdata.com/blog/ai-crawler-block-index)), which means a rule that looks correct in a config review can still leave your store invisible in practice.
@@ -68,12 +78,13 @@ Large SKU catalogs compound the problem. A schema or copy fix that takes ten min
 2. **Validate JSON-LD schema across templates, not one product page.** Enterprise themes often run multiple PDP templates by category, and a schema fix on one does not propagate to the rest.
 3. **Rewrite top revenue-driving PDP intros for answer-first clarity.** Lead with use case, key specs, and audience in the first two sentences, since that is what AI systems extract and cite.
 4. **Add AI-referred traffic as a tracked segment**, not a line item buried inside "other" or "direct" in your analytics.
-5. **Test actual AI citations for your highest-intent category prompts** monthly, and treat gaps the same way you would treat a failed A/B test. The full [Shopify AEO audit checklist](/blog/shopify-aeo-audit-checklist/) covers all five steps in detail.
+5. **Test actual AI citations for your highest-intent category prompts** monthly, and treat gaps the same way you would treat a failed A/B test. The [Nexis CRO AI SEO & AEO suite](/) and our [Shopify AEO audit checklist](/blog/shopify-aeo-audit-checklist/) cover the full workflow from discovery to automated fixes.
 
 <div class="cta-box">
 <p class="cta-title">Add AI search visibility to your Shopify Plus CRO stack</p>
 <p class="cta-desc">Nexis CRO AI SEO & AEO Audit (our own Shopify app) checks crawler access, schema, and citation readiness across your full catalog, built for the scale Shopify Plus stores run at.</p>
-<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_bottom&utm_campaign=shopify-plus-cro-ai-search-visibility" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<p class="cta-secondary">Free plan available · Enterprise ready · 1-click catalog scan</p>
 </div>
 
 ## FAQ

@@ -52,6 +52,16 @@ Three business impacts:
 2. **Compounding SOV** — engines that cite Competitor A today reinforce that choice in future answers.
 3. **Wasted on-site SEO** — perfect Core Web Vitals do not help if the model never fetches your PDP.
 
+<div class="blog-mid-card">
+  <div class="blog-mid-card-badge">Competitor Gap Analysis</div>
+  <p class="blog-mid-card-title">Benchmark Your Shopify Store Against Top Competitors</p>
+  <p class="blog-mid-card-desc">Track up to 5 competitors across category prompts. Spot which rivals win ChatGPT and Perplexity citations and receive instant optimization steps.</p>
+  <div class="blog-mid-card-actions">
+    <a class="blog-mid-card-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_mid&utm_campaign=shopify-competitor-citation-gaps" target="_blank" rel="noopener noreferrer">Audit Competitor Citation Gaps &rarr;</a>
+    <span class="blog-mid-card-meta">No code required · Free plan available · Direct Shopify app</span>
+  </div>
+</div>
+
 ## How to Run a Citation Gap Audit (Weekly)
 
 ### Step 1: Build a prompt panel
@@ -132,7 +142,23 @@ Weekly scorecard per competitor:
 | Strong citations | 5 | 8 | 3 |
 | Top cited URL type | PDP | Review blog | PDP |
 
-Automate with [AI Rank Tracker](https://nexiscro.com/#features) or a manual spreadsheet for the first month. New to the tool? Follow the [AI Rank Tracker setup guide](/blog/ai-rank-tracker-shopify-setup/).
+Automate with the [Nexis CRO AI SEO & AEO suite](/) or a manual spreadsheet for the first month. New to the tool? Follow the [AI Rank Tracker setup guide](/blog/ai-rank-tracker-shopify-setup/).
+
+## Automated vs Manual Competitive Citation Gap Tools
+
+Ecommerce teams evaluating how to analyze citation gaps vs competitors typically choose between manual prompt testing and specialized software tools:
+
+| Feature / Dimension | Manual Prompt Auditing (Sheets + Prompts) | Dedicated Competitive Citation Gap Tool (Nexis CRO) |
+| --- | --- | --- |
+| **Time Investment** | 3–5 hours/week manual copy-pasting | Automated 24/7 background scans |
+| **Engines Monitored** | Usually just ChatGPT web | ChatGPT, Perplexity, Gemini, Claude & Google AI |
+| **Competitor SOV Calculation** | Manual tallying in spreadsheets | Instant % Share-of-Voice dashboard & delta alerts |
+| **Actionable Fix Recommendations** | Requires custom SEO expertise | Direct schema, robots.txt, and copy suggestions |
+| **Catalog Scale** | Max 5–10 hero SKUs before fatigue | Hundreds of category queries and collection pages |
+
+When selecting a **competitive citation gap tool**, prioritize solutions built specifically for Shopify architecture that can directly inspect your theme's JSON-LD schema, collection taxonomy, and crawler policies.
+
+With [Nexis CRO](https://nexiscro.com), Shopify merchants can benchmark up to 5 competitors across commercial category prompts and receive concrete on-page remediation recipes.
 
 ## 30-Day Citation Gap Sprint
 
@@ -144,7 +170,8 @@ Automate with [AI Rank Tracker](https://nexiscro.com/#features) or a manual spre
 <div class="cta-box">
 <p class="cta-title">See which competitors win your category prompts</p>
 <p class="cta-desc">Nexis CRO Citation Gaps tracks up to 5 competitors, surfaces SOV by prompt, and ships step-by-step optimization plans.</p>
-<a class="cta-btn" href="https://apps.shopify.com/partners/nexis-cro" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_bottom&utm_campaign=shopify-competitor-citation-gaps" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<p class="cta-secondary">Free plan available · No code required · Instant competitor gap audit</p>
 </div>
 
 ## FAQ

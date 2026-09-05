@@ -59,7 +59,7 @@ draft: false
 
 Answer Engine Optimization (AEO) is how you prepare a Shopify storefront to be **read, summarized, and recommended** by AI assistants, not just ranked in traditional search results. Where classic SEO optimizes for crawlers that build an index of links, AEO optimizes for systems that **answer questions in plain language** and attach citations to specific merchants.
 
-For Shopify merchants, AEO is practical infrastructure work: allow the right AI crawlers, publish structured product data, ship an `llms.txt` map at your domain root, and rewrite catalog copy so models can extract specs without inventing materials or sizing. None of this removes the need for technical SEO, Core Web Vitals, or strong collection architecture. It adds a parallel surface that is compounding quickly. Tools like [Nexis CRO](https://nexiscro.com/#features) bundle schema checks, llms.txt deployment, and [AI visibility scans](https://nexiscro.com/#how-it-works) so you are not stitching five apps together.
+For Shopify merchants, AEO is practical infrastructure work: allow the right AI crawlers, publish structured product data, ship an `llms.txt` map at your domain root, and rewrite catalog copy so models can extract specs without inventing materials or sizing. None of this removes the need for technical SEO, Core Web Vitals, or strong collection architecture. It adds a parallel surface that is compounding quickly. Tools like the [Nexis CRO Shopify AEO audit app](/) bundle schema checks, llms.txt deployment, and [AI visibility scans](/#how-it-works) so you are not stitching five apps together.
 
 If a shopper asks Perplexity "best waterproof hiking boots under $150," the model does not return ten blue links. It returns a short list with sources. Your product page only enters that list if the model can **verify** attributes like waterproofing, price, and return policy from trustworthy page signals. That verification step is why [structured data and FAQ content](https://nexiscro.com/#features) belong on the product detail page itself, not only on a distant help center article. Merchants who treat AI discovery as optional paid media often wake up later to a citation gap competitors already closed.
 
@@ -92,6 +92,16 @@ Think of Shopify AEO as five layers you can audit independently. Weakness in any
 | 5. Measurement | AI referrals and competitor citations | You optimize blind |
 
 The sections below walk through implementation details for each layer on Shopify specifically.
+
+<div class="blog-mid-card">
+  <div class="blog-mid-card-badge">Free Store Audit</div>
+  <p class="blog-mid-card-title">Check Your Shopify Store's AI Search Readiness Score</p>
+  <p class="blog-mid-card-desc">Audit your storefront across all 5 AEO layers in 60 seconds: crawler policy, llms.txt validation, schema markup completeness, and citation visibility.</p>
+  <div class="blog-mid-card-actions">
+    <a class="blog-mid-card-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_mid&utm_campaign=shopify-aeo-guide-2026" target="_blank" rel="noopener noreferrer">Run Free 60s AEO Audit &rarr;</a>
+    <span class="blog-mid-card-meta">No code required · Free plan available · Direct Shopify app</span>
+  </div>
+</div>
 
 ## Layer 1: AI Crawler and robots.txt Policy
 
@@ -225,8 +235,8 @@ Go deeper on each layer of the AEO stack:
 <div class="cta-box">
 <p class="cta-title">Run a free AEO audit on your Shopify store</p>
 <p class="cta-desc">Nexis CRO scans your storefront for ChatGPT, Perplexity, Google AI, and Copilot readiness: schema gaps, llms.txt status, crawler policy, and AI visibility scores. Fix issues with one-click AI rewrites.</p>
-<a class="cta-btn" href="https://apps.shopify.com/partners/nexis-cro" target="_blank" rel="noopener noreferrer">Start Free Audit on Shopify</a>
-<p class="cta-secondary"><a href="https://nexiscro.com/#faq">Read product FAQ</a></p>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit?utm_source=nexiscro&utm_medium=blog_bottom&utm_campaign=shopify-aeo-guide-2026" target="_blank" rel="noopener noreferrer">Start Free Audit on Shopify</a>
+<p class="cta-secondary">Free plan available · Instant catalog scan · <a href="/#faq">Read product FAQ</a></p>
 </div>
 
 ## FAQ

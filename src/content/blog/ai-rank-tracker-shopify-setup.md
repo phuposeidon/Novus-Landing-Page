@@ -114,7 +114,7 @@ In Nexis CRO, open **AI Rank Tracker → Settings** and save aliases before the 
 
 ## Step 3: Install Nexis CRO and Add Prompts
 
-1. [Install Nexis CRO](https://apps.shopify.com/partners/nexis-cro) on your Shopify store (Free, no credit card).
+1. [Install Nexis CRO](https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit) on your Shopify store (Free, no credit card).
 2. Run the initial **AEO audit** so schema and llms.txt gaps are visible alongside rank data.
 3. Navigate to **AI Rank Tracker** in the app nav.
 4. Click **Add prompt** and paste your first shopper question exactly as you would type it into ChatGPT.
@@ -237,7 +237,7 @@ Recommended order:
 <div class="cta-box">
 <p class="cta-title">Set up AI Rank Tracker on your Shopify store</p>
 <p class="cta-desc">Nexis CRO includes AI Rank Tracker on every plan: start with 1 free prompt and 5 checks, then scale to scheduled daily monitoring with citation gap insights on Growth.</p>
-<a class="cta-btn" href="https://apps.shopify.com/partners/nexis-cro" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
+<a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 </div>
 
 ## FAQ

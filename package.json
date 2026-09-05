@@ -18,13 +18,21 @@
     "seo:install:full": "bash seo-suite/install.sh --full",
     "seo:doctor": "bash seo-suite/doctor.sh",
     "seo:run": "node scripts/seo-run.mjs",
+    "seo:pava": "python3 scripts/seo-pava-loop.py --mode=audit",
+    "seo:pava:act": "python3 scripts/seo-pava-loop.py --mode=act",
     "seo:test": "bash seo-suite/tests/run-tests.sh",
     "seo:uninstall": "bash seo-suite/install.sh --uninstall",
     "deploy": "npm run build && wrangler pages deploy dist/ --project-name novus-landing --commit-dirty=true"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.0.0",
-    "astro": "^5.7.0",
+    "@astrojs/cloudflare": "^12.6.13",
+    "astro": "^5.18.2",
     "resend": "^6.12.4"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "ws": "^8.21.0",
+    "undici": "^7.28.1",
+    "sharp": "^0.35.0"
   }
 }

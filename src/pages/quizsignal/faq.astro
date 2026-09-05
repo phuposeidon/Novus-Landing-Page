@@ -63,7 +63,12 @@ const faqSchema = {
 };
 ---
 
-<Layout title={title} description={description} extraJsonLd={faqSchema}>
+<Layout
+  title={title}
+  description={description}
+  extraJsonLd={faqSchema}
+  includeAppSchema={false}
+>
   <Nav />
   <main class="qs-faq-page">
     <div class="container qs-faq-shell">
