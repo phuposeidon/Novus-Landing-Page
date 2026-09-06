@@ -36,3 +36,5 @@ public/.well-known/agent-skills/index.json
 
 # Raw screen recordings (deploy the compressed file in public/videos/)
 public/Novus*.mp4
+# Temporary scratch
+scratch/

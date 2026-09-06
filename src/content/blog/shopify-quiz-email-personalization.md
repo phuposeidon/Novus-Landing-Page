@@ -78,7 +78,7 @@ For quiz-triggered flows specifically, track placed-order rate segmented by quiz
 
 <div class="cta-box">
 <p class="cta-title">Capture quiz answers as data you can actually use</p>
-<p class="cta-desc">Nexis CRO Quiz Signal tags every quiz answer to the shopper's profile automatically, ready to segment into Klaviyo and Omnisend email flows.</p>
+<p class="cta-desc">Built by <a href="/">Nexis CRO</a>, <a href="/quizsignal/">Quiz Signal</a> tags every quiz answer to the shopper's profile automatically, ready to segment into Klaviyo and Omnisend email flows.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 <p class="cta-secondary">See how it works on the <a href="/quizsignal/">Quiz Signal Product Hub</a> or view <a href="/quizsignal/pricing/">pricing details</a>.</p>
 </div>

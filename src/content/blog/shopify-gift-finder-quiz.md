@@ -72,7 +72,7 @@ Test the quiz on mobile first. Most holiday quiz traffic arrives on a phone, oft
 
 <div class="cta-box">
 <p class="cta-title">Launch a gift finder quiz before your next peak sale</p>
-<p class="cta-desc">Nexis CRO Quiz Signal includes Quiz Studio for building branching gift and product quizzes, ready before Black Friday and Cyber Monday traffic hits.</p>
+<p class="cta-desc">Built by <a href="/">Nexis CRO</a>, <a href="/quizsignal/">Quiz Signal</a> includes Quiz Studio for building branching gift and product quizzes, ready before Black Friday and Cyber Monday traffic hits.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 <p class="cta-secondary">Explore the <a href="/quizsignal/">Quiz Signal App Hub</a> or browse <a href="/quizsignal/guides/">CRO setup guides</a>.</p>
 </div>

@@ -229,15 +229,15 @@ Rank Tracker does not replace audits, schema, or llms.txt. It validates whether 
 
 Recommended order:
 
-1. [AEO audit](/blog/shopify-aeo-guide-2026/) and crawler policy
-2. llms.txt + schema deployment
+1. [Nexis CRO AI SEO & AEO Audit](/) and crawler policy
+2. [llms.txt setup](/blog/llms-txt-shopify-stores/) + [JSON-LD schema deployment](/blog/shopify-json-ld-schema-ai-search/)
 3. Citation-ready PDP copy
 4. **AI Rank Tracker** for longitudinal SOV
 5. [Citation gap remediation](/blog/shopify-competitor-citation-gaps/) on losing prompts
 
 <div class="cta-box">
 <p class="cta-title">Set up AI Rank Tracker on your Shopify store</p>
-<p class="cta-desc">Nexis CRO includes AI Rank Tracker on every plan: start with 1 free prompt and 5 checks, then scale to scheduled daily monitoring with citation gap insights on Growth.</p>
+<p class="cta-desc"><a href="/">Nexis CRO</a> includes AI Rank Tracker on every plan: start with 1 free prompt and 5 checks, then scale to scheduled daily monitoring with citation gap insights on Growth.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 </div>
 

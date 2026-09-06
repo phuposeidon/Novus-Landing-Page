@@ -228,7 +228,38 @@ def stage_act(signals, analysis, validation, mode="audit"):
     print(f"\n⚡ [STAGE 4: ACT] Execution mode: {mode.upper()}")
     actions_taken = []
 
-    if mode != "act":
+    if mode == "striking":
+        print("\n🎯 [STRIKING DISTANCE HIGH-CTR RECOMMENDATIONS] (Pos 8–40)")
+        print("-" * 75)
+        print(f"{'Query':<35} | {'Imp':<5} | {'Pos':<5} | {'Recommended Action'}")
+        print("-" * 75)
+        for sq in analysis["striking_distance"][:15]:
+            q = sq["query"]
+            imp = sq["impressions"]
+            pos = round(sq["position"], 1)
+            rec = f"Target Top 5: Front-load '{q}' into Title & Meta + [2026 Checklist]"
+            print(f"{q:<35} | {imp:<5} | {pos:<5} | {rec}")
+        print("-" * 75)
+        print("💡 Use these insights to optimize Frontmatter titles for instant CTR lift.\n")
+        return {"mode": "striking", "striking_queries": analysis["striking_distance"]}
+
+    elif mode == "delta":
+        print("\n📈 [PAVA 30-DAY DELTA TRACKER] Comparing baseline vs current...")
+        reports = sorted(glob.glob(os.path.join(REPORT_DIR, "pava-report-*.json")))
+        if len(reports) < 2:
+            print(f"  ℹ️ Baseline established ({len(reports)} report on file). Run regularly to track 30-day delta.")
+        else:
+            with open(reports[0]) as f:
+                first_rep = json.load(f)
+            first_imp = sum(q.get("impressions", 0) for q in first_rep.get("top_striking_queries", []))
+            curr_imp = sum(q.get("impressions", 0) for q in analysis.get("striking_distance", []))
+            print(f"  • Baseline Date: {first_rep.get('run_time', 'N/A')[:10]}")
+            print(f"  • Baseline Striking Impressions: {first_imp} -> Current: {curr_imp}")
+            delta = curr_imp - first_imp
+            print(f"  • Net Striking Impression Delta: {'+' if delta >= 0 else ''}{delta}")
+        return {"mode": "delta"}
+
+    elif mode != "act":
         print("  ℹ️ Audit mode only: Generating comprehensive PAVA audit report without altering files.")
     else:
         print("  🚀 Act mode: Executing approved enhancements and running build verification...")
@@ -242,6 +273,21 @@ def stage_act(signals, analysis, validation, mode="audit"):
                 with open(art["path"], "w", encoding="utf-8") as f:
                     f.write(fixed_content)
                 actions_taken.append(f"Replaced outdated partner URL in {art['file']}")
+
+        # 2. Ping Search Engine Sitemaps for fast re-crawling
+        print("  • Pinging Google and Bing sitemap indexes...")
+        sitemap_url = "https://nexiscro.com/sitemap-index.xml"
+        for ping_target in [
+            f"https://www.google.com/ping?sitemap={sitemap_url}",
+            f"https://www.bing.com/ping?sitemap={sitemap_url}"
+        ]:
+            try:
+                req = urllib.request.Request(ping_target, headers={"User-Agent": "NexisCRO-SitemapPing/1.0"})
+                with urllib.request.urlopen(req, timeout=5) as res:
+                    actions_taken.append(f"Sitemap pinged successfully ({ping_target})")
+            except Exception as e:
+                # Pings might return 404 or 410 on deprecated endpoints, gracefully log
+                pass
 
     # Generate Audit Report Document
     os.makedirs(REPORT_DIR, exist_ok=True)
@@ -257,7 +303,7 @@ def stage_act(signals, analysis, validation, mode="audit"):
             "articles_scanned": len(signals["local_articles"]),
             "leaks_detected": len(signals["leaks_found"])
         },
-        "top_striking_queries": analysis["striking_distance"][:10],
+        "top_striking_queries": analysis["striking_distance"][:15],
         "validation": validation,
         "actions_taken": actions_taken
     }

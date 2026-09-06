@@ -82,11 +82,11 @@ A handful of Shopify merchants have shared early numbers publicly. Bedding brand
 
 These are early, self-reported, and brand-specific figures. Use them as evidence the shift is real, not as a forecast for your own store.
 
-For Shopify merchants who want to confirm their own data is agent-ready, the [Nexis CRO AI SEO & AEO Audit](https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit) checks schema, llms.txt, and product completeness against the same signals AI shopping agents rely on.
+For Shopify merchants who want to confirm their own data is agent-ready, the <a href="/">Nexis CRO AI SEO & AEO Audit</a> checks schema, llms.txt, and product completeness against the same signals AI shopping agents rely on.
 
 <div class="cta-box">
 <p class="cta-title">Check if your Shopify catalog is agent-ready</p>
-<p class="cta-desc">Nexis CRO audits JSON-LD schema, llms.txt, and product data completeness so AI shopping agents can find and cite your products.</p>
+<p class="cta-desc"><a href="/">Nexis CRO</a> audits JSON-LD schema, llms.txt, and product data completeness so AI shopping agents can find and cite your products.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 </div>
 

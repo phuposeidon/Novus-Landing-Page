@@ -1,0 +1,48 @@
+{
+  "run_time": "2026-09-05T16:11:07.325353Z",
+  "mode": "audit",
+  "signals": {
+    "gsc_queries_count": 60,
+    "striking_distance_count": 3,
+    "articles_scanned": 16,
+    "leaks_detected": 0
+  },
+  "top_striking_queries": [
+    {
+      "query": "shopify plus cro",
+      "impressions": 55,
+      "clicks": 0,
+      "position": 36.27272727272727,
+      "ctr": 0
+    },
+    {
+      "query": "robots.txt shopify",
+      "impressions": 34,
+      "clicks": 0,
+      "position": 34.38235294117647,
+      "ctr": 0
+    },
+    {
+      "query": "shopify robots txt",
+      "impressions": 14,
+      "clicks": 0,
+      "position": 35.642857142857146,
+      "ctr": 0
+    }
+  ],
+  "validation": {
+    "passed": true,
+    "checks": [
+      "\u2705 Anti-Black Hat Gate: 100% clean (No prompt injections, no zero-opacity CSS, no keyword stuffing).",
+      "\u2705 Evidence Gate: Striking distance queries verified with real GSC impression data.",
+      "\u2705 PageRank Integrity: Hub-and-Spoke internal linking required to boost Homepage from 11.2 to Top 5.",
+      "\u2705 CRO Hygiene: Mid-article cards approved for deployment with valid UTM tags."
+    ],
+    "approved_actions": [
+      "ENRICH_STRIKING_CONTENT",
+      "STRENGTHEN_INTERNAL_LINKS",
+      "INJECT_MID_CARDS"
+    ]
+  },
+  "actions_taken": []
+}

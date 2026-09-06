@@ -134,7 +134,7 @@ After publishing, track whether AI referrals rise in analytics and run [ChatGPT 
 
 <div class="cta-box">
 <p class="cta-title">Auto-generate and deploy llms.txt on Shopify</p>
-<p class="cta-desc">Nexis CRO generates, deploys, and refreshes your store's llms.txt via app proxy with no theme surgery.</p>
+<p class="cta-desc"><a href="/">Nexis CRO AI SEO & AEO Audit</a> automatically generates, deploys, and refreshes your store's llms.txt via app proxy with zero theme code edits. Combine with our <a href="/blog/ai-bot-manager-shopify-robots-txt/">Shopify robots.txt guide</a> to ensure crawlers have full access.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free Audit</a>
 </div>
 

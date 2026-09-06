@@ -1,6 +1,6 @@
 ---
-title: "Shopify Competitor Citation Gaps: How to Find and Fix Them"
-description: "When ChatGPT cites competitors instead of your Shopify store, citation gap analysis shows which prompts you lose, which URLs win, and what to fix first."
+title: "Shopify Competitor Citation Gaps [2026]: How to Find & Win AI Search Recommendations"
+description: "Benchmark your Shopify store against competitors in ChatGPT and Perplexity. Find citation gaps, analyze winning URLs, and capture top AI product recommendations."
 pubDate: 2026-06-12
 updatedDate: 2026-06-12
 author: "Nexis CRO Editorial Team"

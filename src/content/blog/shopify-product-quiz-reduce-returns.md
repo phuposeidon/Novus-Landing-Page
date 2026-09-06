@@ -77,7 +77,7 @@ Track return rate by acquisition path, not just store-wide. Compare the return r
 
 <div class="cta-box">
 <p class="cta-title">Route shoppers to the right size before they order</p>
-<p class="cta-desc">Nexis CRO Quiz Signal builds fit and use-case quizzes that recommend the right product before checkout, eliminating costly returns and buyer remorse.</p>
+<p class="cta-desc">Built by <a href="/">Nexis CRO</a>, <a href="/quizsignal/">Quiz Signal</a> builds fit and use-case quizzes that recommend the right product before checkout, eliminating costly returns and buyer remorse.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 <p class="cta-secondary">Read more on the <a href="/quizsignal/">Quiz Signal Product Hub</a> or view <a href="/quizsignal/pricing/">pricing tiers</a>.</p>
 </div>

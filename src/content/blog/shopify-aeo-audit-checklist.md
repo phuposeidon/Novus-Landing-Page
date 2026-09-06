@@ -86,7 +86,7 @@ Run the full five-step checklist quarterly. Run a fast crawler and schema spot c
 
 <div class="cta-box">
 <p class="cta-title">Turn this checklist into an automated audit</p>
-<p class="cta-desc">Nexis CRO AI SEO & AEO Audit (our own Shopify app) runs crawler access, schema, and llms.txt checks automatically and scores your store's AI search readiness.</p>
+<p class="cta-desc"><a href="/">Nexis CRO AI SEO & AEO Audit</a> (our own Shopify app) runs crawler access, schema, and llms.txt checks automatically and scores your store's AI search readiness. For the complete strategy, explore our <a href="/blog/shopify-aeo-guide-2026/">Shopify AEO Guide 2026</a>.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 </div>
 

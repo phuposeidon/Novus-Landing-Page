@@ -183,7 +183,7 @@ Follow this decision checklist based on your store's current operational scale:
 
 <div class="cta-box">
 <p class="cta-title">Turn browsers into buyers with guided product quizzes</p>
-<p class="cta-desc">Start building recommendation funnels that increase order value and capture zero-party customer data on Shopify.</p>
+<p class="cta-desc">Built by <a href="/">Nexis CRO</a>: Start building recommendation funnels that increase order value and capture zero-party customer data on Shopify.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Install Quiz Signal Free</a>
 <p class="cta-secondary">Explore the <a href="/quizsignal/">Quiz Signal Product Hub</a> or view <a href="/quizsignal/pricing/">transparent pricing</a> ($0 Free Plan / $9 Growth).</p>
 </div>

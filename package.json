@@ -20,6 +20,8 @@
     "seo:run": "node scripts/seo-run.mjs",
     "seo:pava": "python3 scripts/seo-pava-loop.py --mode=audit",
     "seo:pava:act": "python3 scripts/seo-pava-loop.py --mode=act",
+    "seo:striking": "python3 scripts/seo-pava-loop.py --mode=striking",
+    "seo:delta": "python3 scripts/seo-pava-loop.py --mode=delta",
     "seo:test": "bash seo-suite/tests/run-tests.sh",
     "seo:uninstall": "bash seo-suite/install.sh --uninstall",
     "deploy": "npm run build && wrangler pages deploy dist/ --project-name novus-landing --commit-dirty=true"

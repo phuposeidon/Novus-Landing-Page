@@ -1,6 +1,6 @@
 ---
-title: "Shopify Plus CRO in 2026: Why AI Search Traffic Changes the Playbook"
-description: "Shopify Plus CRO benchmarks for 2026, and why AI-referred traffic now needs its own optimization layer alongside A/B testing and checkout tuning."
+title: "Shopify Plus CRO [2026]: How to Turn AI Search Traffic into High-Converting Customers"
+description: "Complete Shopify Plus CRO guide for 2026. Discover conversion benchmarks, AI-referred traffic optimization, and audit strategies beyond traditional A/B testing."
 pubDate: 2026-08-21
 updatedDate: 2026-08-21
 author: "Nexis CRO Editorial Team"

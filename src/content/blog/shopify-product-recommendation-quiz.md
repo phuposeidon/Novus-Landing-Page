@@ -1,6 +1,6 @@
 ---
-title: "Shopify Product Recommendation Quiz: How to Build One That Converts (2026)"
-description: "Learn how to build a Shopify product recommendation quiz that converts, with question design, flow length, and zero-party data steps backed by 2026 benchmark data."
+title: "Shopify Product Recommendation Quiz Guide [2026]: How to Build a Quiz That Converts"
+description: "Step-by-step guide to building a Shopify product recommendation quiz that converts. 4-6 question frameworks, zero-party data strategy, and 2026 DTC benchmarks."
 pubDate: 2026-08-20
 updatedDate: 2026-08-20
 author: "Nexis CRO Editorial Team"
@@ -84,7 +84,7 @@ Quizzes fail most often when they collect data the recommendation logic never us
 
 <div class="cta-box">
 <p class="cta-title">Build a converting quiz without writing recommendation logic by hand</p>
-<p class="cta-desc">Nexis CRO Quiz Signal includes Quiz Studio for building branching product quizzes, automated recommendation rules, and optional Klaviyo email capture.</p>
+<p class="cta-desc">Built by <a href="/">Nexis CRO</a>, <a href="/quizsignal/">Quiz Signal</a> includes Quiz Studio for building branching product quizzes, automated recommendation rules, and zero-party data Klaviyo capture.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-quiz-signal" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 <p class="cta-secondary">Explore the <a href="/quizsignal/">Quiz Signal Product Hub</a> or view <a href="/quizsignal/pricing/">transparent pricing</a> ($0 Free Plan / $9 Growth).</p>
 </div>

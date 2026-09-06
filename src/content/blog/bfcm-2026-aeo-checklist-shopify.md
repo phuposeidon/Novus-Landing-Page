@@ -90,7 +90,7 @@ For ongoing monitoring beyond BFCM week, the [Nexis CRO AI SEO & AEO Audit](http
 
 <div class="cta-box">
 <p class="cta-title">Get your Shopify store BFCM-ready for AI shopping agents</p>
-<p class="cta-desc">Nexis CRO audits schema, pricing accuracy, and llms.txt coverage so AI agents cite the right price and stock during your sale.</p>
+<p class="cta-desc"><a href="/">Nexis CRO AI SEO & AEO Audit</a> audits schema, pricing accuracy, and llms.txt coverage so AI agents cite the right price and stock during your holiday sales. Read our full <a href="/blog/shopify-aeo-guide-2026/">Shopify AEO Guide</a> for step-by-step optimization.</p>
 <a class="cta-btn" href="https://apps.shopify.com/nexis-cro-ai-seo-aeo-audit" target="_blank" rel="noopener noreferrer">Start Free on Shopify</a>
 </div>
 
