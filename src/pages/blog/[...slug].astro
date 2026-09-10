@@ -44,6 +44,7 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 3).m
 
 <BlogLayout
   title={post.data.title}
+  metaTitle={post.data.metaTitle}
   description={post.data.description}
   pubDate={post.data.pubDate}
   updatedDate={post.data.updatedDate}

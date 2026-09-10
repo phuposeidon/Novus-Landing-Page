@@ -136,6 +136,11 @@ const monoFontUrl =
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
+    <!-- Structured Data (JSON-LD) -->
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
     {includeAppSchema && (
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
